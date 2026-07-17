@@ -147,8 +147,10 @@ export default function ProfilePage() {
 
       setSaved(true)
       setTimeout(() => setSaved(false), 2500)
-    } catch (err) { console.error(err); alert('Failed to save') }
-    finally { setSaving(false) }
+    } catch (err: any) {
+      console.error('Profile save error:', err)
+      alert('Failed to save: ' + (err?.message || JSON.stringify(err)))
+    } finally { setSaving(false) }
   }
 
   const s = strength()
