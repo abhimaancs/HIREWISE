@@ -14,6 +14,7 @@ export default function ProfilePage() {
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
   const [userId, setUserId] = useState<string | null>(null)
+  const [userEmail, setUserEmail] = useState<string>('')
 
   // Resume upload state
   const [uploading, setUploading] = useState(false)
@@ -27,6 +28,7 @@ export default function ProfilePage() {
       const { data: { session } } = await supabase.auth.getSession()
       if (!session) { window.location.href = '/login'; return }
       setUserId(session.user.id)
+      setUserEmail(session.user.email ?? '')
       loadProfile(session.user.id)
     }
     checkAuth()
@@ -122,10 +124,11 @@ export default function ProfilePage() {
     if (!userId) return
     setSaving(true)
     try {
-      // upsert on both tables — creates the row for new users, updates for existing
+      // upsert on both tables — creates rows for new users, updates for existing
+      // email comes from Auth session so it is always available even if profiles row was deleted
       const { error: profileError } = await supabase
         .from('profiles')
-        .upsert({ id: userId, name: profile.name || '', role: 'candidate' },
+        .upsert({ id: userId, name: profile.name || '', role: 'candidate', email: userEmail },
           { onConflict: 'id' })
       if (profileError) throw profileError
 

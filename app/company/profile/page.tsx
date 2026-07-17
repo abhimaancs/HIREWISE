@@ -11,12 +11,14 @@ export default function CompanyProfilePage() {
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
   const [userId, setUserId] = useState<string | null>(null)
+  const [userEmail, setUserEmail] = useState<string>('')
 
   useEffect(() => {
     const checkAuth = async () => {
       const { data: { session } } = await supabase.auth.getSession()
       if (!session) { window.location.href = '/login'; return }
       setUserId(session.user.id)
+      setUserEmail(session.user.email ?? '')
       loadProfile(session.user.id)
     }
     checkAuth()
@@ -35,8 +37,19 @@ export default function CompanyProfilePage() {
     if (!userId) return
     setSaving(true)
     try {
-      await supabase.from('profiles').update({ name: profile.name }).eq('id', userId)
-      await supabase.from('company_profiles').upsert({ id: userId, company_name: profile.company_name || '', website: profile.website || '', description: profile.description || '', location: profile.location || '' })
+      // upsert creates rows for users whose profile data was cleared, updates for existing
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .upsert({ id: userId, name: profile.name || '', role: 'company', email: userEmail },
+          { onConflict: 'id' })
+      if (profileError) throw profileError
+
+      const { error: companyError } = await supabase
+        .from('company_profiles')
+        .upsert({ id: userId, company_name: profile.company_name || '', website: profile.website || '', description: profile.description || '', location: profile.location || '' },
+          { onConflict: 'id' })
+      if (companyError) throw companyError
+
       setSaved(true); setTimeout(() => setSaved(false), 2500)
     } catch (err) { console.error(err); alert('Failed to save') }
     finally { setSaving(false) }
