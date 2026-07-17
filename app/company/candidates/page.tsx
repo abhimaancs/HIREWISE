@@ -67,8 +67,8 @@ function CandidatesContent() {
       if (!apps?.length) { setApplicants([]); return }
 
       const enriched = await Promise.all(apps.map(async (app: EnrichedApplicant) => {
-        const { data: candidate } = await supabase.from('profiles').select('*').eq('id', app.candidate_id).single()
-        const { data: details } = await supabase.from('candidate_profiles').select('*').eq('id', app.candidate_id).single()
+        const { data: candidate } = await supabase.from('profiles').select('*').eq('id', app.candidate_id).maybeSingle()
+        const { data: details } = await supabase.from('candidate_profiles').select('*').eq('id', app.candidate_id).maybeSingle()
         return { ...app, candidate, candidate_details: details } as EnrichedApplicant
       }))
 

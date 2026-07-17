@@ -34,14 +34,13 @@ export default function ProfilePage() {
 
   const loadProfile = async (uid: string) => {
     try {
-      const { data: p } = await supabase.from('profiles').select('*').eq('id', uid).single()
-      const { data: c } = await supabase.from('candidate_profiles').select('*').eq('id', uid).single()
-      setProfile({ ...p, ...c })
+      // maybeSingle() returns null (not an error) when no row exists — safe for new users
+      const { data: p } = await supabase.from('profiles').select('*').eq('id', uid).maybeSingle()
+      const { data: c } = await supabase.from('candidate_profiles').select('*').eq('id', uid).maybeSingle()
+      setProfile({ ...(p ?? {}), ...(c ?? {}) })
       setSkills(c?.skills || [])
-      // Restore existing resume URL if present
       if (c?.resume_url) {
         setResumeUrl(c.resume_url)
-        // Extract the filename from the URL for display
         const parts = c.resume_url.split('/')
         setResumeFileName(decodeURIComponent(parts[parts.length - 1]))
       }
@@ -90,11 +89,11 @@ export default function ProfilePage() {
 
       const publicUrl = urlData.publicUrl
 
-      // Persist URL to candidate_profiles.resume_url
+      // Persist URL to candidate_profiles.resume_url — upsert creates the row if it doesn't exist yet
       const { error: dbError } = await supabase
         .from('candidate_profiles')
-        .update({ resume_url: publicUrl })
-        .eq('id', userId)
+        .upsert({ id: userId, resume_url: publicUrl, skills: [], experience_years: 0 },
+          { onConflict: 'id' })
 
       if (dbError) {
         setUploadError('Saved to storage but failed to update profile: ' + dbError.message)
@@ -123,16 +122,26 @@ export default function ProfilePage() {
     if (!userId) return
     setSaving(true)
     try {
-      await supabase.from('profiles').update({ name: profile.name }).eq('id', userId)
-      const { error } = await supabase.from('candidate_profiles').upsert({
-        id: userId,
-        college: profile.college || '',
-        skills,
-        experience_years: profile.experience_years || 0,
-        bio: profile.bio || '',
-        location: profile.location || ''
-      })
-      if (error) throw error
+      // upsert on both tables — creates the row for new users, updates for existing
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .upsert({ id: userId, name: profile.name || '', role: 'candidate' },
+          { onConflict: 'id' })
+      if (profileError) throw profileError
+
+      const { error: candidateError } = await supabase
+        .from('candidate_profiles')
+        .upsert({
+          id: userId,
+          college: profile.college || '',
+          skills,
+          experience_years: profile.experience_years || 0,
+          bio: profile.bio || '',
+          location: profile.location || '',
+        },
+          { onConflict: 'id' })
+      if (candidateError) throw candidateError
+
       setSaved(true)
       setTimeout(() => setSaved(false), 2500)
     } catch (err) { console.error(err); alert('Failed to save') }

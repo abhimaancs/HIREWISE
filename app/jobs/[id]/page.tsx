@@ -86,9 +86,9 @@ export default function JobDetailPage() {
             setCompany(companyData)
 
             // Candidate profile
-            const { data: p } = await supabase.from('profiles').select('*').eq('id', session.user.id).single()
-            const { data: c } = await supabase.from('candidate_profiles').select('*').eq('id', session.user.id).single()
-            const candidate = { ...p, ...c } as CandidateProfile
+            const { data: p } = await supabase.from('profiles').select('*').eq('id', session.user.id).maybeSingle()
+            const { data: c } = await supabase.from('candidate_profiles').select('*').eq('id', session.user.id).maybeSingle()
+            const candidate = { ...(p ?? {}), ...(c ?? {}) } as CandidateProfile
             setProfile(candidate)
 
             // Existing application status

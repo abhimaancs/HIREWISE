@@ -33,9 +33,9 @@ export default function JobsPage() {
       if (!session) { window.location.href = '/login'; return }
       setUserId(session.user.id)
 
-      const { data: p } = await supabase.from('profiles').select('*').eq('id', session.user.id).single()
-      const { data: c } = await supabase.from('candidate_profiles').select('*').eq('id', session.user.id).single()
-      const candidate = { ...p, ...c } as CandidateProfile
+      const { data: p } = await supabase.from('profiles').select('*').eq('id', session.user.id).maybeSingle()
+      const { data: c } = await supabase.from('candidate_profiles').select('*').eq('id', session.user.id).maybeSingle()
+      const candidate = { ...(p ?? {}), ...(c ?? {}) } as CandidateProfile
       setProfile(candidate)
 
       // Fetch all applications with their current status
