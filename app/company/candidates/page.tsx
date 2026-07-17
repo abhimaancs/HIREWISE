@@ -24,7 +24,6 @@ function CandidatesContent() {
   const [updatingStatus, setUpdatingStatus] = useState<string | null>(null)
 
   useEffect(() => { loadJobs() }, [])
-  useEffect(() => { if (selectedJob) { matchCandidates(selectedJob) } }, [selectedJob])
 
   const loadJobs = async () => {
     const { data: { session } } = await supabase.auth.getSession()
@@ -35,6 +34,7 @@ function CandidatesContent() {
     if (target) {
       setSelectedJob(target)
       loadApplicants(target.id)
+      matchCandidates(target)
     } else {
       setLoading(false)
     }
@@ -142,7 +142,7 @@ function CandidatesContent() {
             <div style={{ position: 'relative' }}>
               <select
                 value={selectedJob?.id || ''}
-                onChange={e => { const j = jobs.find(j => j.id === e.target.value); if (j) { setSelectedJob(j); loadApplicants(j.id) } }}
+                onChange={e => { const j = jobs.find(j => j.id === e.target.value); if (j) { setSelectedJob(j); loadApplicants(j.id); matchCandidates(j) } }}
                 style={{ paddingRight: '2rem', appearance: 'none', cursor: 'pointer', minWidth: 220, color: '#f1f1f1' }}
               >
                 {jobs.map(job => <option key={job.id} value={job.id}>{job.title}</option>)}
