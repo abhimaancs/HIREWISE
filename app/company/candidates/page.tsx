@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation'
 import { createClient } from '@/lib/supabase'
 import Navbar from '@/components/layout/Navbar'
 import { CandidateProfile, Job, EnrichedApplicant, CandidateMatch, ApplicationStatus, StatusStyle } from '@/types'
-import { Loader2, MessageSquare, Star, ChevronDown, Users, Briefcase, CheckCircle, X, XCircle } from 'lucide-react'
+import { Loader2, MessageSquare, Star, ChevronDown, Users, Briefcase, CheckCircle, X, XCircle, RotateCcw } from 'lucide-react'
 
 function CandidatesContent() {
   const supabase = createClient()
@@ -22,6 +22,8 @@ function CandidatesContent() {
   const [confirmReject, setConfirmReject] = useState<string | null>(null)
   // appId currently being updated — shows spinner on card
   const [updatingStatus, setUpdatingStatus] = useState<string | null>(null)
+  // toast notification
+  const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null)
 
   useEffect(() => { loadJobs() }, [])
 
@@ -83,13 +85,40 @@ function CandidatesContent() {
     setStartingChat(null)
   }
 
-  // Wrapped to track in-flight updates per card
-  const updateStatus = async (appId: string, status: string) => {
+  // Optimistic update — updates local state immediately, syncs to DB, shows toast
+  const updateStatus = async (appId: string, status: ApplicationStatus) => {
     setUpdatingStatus(appId)
     setConfirmReject(null)
-    await supabase.from('applications').update({ status }).eq('id', appId)
-    if (selectedJob) await loadApplicants(selectedJob.id)
+
+    // Optimistic: update local state immediately so UI reflects change at once
+    setApplicants(prev =>
+      prev.map(a => a.id === appId ? { ...a, status } : a)
+    )
+
+    const { error } = await supabase
+      .from('applications')
+      .update({ status })
+      .eq('id', appId)
+
     setUpdatingStatus(null)
+
+    if (error) {
+      // Rollback by reloading from DB
+      if (selectedJob) await loadApplicants(selectedJob.id)
+      showToast('Failed to update status. Please try again.', 'error')
+    } else {
+      const labels: Record<ApplicationStatus, string> = {
+        applied: 'Moved back to Applied',
+        shortlisted: 'Candidate shortlisted',
+        rejected: 'Candidate rejected',
+      }
+      showToast(labels[status], 'success')
+    }
+  }
+
+  const showToast = (message: string, type: 'success' | 'error') => {
+    setToast({ message, type })
+    setTimeout(() => setToast(null), 3000)
   }
 
   // ── Style helpers ─────────────────────────────────────────────────────────
@@ -119,7 +148,28 @@ function CandidatesContent() {
     <>
       <Navbar userRole="company" />
 
+      {/* Toast notification */}
+      {toast && (
+        <div style={{
+          position: 'fixed', bottom: 24, left: '50%', transform: 'translateX(-50%)',
+          zIndex: 500, display: 'flex', alignItems: 'center', gap: 10,
+          padding: '12px 20px', borderRadius: 12,
+          background: toast.type === 'success' ? 'rgba(16,185,129,0.15)' : 'rgba(239,68,68,0.15)',
+          border: `1px solid ${toast.type === 'success' ? 'rgba(16,185,129,0.35)' : 'rgba(239,68,68,0.35)'}`,
+          backdropFilter: 'blur(12px)',
+          boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
+          fontSize: 13, fontWeight: 600,
+          color: toast.type === 'success' ? '#34d399' : '#f87171',
+          whiteSpace: 'nowrap',
+          animation: 'fadeUp 0.2s ease',
+        }}>
+          {toast.type === 'success' ? <CheckCircle size={15} /> : <XCircle size={15} />}
+          {toast.message}
+        </div>
+      )}
+
       <style>{`
+        @keyframes fadeUp { from { opacity:0; transform:translate(-50%,8px) } to { opacity:1; transform:translate(-50%,0) } }
         @media (max-width: 768px) {
           .cand-card { flex-direction: column !important; align-items: flex-start !important; }
           .cand-actions { flex-direction: row !important; flex-wrap: wrap !important; width: 100% !important; }
@@ -237,7 +287,7 @@ function CandidatesContent() {
                       {showConfirm && (
                         <div style={{ display: 'flex', alignItems: 'center', gap: 8, background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.25)', borderRadius: 9, padding: '8px 12px', marginTop: 4 }}>
                           <span style={{ fontSize: 12, color: '#f87171', fontWeight: 600, flex: 1 }}>
-                            Reject this candidate? This cannot be undone.
+                            Reject this candidate? They can be moved back to Applied.
                           </span>
                           <button
                             onClick={() => updateStatus(app.id, 'rejected')}
@@ -273,17 +323,39 @@ function CandidatesContent() {
                             {startingChat === app.candidate_id ? <Loader2 size={12} style={{ animation: 'spin 1s linear infinite' }} /> : <MessageSquare size={12} />}
                             Message
                           </button>
-                          {/* Locked shortlisted badge */}
+                          {/* Shortlisted badge */}
                           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, padding: '7px 12px', background: 'rgba(16,185,129,0.12)', border: '1px solid rgba(16,185,129,0.25)', borderRadius: 8, color: '#34d399', fontSize: 12, fontWeight: 700 }}>
                             <CheckCircle size={12} /> Shortlisted
                           </div>
+                          {/* Undo shortlist */}
+                          <button
+                            onClick={() => updateStatus(app.id, 'applied')}
+                            title="Undo shortlist — move back to Applied"
+                            style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '6px 12px', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, color: '#6b7280', fontSize: 11, fontWeight: 500, cursor: 'pointer', fontFamily: 'Inter,sans-serif', transition: 'all 0.15s' }}
+                            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.2)'; (e.currentTarget as HTMLElement).style.color = '#9ca3af' }}
+                            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.1)'; (e.currentTarget as HTMLElement).style.color = '#6b7280' }}
+                          >
+                            <RotateCcw size={11} /> Undo
+                          </button>
                         </>
 
                       ) : isRejected ? (
-                        /* Locked rejected badge — no actions */
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, padding: '7px 12px', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: 8, color: '#f87171', fontSize: 12, fontWeight: 700 }}>
-                          <XCircle size={12} /> Rejected
-                        </div>
+                        /* Rejected — badge + undo */
+                        <>
+                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, padding: '7px 12px', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: 8, color: '#f87171', fontSize: 12, fontWeight: 700 }}>
+                            <XCircle size={12} /> Rejected
+                          </div>
+                          {/* Undo rejection */}
+                          <button
+                            onClick={() => updateStatus(app.id, 'applied')}
+                            title="Undo rejection — move back to Applied"
+                            style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '6px 12px', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, color: '#6b7280', fontSize: 11, fontWeight: 500, cursor: 'pointer', fontFamily: 'Inter,sans-serif', transition: 'all 0.15s' }}
+                            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.2)'; (e.currentTarget as HTMLElement).style.color = '#9ca3af' }}
+                            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.1)'; (e.currentTarget as HTMLElement).style.color = '#6b7280' }}
+                          >
+                            <RotateCcw size={11} /> Undo
+                          </button>
+                        </>
 
                       ) : (
                         /* Applied — full action set */
