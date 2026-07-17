@@ -169,6 +169,8 @@ export default function ApplicationsPage() {
               const canWithdraw = app.status === 'applied'
               const isWithdrawing = withdrawing === app.id
               const showConfirm = confirmWithdraw === app.id
+              // Narrowed once — all subsequent accesses use this local variable
+              const job = app.job
 
               return (
                 <div
@@ -246,13 +248,13 @@ export default function ApplicationsPage() {
                   {/* Right-side action buttons */}
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 6, flexShrink: 0 }}>
                     {/* Message button — not shown for rejected */}
-                    {app.job && app.status !== 'rejected' && (
+                    {job && app.status !== 'rejected' && (
                       <button
-                        onClick={() => startChat(app.job.company_id, app.job_id)}
-                        disabled={startingChat === app.job.company_id}
+                        onClick={() => startChat(job.company_id, app.job_id)}
+                        disabled={startingChat === job.company_id}
                         style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '7px 14px', background: '#6366f1', border: 'none', borderRadius: 8, color: '#fff', fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: 'Inter,sans-serif' }}
                       >
-                        {startingChat === app.job.company_id
+                        {startingChat === job.company_id
                           ? <Loader2 size={12} style={{ animation: 'spin 1s linear infinite' }} />
                           : <MessageSquare size={12} />}
                         Message
