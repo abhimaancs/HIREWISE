@@ -124,26 +124,43 @@ export default function ProfilePage() {
     if (!userId) return
     setSaving(true)
     try {
-      // upsert on both tables — creates rows for new users, updates for existing
-      // email comes from Auth session so it is always available even if profiles row was deleted
-      const { error: profileError } = await supabase
+      // Ensure profiles row exists — check first, then insert or update
+      const { data: existingProfile } = await supabase
         .from('profiles')
-        .upsert({ id: userId, name: profile.name || '', role: 'candidate', email: userEmail },
-          { onConflict: 'id' })
-      if (profileError) throw profileError
+        .select('id')
+        .eq('id', userId)
+        .maybeSingle()
 
+      if (!existingProfile) {
+        // Row doesn't exist — insert it
+        const { error: insertError } = await supabase
+          .from('profiles')
+          .insert({ id: userId, name: profile.name || '', role: 'candidate', email: userEmail })
+        if (insertError) throw new Error('profiles insert: ' + insertError.message)
+      } else {
+        // Row exists — update it
+        const { error: updateError } = await supabase
+          .from('profiles')
+          .update({ name: profile.name || '' })
+          .eq('id', userId)
+        if (updateError) throw new Error('profiles update: ' + updateError.message)
+      }
+
+      // Now safe to upsert candidate_profiles — profiles FK is guaranteed to exist
       const { error: candidateError } = await supabase
         .from('candidate_profiles')
-        .upsert({
-          id: userId,
-          college: profile.college || '',
-          skills,
-          experience_years: profile.experience_years || 0,
-          bio: profile.bio || '',
-          location: profile.location || '',
-        },
-          { onConflict: 'id' })
-      if (candidateError) throw candidateError
+        .upsert(
+          {
+            id: userId,
+            college: profile.college || '',
+            skills,
+            experience_years: profile.experience_years || 0,
+            bio: profile.bio || '',
+            location: profile.location || '',
+          },
+          { onConflict: 'id' }
+        )
+      if (candidateError) throw new Error('candidate_profiles: ' + candidateError.message)
 
       setSaved(true)
       setTimeout(() => setSaved(false), 2500)
