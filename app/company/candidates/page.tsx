@@ -24,7 +24,7 @@ function CandidatesContent() {
   const [updatingStatus, setUpdatingStatus] = useState<string | null>(null)
 
   useEffect(() => { loadJobs() }, [])
-  useEffect(() => { if (selectedJob) { loadApplicants(selectedJob.id); matchCandidates(selectedJob) } }, [selectedJob])
+  useEffect(() => { if (selectedJob) { matchCandidates(selectedJob) } }, [selectedJob])
 
   const loadJobs = async () => {
     const { data: { session } } = await supabase.auth.getSession()
@@ -32,8 +32,12 @@ function CandidatesContent() {
     const { data } = await supabase.from('jobs').select('*').eq('company_id', session.user.id).order('created_at', { ascending: false })
     setJobs(data || [])
     const target = data?.find(j => j.id === jobId) || data?.[0]
-    if (target) setSelectedJob(target)
-    else setLoading(false)
+    if (target) {
+      setSelectedJob(target)
+      loadApplicants(target.id)
+    } else {
+      setLoading(false)
+    }
   }
 
   const loadApplicants = async (jid: string) => {
@@ -45,7 +49,9 @@ function CandidatesContent() {
         const { data: details } = await supabase.from('candidate_profiles').select('*').eq('id', app.candidate_id).single()
         return { ...app, candidate, candidate_details: details } as EnrichedApplicant
       }))
-      setApplicants(enriched)
+      setApplicants((enriched ?? []).filter(
+        (app, index, self) => self.findIndex(a => a.id === app.id) === index
+      ))
     } catch (err) { console.error(err) }
   }
 
@@ -136,7 +142,7 @@ function CandidatesContent() {
             <div style={{ position: 'relative' }}>
               <select
                 value={selectedJob?.id || ''}
-                onChange={e => { const j = jobs.find(j => j.id === e.target.value); if (j) setSelectedJob(j) }}
+                onChange={e => { const j = jobs.find(j => j.id === e.target.value); if (j) { setSelectedJob(j); loadApplicants(j.id) } }}
                 style={{ paddingRight: '2rem', appearance: 'none', cursor: 'pointer', minWidth: 220, color: '#f1f1f1' }}
               >
                 {jobs.map(job => <option key={job.id} value={job.id}>{job.title}</option>)}
