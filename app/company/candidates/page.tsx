@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState, Suspense } from 'react'
+import { useEffect, useState, useRef, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { createClient } from '@/lib/supabase'
 import Navbar from '@/components/layout/Navbar'
@@ -24,6 +24,8 @@ function CandidatesContent() {
   const [updatingStatus, setUpdatingStatus] = useState<string | null>(null)
   // toast notification
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null)
+  // guard: prevents concurrent loadApplicants calls from racing each other
+  const loadingApplicantsRef = useRef(false)
 
   useEffect(() => { loadJobs() }, [])
 
@@ -42,7 +44,11 @@ function CandidatesContent() {
     }
   }
 
-  const loadApplicants = async (jid: string) => {
+  const loadApplicants = async (jid: string, force = false) => {
+    // Prevent concurrent calls from racing — only one fetch at a time
+    // Pass force=true to bypass the guard (e.g. after a status update rollback)
+    if (loadingApplicantsRef.current && !force) return
+    loadingApplicantsRef.current = true
     try {
       const { data: apps } = await supabase.from('applications').select('*').eq('job_id', jid).order('applied_at', { ascending: false })
       if (!apps?.length) { setApplicants([]); return }
@@ -51,10 +57,12 @@ function CandidatesContent() {
         const { data: details } = await supabase.from('candidate_profiles').select('*').eq('id', app.candidate_id).single()
         return { ...app, candidate, candidate_details: details } as EnrichedApplicant
       }))
-      setApplicants((enriched ?? []).filter(
-        (app, index, self) => self.findIndex(a => a.id === app.id) === index
-      ))
+      // Replace state — unique by application id
+      setApplicants(
+        enriched.filter((app, index, self) => self.findIndex(a => a.id === app.id) === index)
+      )
     } catch (err) { console.error(err) }
+    finally { loadingApplicantsRef.current = false }
   }
 
   const matchCandidates = async (job: Job) => {
@@ -104,7 +112,7 @@ function CandidatesContent() {
 
     if (error) {
       // Rollback by reloading from DB
-      if (selectedJob) await loadApplicants(selectedJob.id)
+      if (selectedJob) await loadApplicants(selectedJob.id, true)
       showToast('Failed to update status. Please try again.', 'error')
     } else {
       const labels: Record<ApplicationStatus, string> = {
