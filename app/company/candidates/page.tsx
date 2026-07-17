@@ -6,8 +6,10 @@ import Navbar from '@/components/layout/Navbar'
 import { CandidateProfile, Job, EnrichedApplicant, CandidateMatch, ApplicationStatus, StatusStyle } from '@/types'
 import { Loader2, MessageSquare, Star, ChevronDown, Users, Briefcase, CheckCircle, X, XCircle, RotateCcw } from 'lucide-react'
 
+// Singleton client — not recreated on every render/remount
+const supabase = createClient()
+
 function CandidatesContent() {
-  const supabase = createClient()
   const searchParams = useSearchParams()
   const jobId = searchParams.get('job')
   const [jobs, setJobs] = useState<Job[]>([])
@@ -27,12 +29,17 @@ function CandidatesContent() {
   // guard: tracks the active fetch so stale results from previous job selections are discarded
   const loadApplicantsTokenRef = useRef(0)
 
-  useEffect(() => { loadJobs() }, [])
+  useEffect(() => {
+    let cancelled = false
+    loadJobs(cancelled)
+    return () => { cancelled = true }
+  }, [])
 
-  const loadJobs = async () => {
+  const loadJobs = async (cancelled = false) => {
     const { data: { session } } = await supabase.auth.getSession()
-    if (!session) { window.location.href = '/login'; return }
+    if (cancelled || !session) { if (!session) window.location.href = '/login'; return }
     const { data } = await supabase.from('jobs').select('*').eq('company_id', session.user.id).order('created_at', { ascending: false })
+    if (cancelled) return
     setJobs(data || [])
     const target = data?.find(j => j.id === jobId) || data?.[0]
     if (target) {
