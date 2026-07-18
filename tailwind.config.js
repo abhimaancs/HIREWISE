@@ -7,13 +7,49 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        syne: ['var(--font-syne)', 'sans-serif'],
-        dm: ['var(--font-dm)', 'sans-serif'],
+        sans: ['Inter', 'var(--font-dm)', 'system-ui', 'sans-serif'],
+        display: ['Syne', 'var(--font-syne)', 'sans-serif'],
       },
       colors: {
-        accent: '#4f8ef7',
-        navy: '#0a0f1e',
-      }
+        bg: 'var(--bg)',
+        surface: {
+          0: 'var(--surface-0)',
+          1: 'var(--surface-1)',
+          2: 'var(--surface-2)',
+        },
+        border: 'var(--border)',
+        'border-strong': 'var(--border-strong)',
+        accent: 'var(--accent)',
+        'accent-hover': 'var(--accent-hover)',
+        'accent-subtle': 'var(--accent-subtle)',
+        success: 'var(--success)',
+        warning: 'var(--warning)',
+        danger: 'var(--danger)',
+        text: {
+          primary: 'var(--text-primary)',
+          secondary: 'var(--text-secondary)',
+          tertiary: 'var(--text-tertiary)',
+          disabled: 'var(--text-disabled)',
+        },
+      },
+      borderRadius: {
+        sm: 'var(--radius-sm)',
+        md: 'var(--radius-md)',
+        lg: 'var(--radius-lg)',
+        xl: 'var(--radius-xl)',
+        full: 'var(--radius-full)',
+      },
+      boxShadow: {
+        sm: 'var(--shadow-sm)',
+        md: 'var(--shadow-md)',
+        lg: 'var(--shadow-lg)',
+        glow: 'var(--glow-accent)',
+      },
+      transitionDuration: {
+        fast: '150ms',
+        normal: '200ms',
+        slow: '300ms',
+      },
     },
   },
   plugins: [],
