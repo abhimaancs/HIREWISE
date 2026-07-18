@@ -198,8 +198,8 @@ function CandidatesContent() {
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap', gap: 12 }}>
           <div>
-            <h1 style={{ fontSize: 22, fontWeight: 800, color: '#fff', letterSpacing: '-0.5px', marginBottom: 4 }}>Candidates</h1>
-            <p style={{ fontSize: 13, color: '#6b7280' }}>View applicants and AI-ranked matches</p>
+            <h1 style={{ fontSize: 22, fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.03em', marginBottom: 4, fontFamily: 'var(--font-syne), sans-serif' }}>Candidates</h1>
+            <p style={{ fontSize: 13, color: 'var(--text-secondary)' }}>View applicants and AI-ranked matches</p>
           </div>
           {jobs.length > 0 && (
             <div style={{ position: 'relative' }}>
@@ -216,7 +216,7 @@ function CandidatesContent() {
         </div>
 
         {/* Tabs */}
-        <div style={{ display: 'flex', gap: 4, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 10, padding: 4, width: 'fit-content', marginBottom: '1.5rem' }}>
+        <div style={{ display: 'flex', gap: 4, background: 'var(--surface-1)', border: '1px solid var(--border)', borderRadius: 'var(--radius-sm)', padding: 4, width: 'fit-content', marginBottom: '1.5rem' }}>
           {[
             { id: 'applicants', label: `Applicants (${applicants.length})`, icon: <Users size={13} /> },
             { id: 'ai', label: 'AI Ranked', icon: <Star size={13} /> },

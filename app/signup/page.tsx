@@ -37,29 +37,31 @@ function SignupForm() {
     finally { setLoading(false) }
   }
 
-  const lbl = { fontSize: 11, fontWeight: 700, color: '#6b7280', textTransform: 'uppercase' as const, letterSpacing: '0.06em', marginBottom: 6, display: 'block' }
+  const lbl: React.CSSProperties = { fontSize: 11, fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6, display: 'block' }
 
   return (
-    <div style={{ minHeight: '100vh', background: '#0d0d14', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1.5rem' }}>
+    <div style={{ minHeight: '100vh', background: 'var(--bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1.5rem' }}>
       <div style={{ width: '100%', maxWidth: 440 }}>
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <Link href="/" style={{ textDecoration: 'none' }}>
-            <div style={{ fontSize: 22, fontWeight: 900, color: '#fff', letterSpacing: '-0.5px', marginBottom: 12 }}>Hire<span style={{ color: '#818cf8' }}>Wise</span></div>
+            <div style={{ fontSize: 22, fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.5px', marginBottom: 12 }}>
+              Hire<span style={{ color: 'var(--accent)' }}>Wise</span>
+            </div>
           </Link>
-          <div style={{ fontSize: 24, fontWeight: 800, color: '#fff', letterSpacing: '-1px', marginBottom: 6 }}>Create your account</div>
-          <div style={{ fontSize: 14, color: '#6b7280' }}>Join HireWise and find your perfect match</div>
+          <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.03em', marginBottom: 6 }}>Create your account</div>
+          <div style={{ fontSize: 14, color: 'var(--text-secondary)' }}>Join HireWise and find your perfect match</div>
         </div>
 
         {/* Role toggle */}
-        <div style={{ display: 'flex', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 12, padding: 4, marginBottom: '1.25rem' }}>
+        <div style={{ display: 'flex', background: 'var(--surface-1)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', padding: 4, marginBottom: '1.25rem' }}>
           {(['candidate', 'company'] as const).map(r => (
-            <button key={r} onClick={() => setRole(r)} style={{ flex: 1, padding: 9, borderRadius: 9, border: 'none', background: role === r ? '#6366f1' : 'transparent', color: role === r ? '#fff' : '#6b7280', fontSize: 13, fontWeight: role === r ? 700 : 500, cursor: 'pointer', fontFamily: 'Inter,sans-serif', transition: 'all 0.2s' }}>
+            <button key={r} onClick={() => setRole(r)} style={{ flex: 1, padding: 9, borderRadius: 'var(--radius-sm)', border: 'none', background: role === r ? 'var(--accent)' : 'transparent', color: role === r ? 'white' : 'var(--text-secondary)', fontSize: 13, fontWeight: role === r ? 700 : 500, cursor: 'pointer', fontFamily: 'Inter,sans-serif', transition: 'background-color 150ms ease, color 150ms ease' }}>
               {r === 'candidate' ? "I'm a candidate" : "I'm a company"}
             </button>
           ))}
         </div>
 
-        <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 22, padding: '1.75rem' }}>
+        <div style={{ background: 'var(--surface-0)', border: '1px solid var(--border)', borderRadius: 'var(--radius-lg)', padding: '1.75rem', boxShadow: 'var(--shadow-md)' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 12 }}>
             <div><label style={lbl}>Full name</label><input placeholder="Abhi B." value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} /></div>
             <div><label style={lbl}>Location</label><input placeholder="Chennai, India" value={form.location} onChange={e => setForm({ ...form, location: e.target.value })} /></div>
@@ -71,16 +73,22 @@ function SignupForm() {
             : <div style={{ marginBottom: 16 }}><label style={lbl}>Company name</label><input placeholder="Acme Corp" value={form.company_name} onChange={e => setForm({ ...form, company_name: e.target.value })} /></div>
           }
 
-          {error && <div style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.25)', borderRadius: 9, padding: '10px 12px', color: '#f87171', fontSize: 13, marginBottom: 14 }}>{error}</div>}
+          {error && (
+            <div style={{ background: 'var(--danger-subtle)', border: '1px solid var(--danger-border)', borderRadius: 'var(--radius-sm)', padding: '10px 12px', color: 'var(--danger)', fontSize: 13, marginBottom: 14 }}>{error}</div>
+          )}
 
-          <button onClick={handleSubmit} disabled={loading} style={{ width: '100%', padding: 12, background: '#6366f1', border: 'none', borderRadius: 11, color: '#fff', fontSize: 14, fontWeight: 700, cursor: loading ? 'not-allowed' : 'pointer', fontFamily: 'Inter,sans-serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, opacity: loading ? 0.7 : 1, boxShadow: '0 0 20px rgba(99,102,241,0.3)', letterSpacing: '-0.2px' }}>
-            {loading && <Loader2 size={16} style={{ animation: 'spin 1s linear infinite' }} />}
-            {loading ? 'Creating account...' : 'Create account →'}
+          <button
+            onClick={handleSubmit}
+            disabled={loading}
+            style={{ width: '100%', padding: 12, background: 'var(--accent)', border: 'none', borderRadius: 'var(--radius-sm)', color: 'white', fontSize: 14, fontWeight: 700, cursor: loading ? 'not-allowed' : 'pointer', fontFamily: 'Inter,sans-serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, opacity: loading ? 0.7 : 1, boxShadow: 'var(--glow-accent)', letterSpacing: '-0.2px' }}
+          >
+            {loading && <Loader2 size={16} style={{ animation: 'spin 600ms linear infinite' }} />}
+            {loading ? 'Creating account…' : 'Create account →'}
           </button>
 
-          <p style={{ textAlign: 'center', fontSize: 13, color: '#6b7280', marginTop: 16 }}>
+          <p style={{ textAlign: 'center', fontSize: 13, color: 'var(--text-secondary)', marginTop: 16 }}>
             Already have an account?{' '}
-            <Link href="/login" style={{ color: '#818cf8', fontWeight: 700, textDecoration: 'none' }}>Sign in</Link>
+            <Link href="/login" style={{ color: 'var(--accent)', fontWeight: 700, textDecoration: 'none' }}>Sign in</Link>
           </p>
         </div>
       </div>
