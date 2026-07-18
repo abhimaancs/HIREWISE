@@ -14,9 +14,7 @@ export default function HomePage() {
         @keyframes slideIn{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:translateX(0)}}
         @keyframes glow{0%,100%{box-shadow:0 0 25px rgba(99,102,241,.3)}50%{box-shadow:0 0 50px rgba(99,102,241,.6)}}
         @keyframes barGrow{from{width:0}to{width:var(--w)}}
-        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
         @keyframes spin{to{transform:rotate(360deg)}}
-        @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
         .fade-up{animation:fadeUp .6s ease forwards}
         .fade-up-1{animation:fadeUp .6s .1s ease both}
         .fade-up-2{animation:fadeUp .6s .2s ease both}
@@ -24,24 +22,24 @@ export default function HomePage() {
         .fade-up-4{animation:fadeUp .6s .4s ease both}
         .fade-up-5{animation:fadeUp .6s .5s ease both}
         .glow-btn{animation:glow 3s ease-in-out infinite}
-        .badge-dot{width:6px;height:6px;background:#818cf8;border-radius:50%;display:inline-block;animation:pulse 2s infinite;margin-right:6px;vertical-align:middle}
+        .badge-dot{width:6px;height:6px;background:var(--accent);border-radius:50%;display:inline-block;animation:pulse 2s infinite;margin-right:6px;vertical-align:middle}
         .ai-item{animation:slideIn .4s ease forwards;opacity:0}
         .ai-item:nth-child(1){animation-delay:.2s}
         .ai-item:nth-child(2){animation-delay:.5s}
         .ai-item:nth-child(3){animation-delay:.8s}
         .ai-item:nth-child(4){animation-delay:1.1s}
         .bar-fill{animation:barGrow .9s .3s ease forwards;width:0}
-        .btn-hero{transition:all .25s!important}
-        .btn-hero:hover{transform:translateY(-3px)!important;box-shadow:0 0 50px rgba(99,102,241,.6)!important}
-        .btn-outline-hero{transition:all .2s!important}
-        .btn-outline-hero:hover{background:rgba(255,255,255,.08)!important;border-color:rgba(255,255,255,.3)!important;transform:translateY(-1px)!important}
-        .feature-card{transition:all .3s!important}
-        .feature-card:hover{border-color:rgba(99,102,241,.4)!important;transform:translateY(-4px)!important;box-shadow:0 12px 40px rgba(0,0,0,.4)!important}
-        .step-card{transition:all .3s!important}
-        .step-card:hover{border-color:rgba(99,102,241,.35)!important;transform:translateY(-3px)!important}
-        .cta-btn{transition:all .2s!important}
-        .cta-btn:hover{transform:translateY(-2px)!important;filter:brightness(1.1)!important}
-        .db-link-h:hover{background:rgba(255,255,255,.04)!important;color:#9ca3af!important}
+        .btn-hero{transition:background-color 150ms ease,box-shadow 150ms ease,transform 150ms ease}
+        .btn-hero:hover{transform:translateY(-2px);box-shadow:var(--glow-accent)}
+        .btn-outline-hero{transition:background-color 150ms ease,border-color 150ms ease,transform 150ms ease}
+        .btn-outline-hero:hover{background:var(--surface-2)!important;transform:translateY(-1px)}
+        .feature-card{transition:border-color 200ms ease,transform 200ms ease,box-shadow 200ms ease}
+        .feature-card:hover{border-color:var(--accent-border)!important;transform:translateY(-3px);box-shadow:var(--shadow-md)}
+        .step-card{transition:border-color 200ms ease,transform 200ms ease}
+        .step-card:hover{border-color:var(--accent-border)!important;transform:translateY(-2px)}
+        .cta-btn{transition:background-color 150ms ease,transform 150ms ease}
+        .cta-btn:hover{transform:translateY(-2px)}
+        .db-link-h:hover{background:var(--surface-2)!important;color:var(--text-secondary)!important}
 
         @media(max-width:768px){
           .hero-grid{grid-template-columns:1fr!important;gap:2rem!important;padding:3rem 1.25rem 2rem!important}
@@ -52,7 +50,6 @@ export default function HomePage() {
           .hero-title{font-size:2.5rem!important;letter-spacing:-1.5px!important}
           .hero-pills{flex-wrap:wrap!important}
           .hero-pill{min-width:calc(50% - 5px)!important}
-          .trusted-logos{gap:1.5rem!important}
         }
         @media(max-width:480px){
           .features-grid{grid-template-columns:1fr!important}

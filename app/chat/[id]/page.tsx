@@ -61,8 +61,19 @@ export default function ChatPage({ params }: { params: { id: string } }) {
   if (loading) return (
     <>
       <Navbar userRole={currentUser?.role || null} />
-      <div style={{ textAlign: 'center', padding: '4rem', color: '#6b7280' }}>
-        <Loader2 size={24} style={{ animation: 'spin 1s linear infinite' }} />
+      <div style={{ maxWidth: 700, margin: '0 auto', padding: '1.5rem', height: 'calc(100vh - 64px)', display: 'flex', flexDirection: 'column', gap: 12 }}>
+        {/* Header skeleton */}
+        <div className="skeleton" style={{ height: 68, borderRadius: 'var(--radius-md)' }} />
+        {/* Message skeletons */}
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 10, paddingTop: 8 }}>
+          {[40, 60, 35, 55, 45].map((w, i) => (
+            <div key={i} style={{ display: 'flex', justifyContent: i % 2 === 0 ? 'flex-start' : 'flex-end' }}>
+              <div className="skeleton" style={{ width: `${w}%`, height: 38, borderRadius: 12 }} />
+            </div>
+          ))}
+        </div>
+        {/* Input skeleton */}
+        <div className="skeleton" style={{ height: 56, borderRadius: 'var(--radius-md)' }} />
       </div>
     </>
   )
@@ -73,26 +84,28 @@ export default function ChatPage({ params }: { params: { id: string } }) {
       <div style={{ maxWidth: 700, margin: '0 auto', padding: '1.5rem', height: 'calc(100vh - 64px)', display: 'flex', flexDirection: 'column' }}>
 
         {/* Chat header */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem', marginBottom: '1rem', padding: '1rem 1.25rem', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 16 }}>
-          <button onClick={() => history.back()} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#6b7280', padding: 4, display: 'flex' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12, padding: '12px 16px', background: 'var(--surface-0)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', boxShadow: 'var(--shadow-sm)', flexShrink: 0 }}>
+          <button
+            onClick={() => history.back()}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-secondary)', padding: 4, display: 'flex', borderRadius: 'var(--radius-sm)' }}
+          >
             <ArrowLeft size={18} />
           </button>
-          <div style={{ width: 38, height: 38, borderRadius: '50%', background: 'linear-gradient(135deg,#6366f1,#8b5cf6)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 14, color: '#fff' }}>
+          <div style={{ width: 38, height: 38, borderRadius: 'var(--radius-full)', background: 'linear-gradient(135deg, var(--accent), var(--accent-hover))', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 14, color: '#fff', flexShrink: 0 }}>
             {otherUser?.name?.[0]?.toUpperCase()}
           </div>
           <div>
-            <div style={{ fontWeight: 700, color: '#f1f1f1', fontSize: 14 }}>{otherUser?.name}</div>
-            <div style={{ fontSize: 12, color: '#6b7280' }}>
-              HireWise member
-            </div>
+            <div style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: 14, letterSpacing: '-0.01em' }}>{otherUser?.name}</div>
+            <div style={{ fontSize: 12, color: 'var(--text-tertiary)' }}>HireWise member</div>
           </div>
         </div>
 
         {/* Messages */}
-        <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '0.5rem', padding: '0.5rem 0', marginBottom: '1rem' }}>
+        <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 6, padding: '4px 0', marginBottom: 12 }}>
           {messages.length === 0 && (
-            <div style={{ textAlign: 'center', color: '#6b7280', fontSize: 13, padding: '2rem' }}>
-              Start the conversation! Say hi 👋
+            <div style={{ textAlign: 'center', color: 'var(--text-tertiary)', fontSize: 13, padding: '3rem 2rem' }}>
+              <div style={{ fontSize: 24, marginBottom: 8 }}>👋</div>
+              Start the conversation
             </div>
           )}
           {messages.map((msg, i) => {
@@ -100,11 +113,20 @@ export default function ChatPage({ params }: { params: { id: string } }) {
             const showTime = i === messages.length - 1 || messages[i + 1]?.sender_id !== msg.sender_id
             return (
               <div key={msg.id} style={{ display: 'flex', flexDirection: 'column', alignItems: isMe ? 'flex-end' : 'flex-start' }}>
-                <div style={{ maxWidth: '75%', padding: '10px 14px', borderRadius: isMe ? '14px 14px 4px 14px' : '14px 14px 14px 4px', background: isMe ? '#6366f1' : 'rgba(255,255,255,0.06)', border: isMe ? 'none' : '1px solid rgba(255,255,255,0.08)', color: isMe ? '#fff' : '#e5e7eb', fontSize: 14, lineHeight: 1.6 }}>
+                <div style={{
+                  maxWidth: '72%',
+                  padding: '10px 14px',
+                  borderRadius: isMe ? '12px 12px 4px 12px' : '12px 12px 12px 4px',
+                  background: isMe ? 'var(--accent)' : 'var(--surface-1)',
+                  border: isMe ? 'none' : '1px solid var(--border)',
+                  color: isMe ? '#fff' : 'var(--text-primary)',
+                  fontSize: 14,
+                  lineHeight: 1.6,
+                }}>
                   {msg.content}
                 </div>
                 {showTime && (
-                  <div style={{ fontSize: 11, color: '#4b5563', marginTop: 4, padding: '0 4px' }}>
+                  <div style={{ fontSize: 11, color: 'var(--text-tertiary)', marginTop: 4, padding: '0 4px' }}>
                     {formatTime(msg.created_at)}
                   </div>
                 )}
@@ -114,11 +136,32 @@ export default function ChatPage({ params }: { params: { id: string } }) {
           <div ref={bottomRef} />
         </div>
 
-        {/* Input */}
-        <div style={{ display: 'flex', gap: '0.625rem', alignItems: 'center', padding: '0.75rem', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 16 }}>
-          <input value={text} onChange={e => setText(e.target.value)} onKeyDown={e => e.key === 'Enter' && !e.shiftKey && sendMessage()} placeholder="Type a message..." style={{ flex: 1, background: 'transparent', border: 'none', padding: '0.25rem 0', fontSize: 14 }} />
-          <button onClick={sendMessage} disabled={!text.trim() || sending} style={{ width: 38, height: 38, borderRadius: 9, background: text.trim() ? '#6366f1' : 'rgba(255,255,255,0.06)', border: 'none', cursor: text.trim() ? 'pointer' : 'default', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background 0.2s', flexShrink: 0, boxShadow: text.trim() ? '0 0 12px rgba(99,102,241,0.3)' : 'none' }}>
-            {sending ? <Loader2 size={15} color="#fff" style={{ animation: 'spin 1s linear infinite' }} /> : <Send size={15} color={text.trim() ? '#fff' : '#4b5563'} />}
+        {/* Input bar */}
+        <div style={{ display: 'flex', gap: 10, alignItems: 'center', padding: '10px 12px', background: 'var(--surface-0)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', boxShadow: 'var(--shadow-sm)', flexShrink: 0 }}>
+          <input
+            value={text}
+            onChange={e => setText(e.target.value)}
+            onKeyDown={e => e.key === 'Enter' && !e.shiftKey && sendMessage()}
+            placeholder="Type a message…"
+            style={{ flex: 1, background: 'transparent', border: 'none', padding: '4px 0', fontSize: 14, boxShadow: 'none' }}
+          />
+          <button
+            onClick={sendMessage}
+            disabled={!text.trim() || sending}
+            style={{
+              width: 36, height: 36, borderRadius: 'var(--radius-sm)',
+              background: text.trim() ? 'var(--accent)' : 'var(--surface-2)',
+              border: 'none',
+              cursor: text.trim() ? 'pointer' : 'default',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              flexShrink: 0,
+              boxShadow: text.trim() ? 'var(--glow-accent)' : 'none',
+              transition: 'background-color 150ms ease, box-shadow 150ms ease',
+            }}
+          >
+            {sending
+              ? <Loader2 size={15} color={text.trim() ? '#fff' : 'var(--text-tertiary)'} style={{ animation: 'spin 600ms linear infinite' }} />
+              : <Send size={15} color={text.trim() ? '#fff' : 'var(--text-tertiary)'} />}
           </button>
         </div>
       </div>
