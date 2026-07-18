@@ -35,9 +35,16 @@ function ScoreChip({ score }: { score: number }) {
   const high = score >= 80
   const mid = score >= 50 && score < 80
   const style: React.CSSProperties = high
-    ? { background: 'linear-gradient(135deg, var(--score-high-from), var(--score-high-to))', color: 'var(--bg)', boxShadow: 'var(--glow-success)' }
+    ? {
+      background: 'linear-gradient(135deg, var(--score-high-from), var(--score-high-to))',
+      color: 'var(--score-high-text)',
+      boxShadow: 'var(--glow-success)',
+    }
     : mid
-      ? { background: 'linear-gradient(135deg, var(--score-mid-from), var(--score-mid-to))', color: '#18181B' }
+      ? {
+        background: 'linear-gradient(135deg, var(--score-mid-from), var(--score-mid-to))',
+        color: 'var(--score-mid-text)',
+      }
       : { background: 'var(--score-low-bg)', color: 'var(--score-low-text)' }
   return (
     <span style={{ ...style, borderRadius: 'var(--radius-full)', fontSize: 11, fontWeight: 800, padding: '3px 10px', letterSpacing: '-0.01em', fontVariantNumeric: 'tabular-nums' }}>
@@ -208,7 +215,18 @@ export default function JobsPage() {
                   key={job.id}
                   className="job-card"
                   onClick={() => router.push(`/jobs/${job.id}`)}
-                  style={{ background: 'var(--surface-0)', border: `1px solid ${isApplied ? 'var(--success-border)' : 'var(--border)'}`, borderRadius: 'var(--radius-lg)', padding: 20, cursor: 'pointer', boxShadow: 'var(--shadow-sm)' }}
+                  style={{
+                    background: isApplied
+                      ? 'var(--surface-0)'
+                      : match_score >= 80
+                        ? 'linear-gradient(135deg, var(--score-high-wash) 0%, transparent 60%), var(--surface-0)'
+                        : 'var(--surface-0)',
+                    border: `1px solid ${isApplied ? 'var(--success-border)' : 'var(--border)'}`,
+                    borderRadius: 'var(--radius-lg)',
+                    padding: 20,
+                    cursor: 'pointer',
+                    boxShadow: 'var(--shadow-card)',
+                  }}
                 >
                   {/* Header */}
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>

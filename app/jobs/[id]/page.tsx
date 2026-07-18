@@ -14,9 +14,9 @@ function ScoreChip({ score }: { score: number }) {
     const high = score >= 80
     const mid = score >= 50 && score < 80
     const style: React.CSSProperties = high
-        ? { background: 'linear-gradient(135deg, var(--score-high-from), var(--score-high-to))', color: 'var(--bg)', boxShadow: 'var(--glow-success)' }
+        ? { background: 'linear-gradient(135deg, var(--score-high-from), var(--score-high-to))', color: 'var(--score-high-text)', boxShadow: 'var(--glow-success)' }
         : mid
-            ? { background: 'linear-gradient(135deg, var(--score-mid-from), var(--score-mid-to))', color: '#18181B' }
+            ? { background: 'linear-gradient(135deg, var(--score-mid-from), var(--score-mid-to))', color: 'var(--score-mid-text)' }
             : { background: 'var(--score-low-bg)', color: 'var(--score-low-text)' }
     return (
         <span style={{ ...style, borderRadius: 'var(--radius-full)', fontSize: 11, fontWeight: 800, padding: '3px 10px', letterSpacing: '-0.01em', fontVariantNumeric: 'tabular-nums', display: 'inline-block' }}>

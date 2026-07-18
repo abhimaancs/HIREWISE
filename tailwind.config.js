@@ -21,7 +21,9 @@ module.exports = {
         'border-strong': 'var(--border-strong)',
         accent: 'var(--accent)',
         'accent-hover': 'var(--accent-hover)',
+        'accent-active': 'var(--accent-active)',
         'accent-subtle': 'var(--accent-subtle)',
+        'score-high-wash': 'var(--score-high-wash)',
         success: 'var(--success)',
         warning: 'var(--warning)',
         danger: 'var(--danger)',
@@ -44,6 +46,7 @@ module.exports = {
         md: 'var(--shadow-md)',
         lg: 'var(--shadow-lg)',
         glow: 'var(--glow-accent)',
+        card: 'var(--shadow-card)',
       },
       transitionDuration: {
         fast: '150ms',

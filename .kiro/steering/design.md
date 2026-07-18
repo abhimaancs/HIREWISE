@@ -12,13 +12,13 @@ Single source of truth for all visual decisions. Every spec, component, and code
 
 Two fully realised themes — not a colour inversion.
 
-| | Light — "Clean & Airy" | Dark — "Premium Editor" |
+| | Light — "Premium Warm" | Dark — "Premium Editor" |
 |---|---|---|
-| Feel | Paper, glass, natural light | Control room, editor, focused dark |
-| Reference | Vercel dashboard (light), Linear (light) | Linear (dark), Raycast, VS Code |
-| Depth via | Soft drop shadows | Layered surface background shades |
-| Borders | Minimal — shadow does the work | 1px rgba(255,255,255,0.08) separates layers |
-| Accent | #4F46E5 indigo, used sparingly | #818CF8 bright indigo, same hue family |
+| Feel | Warm paper, airy surfaces, SaaS-grade polish | Control room, editor, focused dark |
+| Reference | Linear (light), Stripe Dashboard, Notion | Linear (dark), Raycast, VS Code |
+| Depth via | Layered soft shadows — no hard borders | Layered surface background shades |
+| Borders | #EDEDEB, inputs + dividers only — shadow separates cards | 1px rgba(255,255,255,0.08) separates layers |
+| Accent | #0D9488 teal-600, used very sparingly | #818CF8 bright indigo, same hue family |
 
 Default theme: **dark**. On first visit, detect `prefers-color-scheme`. Persist choice in `localStorage` key `hw-theme`.
 
@@ -74,45 +74,68 @@ Applied via `data-theme="light"` or `data-theme="dark"` on `<html>`. Default is 
 
 /* ── Light ─────────────────────────────────────── */
 [data-theme="light"] {
-  --bg:            #F7F7F8;
+  /* ── Backgrounds ── */
+  --bg:            #FAFAF9;
   --surface-0:     #FFFFFF;
-  --surface-1:     #F4F4F6;
-  --surface-2:     #EBEBED;
+  --surface-1:     #F5F5F4;
+  --surface-2:     #E7E5E4;
 
-  --border:        rgba(0,0,0,0.07);
-  --border-strong: rgba(0,0,0,0.14);
-  --shadow-sm:     0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-  --shadow-md:     0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
-  --shadow-lg:     0 8px 24px rgba(0,0,0,0.10), 0 4px 8px rgba(0,0,0,0.05);
-  --glow-accent:   none;
-  --glow-success:  none;
+  /* ── Borders — secondary use only ── */
+  --border:        #EDEDEB;
+  --border-strong: #D6D3D1;
 
-  --text-primary:   #18181B;
-  --text-secondary: #52525B;
-  --text-tertiary:  #A1A1AA;
-  --text-disabled:  #D4D4D8;
+  /* ── Shadows ── */
+  --shadow-sm:   0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:   0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+  --shadow-lg:   0 8px 24px rgba(0,0,0,0.10), 0 4px 8px rgba(0,0,0,0.05);
+  --shadow-card: 0 1px 4px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04);
+  --glow-accent:  none;
+  --glow-success: none;
 
-  --accent:         #4F46E5;
-  --accent-hover:   #4338CA;
-  --accent-subtle:  rgba(79,70,229,0.08);
-  --accent-border:  rgba(79,70,229,0.20);
+  /* ── Text ── */
+  --text-primary:   #1C1917;
+  --text-secondary: #78716C;
+  --text-tertiary:  #A8A29E;
+  --text-disabled:  #D6D3D1;
 
-  --success:        #16A34A;
-  --success-subtle: rgba(22,163,74,0.08);
-  --success-border: rgba(22,163,74,0.20);
+  /* ── Accent — teal-600, used sparingly ── */
+  --accent:         #0D9488;
+  --accent-hover:   #0F766E;
+  --accent-active:  #115E59;
+  --accent-subtle:  rgba(13,148,136,0.08);
+  --accent-border:  rgba(13,148,136,0.25);
+
+  /* ── Semantic ── */
+  --success:        #059669;
+  --success-subtle: rgba(5,150,105,0.08);
+  --success-border: rgba(5,150,105,0.25);
   --warning:        #D97706;
   --warning-subtle: rgba(217,119,6,0.08);
-  --warning-border: rgba(217,119,6,0.20);
+  --warning-border: rgba(217,119,6,0.25);
   --danger:         #DC2626;
   --danger-subtle:  rgba(220,38,38,0.08);
-  --danger-border:  rgba(220,38,38,0.20);
+  --danger-border:  rgba(220,38,38,0.25);
 
-  --score-high-from: #16A34A;
-  --score-high-to:   #4ADE80;
-  --score-mid-from:  #D97706;
-  --score-mid-to:    #FCD34D;
-  --score-low-bg:    #EBEBED;
-  --score-low-text:  #A1A1AA;
+  /* ── Match score ── */
+  --score-high-from:  #22C55E;
+  --score-high-to:    #A3E635;
+  --score-high-text:  #14532D;
+  --score-high-wash:  rgba(34,197,94,0.06);
+  --score-mid-from:   #F59E0B;
+  --score-mid-to:     #D97706;
+  --score-mid-text:   #78350F;
+  --score-low-bg:     #F5F5F4;
+  --score-low-text:   #A8A29E;
+
+  /* ── Nav ── */
+  --nav-bg: rgba(255,255,255,0.92);
+
+  /* ── Radius ── */
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   16px;
+  --radius-xl:   20px;
+  --radius-full: 9999px;
 }
 ```
 
@@ -394,3 +417,26 @@ Never `outline: none` without an equivalent replacement. All interactive element
 - Glow on more than one element per screen
 - Hard theme switch (flash) — always crossfade
 - Shadows in dark mode or glow effects in light mode
+
+---
+
+## 14. Light Mode Specific Rules
+
+These rules apply ONLY when `data-theme="light"`. Dark mode is unaffected.
+
+1. **Cards use shadow, not border, as the primary elevation signal.** `box-shadow: var(--shadow-card)` replaces border. Exception: input fields always show a 1px border in both themes.
+
+2. **Teal accent appears on at most 2 elements per screen.** Primary CTAs and the top match-score chip only. Everything else uses neutral stone/gray (`--text-secondary`, `--surface-1`).
+
+3. **Match-score card wash:** Cards displaying ≥80% match scores get a subtle gradient wash behind the white surface: `background: linear-gradient(135deg, rgba(34,197,94,0.04) 0%, rgba(163,230,53,0.04) 100%), var(--surface-0)`. Mid and low match cards stay plain `var(--surface-0)`.
+
+4. **Score chip text colours in light mode:**
+   - ≥80%: gradient pill, text `var(--score-high-text)` (#14532D — green-900, passes WCAG AA)
+   - 50–79%: gradient pill, text `var(--score-mid-text)` (#78350F — amber-900)
+   - <50%: `var(--score-low-bg)` pill, `var(--score-low-text)` text
+
+5. **Navbar in light:** `background: rgba(255,255,255,0.92)`, `backdrop-filter: blur(8px)`, `border-bottom: 1px solid var(--border)`. Nav links: `var(--text-secondary)` at rest, `var(--accent)` on active/hover.
+
+6. **Empty state icons:** 72px circle with `background: var(--accent-subtle)`. Icon 40px, `color: var(--accent)`. No opacity trick — use the subtle token background.
+
+7. **Forbidden in light mode only:** box-shadow glows (`var(--glow-accent)`, `var(--glow-success)`), layered dark surfaces, pure white `#FFFFFF` as page background, indigo accent.

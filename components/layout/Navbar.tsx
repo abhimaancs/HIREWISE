@@ -146,8 +146,8 @@ export default function Navbar({ userRole }: NavbarProps) {
         style={{
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           padding: '0 2.5rem', height: '60px',
-          background: 'var(--surface-0)', borderBottom: '1px solid var(--border)',
-          position: 'sticky', top: 0, zIndex: 100, backdropFilter: 'blur(20px)',
+          background: 'var(--nav-bg, rgba(8,8,18,0.95))', borderBottom: '1px solid var(--border)',
+          position: 'sticky', top: 0, zIndex: 100, backdropFilter: 'blur(8px)',
         }}
         aria-label="Main navigation"
       >
