@@ -62,59 +62,71 @@
 [data-theme="light"] {
   /* ── Backgrounds ── */
   --bg: #FAFAF9;
+  /* warm off-white page background */
   --surface-0: #FFFFFF;
-  --surface-1: #F5F5F4;
-  --surface-2: #E7E5E4;
+  /* cards — clearly white against the bg */
+  --surface-1: #F0EFED;
+  /* nested sections, tighter contrast than before */
+  --surface-2: #E4E2DF;
+  /* hover states, selected rows — clearly darker */
 
-  /* ── Borders — secondary use only ── */
-  --border: #EDEDEB;
-  --border-strong: #D6D3D1;
+  /* ── Borders — strengthened for visibility ── */
+  --border: #D9D5D0;
+  /* was #EDEDEB — now clearly visible on white */
+  --border-strong: #B8B3AC;
+  /* for dividers, table lines */
 
   /* ── Shadows ── */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.10), 0 4px 8px rgba(0, 0, 0, 0.05);
-  --shadow-card: 0 1px 4px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.10), 0 2px 4px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.07);
+  --shadow-card: 0 1px 4px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.06);
   --glow-accent: none;
   --glow-success: none;
 
-  /* ── Text ── */
+  /* ── Text — warm stone scale, WCAG AA compliant ── */
   --text-primary: #1C1917;
-  --text-secondary: #78716C;
-  --text-tertiary: #A8A29E;
-  --text-disabled: #D6D3D1;
+  /* stone-900, 16:1 on white */
+  --text-secondary: #57534E;
+  /* stone-600, was 78716C — 7.5:1 on white */
+  --text-tertiary: #78716C;
+  /* stone-500, was A8A29E — 4.6:1 on white */
+  --text-disabled: #A8A29E;
+  /* stone-400 */
 
   /* ── Accent — teal-600, used sparingly ── */
   --accent: #0D9488;
   --accent-hover: #0F766E;
   --accent-active: #115E59;
-  --accent-subtle: rgba(13, 148, 136, 0.08);
-  --accent-border: rgba(13, 148, 136, 0.25);
+  --accent-subtle: rgba(13, 148, 136, 0.10);
+  /* slightly stronger wash */
+  --accent-border: rgba(13, 148, 136, 0.35);
+  /* clearly visible border */
 
   /* ── Semantic ── */
   --success: #059669;
-  --success-subtle: rgba(5, 150, 105, 0.08);
-  --success-border: rgba(5, 150, 105, 0.25);
+  --success-subtle: rgba(5, 150, 105, 0.10);
+  --success-border: rgba(5, 150, 105, 0.35);
   --warning: #D97706;
-  --warning-subtle: rgba(217, 119, 6, 0.08);
-  --warning-border: rgba(217, 119, 6, 0.25);
+  --warning-subtle: rgba(217, 119, 6, 0.10);
+  --warning-border: rgba(217, 119, 6, 0.35);
   --danger: #DC2626;
   --danger-subtle: rgba(220, 38, 38, 0.08);
-  --danger-border: rgba(220, 38, 38, 0.25);
+  --danger-border: rgba(220, 38, 38, 0.35);
 
   /* ── Match score ── */
   --score-high-from: #22C55E;
   --score-high-to: #A3E635;
   --score-high-text: #14532D;
-  --score-high-wash: rgba(34, 197, 94, 0.06);
+  --score-high-wash: rgba(34, 197, 94, 0.07);
   --score-mid-from: #F59E0B;
   --score-mid-to: #D97706;
   --score-mid-text: #78350F;
-  --score-low-bg: #F5F5F4;
-  --score-low-text: #A8A29E;
+  --score-low-bg: #E4E2DF;
+  --score-low-text: #78716C;
 
   /* ── Nav ── */
-  --nav-bg: rgba(255, 255, 255, 0.92);
+  --nav-bg: rgba(255, 255, 255, 0.95);
 
   /* ── Radius ── */
   --radius-sm: 8px;
@@ -177,12 +189,26 @@ select {
   transition: border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
 }
 
+/* In light mode, inputs must always be clearly white with a visible border */
+[data-theme="light"] input,
+[data-theme="light"] textarea,
+[data-theme="light"] select {
+  background: #FFFFFF;
+  border: 1px solid var(--border);
+}
+
 input:focus,
 textarea:focus,
 select:focus {
-  border-color: var(--accent-border);
+  border-color: var(--accent);
   background: var(--surface-1);
   box-shadow: 0 0 0 3px var(--accent-subtle);
+}
+
+[data-theme="light"] input:focus,
+[data-theme="light"] textarea:focus,
+[data-theme="light"] select:focus {
+  background: #FFFFFF;
 }
 
 input::placeholder,
@@ -253,6 +279,23 @@ a,
 
 [data-theme="light"] .skeleton {
   background: var(--surface-2);
+}
+
+/* ── Light mode component overrides ── */
+/* Cards always show a visible border + shadow in light mode */
+[data-theme="light"] .job-card,
+[data-theme="light"] .app-row,
+[data-theme="light"] .conv-row,
+[data-theme="light"] .cand-card,
+[data-theme="light"] .job-row {
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow-card);
+}
+
+/* Select dropdown options need a white bg in light mode */
+[data-theme="light"] select option {
+  background: #FFFFFF;
+  color: var(--text-primary);
 }
 
 /* ── Reduced motion ── */
