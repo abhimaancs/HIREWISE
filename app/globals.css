@@ -65,9 +65,10 @@
   /* warm off-white page background */
   --surface-0: #FFFFFF;
   /* cards — clearly white against the bg */
-  --surface-1: #F0EFED;
-  /* nested sections, tighter contrast than before */
-  --surface-2: #E4E2DF;
+  --surface-1: #EEF2F0;
+  /* nested sections — teal-tinted off-white, clearly distinct from white cards */
+  --surface-2: #E0E8E5;
+  /* hover states — teal-tinted, clearly darker */
   /* hover states, selected rows — clearly darker */
 
   /* ── Borders — strengthened for visibility ── */
@@ -122,8 +123,8 @@
   --score-mid-from: #F59E0B;
   --score-mid-to: #D97706;
   --score-mid-text: #78350F;
-  --score-low-bg: #E4E2DF;
-  --score-low-text: #78716C;
+  --score-low-bg: #E0E8E5;
+  --score-low-text: #57534E;
 
   /* ── Nav ── */
   --nav-bg: rgba(255, 255, 255, 0.95);
@@ -290,6 +291,117 @@ a,
 [data-theme="light"] .job-row {
   border: 1px solid var(--border) !important;
   box-shadow: var(--shadow-card);
+}
+
+/* ── Light mode: comprehensive contrast system ── */
+
+/* Page background — slightly warmer than pure white, creates depth */
+[data-theme="light"] body {
+  background: var(--bg);
+  color: var(--text-primary);
+}
+
+/* Headings — near-black for maximum legibility */
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] h3 {
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+/* ── Card internals: info boxes and reason panels ── */
+/* The "AI match reason" box inside job cards */
+[data-theme="light"] .job-card [style*="var(--surface-1)"] {
+  background: #F0EFED !important;
+  border-left: 3px solid var(--accent) !important;
+  color: var(--text-secondary) !important;
+}
+
+/* ── Skill tag chips — give them teal tint in light mode ── */
+/* Tags that use surface-1 + border become teal-tinted for clear identity */
+[data-theme="light"] .job-card span[style*="var(--surface-1)"],
+[data-theme="light"] .app-row span[style*="var(--surface-1)"],
+[data-theme="light"] .job-row span[style*="var(--surface-1)"],
+[data-theme="light"] .cand-card span[style*="var(--surface-1)"] {
+  background: rgba(13, 148, 136, 0.07) !important;
+  border-color: rgba(13, 148, 136, 0.25) !important;
+  color: #0F766E !important;
+}
+
+/* ── Banner / info strip styling in light ── */
+/* The accent-subtle banner at top of jobs page */
+[data-theme="light"] [style*="var(--accent-subtle)"][style*="border"] {
+  background: rgba(13, 148, 136, 0.06) !important;
+  border: 1px solid rgba(13, 148, 136, 0.20) !important;
+}
+
+/* ── Job avatar circles — stronger opacity in light ── */
+[data-theme="light"] .job-card [style*="borderRadius: 'var(--radius-md)'"][style*="fontWeight: 800"] {
+  opacity: 1 !important;
+}
+
+/* ── Filter pills inactive state ── */
+[data-theme="light"] .filter-pill {
+  background: #FFFFFF !important;
+  color: var(--text-secondary) !important;
+  border-color: var(--border) !important;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── Section dividers and footer strips inside cards ── */
+[data-theme="light"] .job-card [style*="borderTop: '1px solid var(--border)'"] {
+  border-top-color: var(--border) !important;
+}
+
+/* ── Stat cards on applications page ── */
+[data-theme="light"] [style*="var(--surface-0)"][style*="var(--shadow-sm)"] {
+  box-shadow: var(--shadow-card);
+}
+
+/* ── "Update profile" and secondary action buttons in light ── */
+[data-theme="light"] button[style*="var(--surface-1)"][style*="var(--border)"] {
+  background: #FFFFFF !important;
+  border-color: var(--border) !important;
+  color: var(--text-secondary) !important;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── Score chip low matches — clearly distinct in light ── */
+[data-theme="light"] [style*="var(--score-low-bg)"] {
+  background: #E4E2DF !important;
+  color: #57534E !important;
+  font-weight: 700;
+}
+
+/* ── Conversation rows ── */
+[data-theme="light"] .conv-row {
+  background: #FFFFFF !important;
+}
+
+[data-theme="light"] .conv-row:hover {
+  background: #F5F3F1 !important;
+  border-color: rgba(13, 148, 136, 0.3) !important;
+}
+
+/* ── Typography hierarchy enforcement in light ── */
+/* Page titles bold, clearly dark */
+[data-theme="light"] [style*="fontWeight: 800"][style*="var(--text-primary)"] {
+  color: #1C1917 !important;
+}
+
+/* Card titles — medium-dark */
+[data-theme="light"] [style*="fontWeight: 600"][style*="var(--text-primary)"] {
+  color: #292524 !important;
+}
+
+/* Secondary text — stone-600 for clear readability */
+[data-theme="light"] [style*="var(--text-secondary)"] {
+  color: #57534E !important;
+}
+
+/* Tertiary — still legible, not invisible */
+[data-theme="light"] [style*="var(--text-tertiary)"] {
+  color: #78716C !important;
 }
 
 /* Select dropdown options need a white bg in light mode */
