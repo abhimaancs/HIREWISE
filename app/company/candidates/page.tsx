@@ -67,8 +67,19 @@ function CandidatesContent() {
       if (!apps?.length) { setApplicants([]); return }
 
       const enriched = await Promise.all(apps.map(async (app: EnrichedApplicant) => {
-        const { data: candidate } = await supabase.from('profiles').select('*').eq('id', app.candidate_id).maybeSingle()
-        const { data: details } = await supabase.from('candidate_profiles').select('*').eq('id', app.candidate_id).maybeSingle()
+        const { data: candidate } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', app.candidate_id)
+          .eq('role', 'candidate')
+          .maybeSingle()
+        const { data: details } = await supabase
+          .from('candidate_profiles')
+          .select('*')
+          .eq('id', app.candidate_id)
+          .maybeSingle()
+        // Skip if profile is missing or not a candidate role
+        if (!candidate) return null
         return { ...app, candidate, candidate_details: details } as EnrichedApplicant
       }))
 
@@ -76,7 +87,9 @@ function CandidatesContent() {
       if (token !== loadApplicantsTokenRef.current) return
 
       setApplicants(
-        enriched.filter((app, index, self) => self.findIndex(a => a.id === app.id) === index)
+        enriched
+          .filter((app): app is EnrichedApplicant => app !== null)
+          .filter((app, index, self) => self.findIndex(a => a.id === app.id) === index)
       )
     } catch (err) { console.error(err) }
   }
