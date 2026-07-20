@@ -148,9 +148,9 @@ function CandidatesContent() {
   }
 
   // ── Style helpers ─────────────────────────────────────────────────────────
-  const scoreColor = (s: number) => s >= 85 ? '#34d399' : s >= 70 ? '#818cf8' : '#9ca3af'
-  const scoreBg = (s: number) => s >= 85 ? 'rgba(16,185,129,0.15)' : s >= 70 ? 'rgba(99,102,241,0.15)' : 'rgba(255,255,255,0.06)'
-  const scoreBorder = (s: number) => s >= 85 ? 'rgba(16,185,129,0.3)' : s >= 70 ? 'rgba(99,102,241,0.3)' : 'rgba(255,255,255,0.1)'
+  const scoreColor = (s: number) => s >= 85 ? 'var(--success)' : s >= 70 ? 'var(--accent)' : 'var(--text-tertiary)'
+  const scoreBg = (s: number) => s >= 85 ? 'var(--success-subtle)' : s >= 70 ? 'var(--accent-subtle)' : 'var(--surface-2)'
+  const scoreBorder = (s: number) => s >= 85 ? 'var(--success-border)' : s >= 70 ? 'var(--accent-border)' : 'var(--border)'
 
   const statusColors: Record<ApplicationStatus, StatusStyle> = {
     applied: { bg: 'rgba(99,102,241,0.12)', color: '#818cf8', border: 'rgba(99,102,241,0.25)' },
@@ -219,11 +219,11 @@ function CandidatesContent() {
               <select
                 value={selectedJob?.id || ''}
                 onChange={e => { const j = jobs.find(j => j.id === e.target.value); if (j) { setSelectedJob(j); loadApplicants(j.id); matchCandidates(j) } }}
-                style={{ paddingRight: '2rem', appearance: 'none', cursor: 'pointer', minWidth: 220, color: '#f1f1f1' }}
+                style={{ paddingRight: '2rem', appearance: 'none', cursor: 'pointer', minWidth: 220, color: 'var(--text-primary)' }}
               >
                 {jobs.map(job => <option key={job.id} value={job.id}>{job.title}</option>)}
               </select>
-              <ChevronDown size={14} style={{ position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)', color: '#6b7280', pointerEvents: 'none' }} />
+              <ChevronDown size={14} style={{ position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-tertiary)', pointerEvents: 'none' }} />
             </div>
           )}
         </div>
@@ -237,7 +237,7 @@ function CandidatesContent() {
             <button
               key={t.id}
               onClick={() => setTab(t.id as 'applicants' | 'ai')}
-              style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '7px 14px', borderRadius: 8, border: 'none', background: tab === t.id ? 'rgba(99,102,241,0.2)' : 'transparent', color: tab === t.id ? '#818cf8' : '#6b7280', fontSize: 13, fontWeight: tab === t.id ? 700 : 500, cursor: 'pointer', fontFamily: 'Inter,sans-serif', transition: 'all 0.15s' }}
+              style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '7px 14px', borderRadius: 'var(--radius-sm)', border: 'none', background: tab === t.id ? 'var(--accent)' : 'transparent', color: tab === t.id ? '#fff' : 'var(--text-secondary)', fontSize: 13, fontWeight: tab === t.id ? 700 : 500, cursor: 'pointer', fontFamily: 'inherit', transition: 'background-color 150ms ease, color 150ms ease' }}
             >
               {t.icon}{t.label}
             </button>
@@ -246,16 +246,16 @@ function CandidatesContent() {
 
         {/* ── Loading ── */}
         {loading ? (
-          <div style={{ textAlign: 'center', padding: '3rem', color: '#6b7280' }}>
+          <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-secondary)' }}>
             <Loader2 size={24} style={{ animation: 'spin 1s linear infinite' }} />
           </div>
 
           /* ── Applicants tab ── */
         ) : tab === 'applicants' ? (
           applicants.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '4rem', color: '#6b7280' }}>
+            <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-secondary)' }}>
               <Users size={40} style={{ marginBottom: 12, opacity: 0.2 }} />
-              <p style={{ fontSize: 15, fontWeight: 700, color: '#e5e7eb', marginBottom: 6 }}>No applicants yet</p>
+              <p style={{ fontSize: 15, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 6 }}>No applicants yet</p>
               <p style={{ fontSize: 13 }}>Candidates who apply will appear here</p>
             </div>
           ) : (
@@ -272,12 +272,12 @@ function CandidatesContent() {
                   <div
                     key={app.id}
                     className="cand-card"
-                    style={{ background: 'rgba(255,255,255,0.03)', border: `1px solid ${isShortlisted ? 'rgba(16,185,129,0.2)' : isRejected ? 'rgba(239,68,68,0.15)' : 'rgba(255,255,255,0.07)'}`, borderRadius: 16, padding: '1.25rem', display: 'flex', alignItems: 'flex-start', gap: 14, transition: 'border-color 0.2s' }}
-                    onMouseEnter={e => { if (!isRejected) (e.currentTarget as HTMLElement).style.borderColor = isShortlisted ? 'rgba(16,185,129,0.35)' : 'rgba(99,102,241,0.3)' }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = isShortlisted ? 'rgba(16,185,129,0.2)' : isRejected ? 'rgba(239,68,68,0.15)' : 'rgba(255,255,255,0.07)' }}
+                    style={{ background: 'var(--surface-0)', border: `1px solid ${isShortlisted ? 'var(--success-border)' : isRejected ? 'var(--danger-border)' : 'var(--border)'}`, borderRadius: 'var(--radius-lg)', padding: '1.25rem', display: 'flex', alignItems: 'flex-start', gap: 14, transition: 'border-color 0.2s', boxShadow: 'var(--shadow-sm)' }}
+                    onMouseEnter={e => { if (!isRejected) (e.currentTarget as HTMLElement).style.borderColor = isShortlisted ? 'var(--success-border)' : 'var(--accent-border)' }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = isShortlisted ? 'var(--success-border)' : isRejected ? 'var(--danger-border)' : 'var(--border)' }}
                   >
                     {/* Avatar */}
-                    <div style={{ width: 46, height: 46, borderRadius: '50%', background: isRejected ? 'rgba(255,255,255,0.05)' : 'linear-gradient(135deg,#6366f1,#8b5cf6)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: isRejected ? '#6b7280' : '#fff', fontWeight: 800, fontSize: 17, flexShrink: 0, opacity: isRejected ? 0.6 : 1 }}>
+                    <div style={{ width: 46, height: 46, borderRadius: 'var(--radius-full)', background: isRejected ? 'var(--surface-2)' : 'linear-gradient(135deg,var(--accent),var(--accent-hover))', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 800, fontSize: 17, flexShrink: 0, opacity: isRejected ? 0.6 : 1 }}>
                       {app.candidate?.name?.[0]?.toUpperCase() || '?'}
                     </div>
 
@@ -285,7 +285,7 @@ function CandidatesContent() {
                     <div style={{ flex: 1, minWidth: 0 }}>
                       {/* Name + status badge */}
                       <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginBottom: 5 }}>
-                        <span style={{ fontWeight: 700, fontSize: 15, color: isRejected ? '#6b7280' : '#f1f1f1', letterSpacing: '-0.2px' }}>
+                        <span style={{ fontWeight: 700, fontSize: 15, color: isRejected ? 'var(--text-tertiary)' : 'var(--text-primary)', letterSpacing: '-0.2px' }}>
                           {app.candidate?.name || 'Unknown'}
                         </span>
                         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 4, background: sc.bg, color: sc.color, border: `1px solid ${sc.border}`, borderRadius: 20, fontSize: 11, fontWeight: 700, padding: '2px 8px' }}>
@@ -294,7 +294,7 @@ function CandidatesContent() {
                       </div>
 
                       {/* Meta */}
-                      <div style={{ fontSize: 12, color: '#6b7280', marginBottom: 8 }}>
+                      <div style={{ fontSize: 12, color: 'var(--text-secondary)', marginBottom: 8 }}>
                         Applied {new Date(app.applied_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
                         {app.candidate_details?.college && ` · 🎓 ${app.candidate_details.college}`}
                         {app.candidate_details?.experience_years === 0 ? ' · 💼 Fresher' : app.candidate_details?.experience_years ? ` · 💼 ${app.candidate_details.experience_years}y exp` : ''}
@@ -304,26 +304,26 @@ function CandidatesContent() {
                       {app.candidate_details?.skills?.length ? (
                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5, marginBottom: 10 }}>
                           {app.candidate_details.skills.slice(0, 5).map((s: string) => (
-                            <span key={s} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', color: '#9ca3af', borderRadius: 7, fontSize: 11, padding: '3px 8px', fontWeight: 500 }}>{s}</span>
+                            <span key={s} style={{ background: 'var(--surface-1)', border: '1px solid var(--border)', color: 'var(--text-secondary)', borderRadius: 'var(--radius-sm)', fontSize: 11, padding: '3px 8px', fontWeight: 500 }}>{s}</span>
                           ))}
                         </div>
                       ) : null}
 
                       {/* Inline reject confirmation */}
                       {showConfirm && (
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 8, background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.25)', borderRadius: 9, padding: '8px 12px', marginTop: 4 }}>
-                          <span style={{ fontSize: 12, color: '#f87171', fontWeight: 600, flex: 1 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 8, background: 'var(--danger-subtle)', border: '1px solid var(--danger-border)', borderRadius: 'var(--radius-sm)', padding: '8px 12px', marginTop: 4 }}>
+                          <span style={{ fontSize: 12, color: 'var(--danger)', fontWeight: 600, flex: 1 }}>
                             Reject this candidate? They can be moved back to Applied.
                           </span>
                           <button
                             onClick={() => updateStatus(app.id, 'rejected')}
-                            style={{ fontSize: 12, fontWeight: 700, color: '#f87171', background: 'rgba(239,68,68,0.15)', border: '1px solid rgba(239,68,68,0.3)', borderRadius: 7, padding: '4px 12px', cursor: 'pointer', fontFamily: 'Inter,sans-serif', whiteSpace: 'nowrap' }}
+                            style={{ fontSize: 12, fontWeight: 700, color: 'var(--danger)', background: 'var(--danger-subtle)', border: '1px solid var(--danger-border)', borderRadius: 'var(--radius-sm)', padding: '4px 12px', cursor: 'pointer', fontFamily: 'inherit', whiteSpace: 'nowrap' }}
                           >
                             Confirm
                           </button>
                           <button
                             onClick={() => setConfirmReject(null)}
-                            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'transparent', border: 'none', color: '#6b7280', cursor: 'pointer', padding: 4 }}
+                            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'transparent', border: 'none', color: 'var(--text-tertiary)', cursor: 'pointer', padding: 4 }}
                           >
                             <X size={14} />
                           </button>
@@ -344,22 +344,22 @@ function CandidatesContent() {
                           <button
                             onClick={() => startChat(app.candidate_id)}
                             disabled={startingChat === app.candidate_id}
-                            style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '7px 12px', background: 'rgba(99,102,241,0.12)', border: '1px solid rgba(99,102,241,0.25)', borderRadius: 8, color: '#818cf8', fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: 'Inter,sans-serif' }}
+                            style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '7px 12px', background: 'var(--accent-subtle)', border: '1px solid var(--accent-border)', borderRadius: 'var(--radius-sm)', color: 'var(--accent)', fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}
                           >
                             {startingChat === app.candidate_id ? <Loader2 size={12} style={{ animation: 'spin 1s linear infinite' }} /> : <MessageSquare size={12} />}
                             Message
                           </button>
                           {/* Shortlisted badge */}
-                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, padding: '7px 12px', background: 'rgba(16,185,129,0.12)', border: '1px solid rgba(16,185,129,0.25)', borderRadius: 8, color: '#34d399', fontSize: 12, fontWeight: 700 }}>
+                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, padding: '7px 12px', background: 'var(--success-subtle)', border: '1px solid var(--success-border)', borderRadius: 'var(--radius-sm)', color: 'var(--success)', fontSize: 12, fontWeight: 700 }}>
                             <CheckCircle size={12} /> Shortlisted
                           </div>
                           {/* Undo shortlist */}
                           <button
                             onClick={() => updateStatus(app.id, 'applied')}
                             title="Undo shortlist — move back to Applied"
-                            style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '6px 12px', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, color: '#6b7280', fontSize: 11, fontWeight: 500, cursor: 'pointer', fontFamily: 'Inter,sans-serif', transition: 'all 0.15s' }}
-                            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.2)'; (e.currentTarget as HTMLElement).style.color = '#9ca3af' }}
-                            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.1)'; (e.currentTarget as HTMLElement).style.color = '#6b7280' }}
+                            style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '6px 12px', background: 'transparent', border: '1px solid var(--border)', borderRadius: 'var(--radius-sm)', color: 'var(--text-secondary)', fontSize: 11, fontWeight: 500, cursor: 'pointer', fontFamily: 'Inter,sans-serif', transition: 'border-color 150ms ease, color 150ms ease' }}
+                            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-border)'; (e.currentTarget as HTMLElement).style.color = 'var(--accent)' }}
+                            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)'; (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)' }}
                           >
                             <RotateCcw size={11} /> Undo
                           </button>
@@ -368,16 +368,16 @@ function CandidatesContent() {
                       ) : isRejected ? (
                         /* Rejected — badge + undo */
                         <>
-                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, padding: '7px 12px', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: 8, color: '#f87171', fontSize: 12, fontWeight: 700 }}>
+                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, padding: '7px 12px', background: 'var(--danger-subtle)', border: '1px solid var(--danger-border)', borderRadius: 'var(--radius-sm)', color: 'var(--danger)', fontSize: 12, fontWeight: 700 }}>
                             <XCircle size={12} /> Rejected
                           </div>
                           {/* Undo rejection */}
                           <button
                             onClick={() => updateStatus(app.id, 'applied')}
                             title="Undo rejection — move back to Applied"
-                            style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '6px 12px', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, color: '#6b7280', fontSize: 11, fontWeight: 500, cursor: 'pointer', fontFamily: 'Inter,sans-serif', transition: 'all 0.15s' }}
-                            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.2)'; (e.currentTarget as HTMLElement).style.color = '#9ca3af' }}
-                            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.1)'; (e.currentTarget as HTMLElement).style.color = '#6b7280' }}
+                            style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '6px 12px', background: 'transparent', border: '1px solid var(--border)', borderRadius: 'var(--radius-sm)', color: 'var(--text-secondary)', fontSize: 11, fontWeight: 500, cursor: 'pointer', fontFamily: 'Inter,sans-serif', transition: 'border-color 150ms ease, color 150ms ease' }}
+                            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-border)'; (e.currentTarget as HTMLElement).style.color = 'var(--accent)' }}
+                            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)'; (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)' }}
                           >
                             <RotateCcw size={11} /> Undo
                           </button>
@@ -390,7 +390,7 @@ function CandidatesContent() {
                           <button
                             onClick={() => startChat(app.candidate_id)}
                             disabled={startingChat === app.candidate_id}
-                            style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '7px 12px', background: 'rgba(99,102,241,0.12)', border: '1px solid rgba(99,102,241,0.25)', borderRadius: 8, color: '#818cf8', fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: 'Inter,sans-serif', transition: 'all 0.15s' }}
+                            style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '7px 12px', background: 'var(--accent-subtle)', border: '1px solid var(--accent-border)', borderRadius: 'var(--radius-sm)', color: 'var(--accent)', fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit', transition: 'background-color 150ms ease' }}
                           >
                             {startingChat === app.candidate_id ? <Loader2 size={12} style={{ animation: 'spin 1s linear infinite' }} /> : <MessageSquare size={12} />}
                             Message
@@ -399,7 +399,7 @@ function CandidatesContent() {
                           {/* Shortlist — primary green */}
                           <button
                             onClick={() => updateStatus(app.id, 'shortlisted')}
-                            style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '7px 12px', background: 'rgba(16,185,129,0.15)', border: '1px solid rgba(16,185,129,0.3)', borderRadius: 8, color: '#34d399', fontSize: 12, fontWeight: 700, cursor: 'pointer', fontFamily: 'Inter,sans-serif', transition: 'all 0.15s' }}
+                            style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '7px 12px', background: 'var(--success-subtle)', border: '1px solid var(--success-border)', borderRadius: 'var(--radius-sm)', color: 'var(--success)', fontSize: 12, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit', transition: 'background-color 150ms ease' }}
                           >
                             <CheckCircle size={12} /> Shortlist
                           </button>
@@ -408,7 +408,7 @@ function CandidatesContent() {
                           {!showConfirm && (
                             <button
                               onClick={() => setConfirmReject(app.id)}
-                              style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '7px 12px', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: 8, color: '#f87171', fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: 'Inter,sans-serif', transition: 'all 0.15s' }}
+                              style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '7px 12px', background: 'var(--danger-subtle)', border: '1px solid var(--danger-border)', borderRadius: 'var(--radius-sm)', color: 'var(--danger)', fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit', transition: 'background-color 150ms ease' }}
                             >
                               <X size={12} /> Reject
                             </button>
@@ -424,52 +424,52 @@ function CandidatesContent() {
 
           /* ── AI Ranked tab ── */
         ) : matching ? (
-          <div style={{ background: 'rgba(99,102,241,0.08)', border: '1px solid rgba(99,102,241,0.2)', borderRadius: 14, padding: '1.25rem', display: 'flex', alignItems: 'center', gap: 12 }}>
-            <Loader2 size={18} color="#818cf8" style={{ animation: 'spin 1s linear infinite' }} />
-            <span style={{ fontSize: 14, color: '#818cf8', fontWeight: 600 }}>AI is ranking candidates...</span>
+          <div style={{ background: 'var(--accent-subtle)', border: '1px solid var(--accent-border)', borderRadius: 'var(--radius-md)', padding: '1.25rem', display: 'flex', alignItems: 'center', gap: 12 }}>
+            <Loader2 size={18} color="var(--accent)" style={{ animation: 'spin 1s linear infinite' }} />
+            <span style={{ fontSize: 14, color: 'var(--accent)', fontWeight: 600 }}>AI is ranking candidates...</span>
           </div>
         ) : matches.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '4rem', color: '#6b7280' }}>
+          <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-secondary)' }}>
             <Briefcase size={40} style={{ marginBottom: 12, opacity: 0.2 }} />
-            <p style={{ fontSize: 15, fontWeight: 700, color: '#e5e7eb' }}>No candidates found yet</p>
+            <p style={{ fontSize: 15, fontWeight: 700, color: 'var(--text-primary)' }}>No candidates found yet</p>
           </div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
             {matches.map(({ job: candidate, match_score, match_reason }: CandidateMatch, i: number) => (
               <div
                 key={candidate.id}
-                style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 16, padding: '1.25rem', display: 'flex', alignItems: 'flex-start', gap: 14, transition: 'all 0.2s' }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(99,102,241,0.3)'; (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.05)' }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.07)'; (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.03)' }}
+                style={{ background: 'var(--surface-0)', border: '1px solid var(--border)', borderRadius: 'var(--radius-lg)', padding: '1.25rem', display: 'flex', alignItems: 'flex-start', gap: 14, transition: 'border-color 200ms ease, box-shadow 200ms ease, background-color 200ms ease', boxShadow: 'var(--shadow-sm)' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-border)'; (e.currentTarget as HTMLElement).style.background = 'var(--surface-1)'; (e.currentTarget as HTMLElement).style.boxShadow = 'var(--shadow-md)' }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)'; (e.currentTarget as HTMLElement).style.background = 'var(--surface-0)'; (e.currentTarget as HTMLElement).style.boxShadow = 'var(--shadow-sm)' }}
               >
                 {/* Rank badge */}
-                <div style={{ width: 28, height: 28, borderRadius: '50%', background: i === 0 ? 'rgba(245,158,11,0.15)' : 'rgba(255,255,255,0.05)', border: `1px solid ${i === 0 ? 'rgba(245,158,11,0.3)' : 'rgba(255,255,255,0.08)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 800, color: i === 0 ? '#fbbf24' : '#6b7280', flexShrink: 0, marginTop: 8 }}>
+                <div style={{ width: 28, height: 28, borderRadius: 'var(--radius-full)', background: i === 0 ? 'rgba(245,158,11,0.15)' : 'var(--surface-2)', border: `1px solid ${i === 0 ? 'rgba(245,158,11,0.3)' : 'var(--border)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 800, color: i === 0 ? '#f59e0b' : 'var(--text-tertiary)', flexShrink: 0, marginTop: 8 }}>
                   {i === 0 ? <Star size={13} fill="#fbbf24" color="#fbbf24" /> : `#${i + 1}`}
                 </div>
 
                 {/* Avatar */}
-                <div style={{ width: 46, height: 46, borderRadius: '50%', background: 'linear-gradient(135deg,#6366f1,#8b5cf6)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 800, fontSize: 17, flexShrink: 0 }}>
+                <div style={{ width: 46, height: 46, borderRadius: 'var(--radius-full)', background: 'linear-gradient(135deg,var(--accent),var(--accent-hover))', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 800, fontSize: 17, flexShrink: 0 }}>
                   {candidate.name?.[0]?.toUpperCase()}
                 </div>
 
                 {/* Info */}
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginBottom: 5 }}>
-                    <span style={{ fontWeight: 700, fontSize: 15, color: '#f1f1f1', letterSpacing: '-0.2px' }}>{candidate.name}</span>
+                    <span style={{ fontWeight: 700, fontSize: 15, color: 'var(--text-primary)', letterSpacing: '-0.2px' }}>{candidate.name}</span>
                     <div style={{ display: 'inline-flex', alignItems: 'center', gap: 3, background: scoreBg(match_score), color: scoreColor(match_score), border: `1px solid ${scoreBorder(match_score)}`, borderRadius: 20, fontSize: 11, fontWeight: 700, padding: '2px 8px' }}>
                       {match_score}% match
                     </div>
                   </div>
-                  <div style={{ fontSize: 12, color: '#6b7280', marginBottom: 8 }}>
+                  <div style={{ fontSize: 12, color: 'var(--text-secondary)', marginBottom: 8 }}>
                     {candidate.college && `🎓 ${candidate.college} · `}
                     {candidate.experience_years === 0 ? '💼 Fresher' : `💼 ${candidate.experience_years}y exp`}
                   </div>
-                  <div style={{ fontSize: 12, color: '#9ca3af', background: 'rgba(255,255,255,0.03)', borderRadius: 8, padding: '6px 10px', marginBottom: 8, borderLeft: '2px solid rgba(99,102,241,0.4)', lineHeight: 1.6 }}>
+                  <div style={{ fontSize: 12, color: 'var(--text-secondary)', background: 'var(--surface-1)', borderRadius: 'var(--radius-sm)', padding: '6px 10px', marginBottom: 8, borderLeft: '2px solid var(--accent-border)', lineHeight: 1.6 }}>
                     ✦ {match_reason}
                   </div>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
                     {candidate.skills?.slice(0, 5).map((s: string) => (
-                      <span key={s} style={{ background: 'rgba(99,102,241,0.1)', color: '#818cf8', border: '1px solid rgba(99,102,241,0.2)', borderRadius: 7, fontSize: 11, padding: '3px 8px', fontWeight: 500 }}>{s}</span>
+                      <span key={s} style={{ background: 'var(--accent-subtle)', color: 'var(--accent)', border: '1px solid var(--accent-border)', borderRadius: 'var(--radius-sm)', fontSize: 11, padding: '3px 8px', fontWeight: 500 }}>{s}</span>
                     ))}
                   </div>
                 </div>
@@ -478,7 +478,7 @@ function CandidatesContent() {
                 <button
                   onClick={() => startChat(candidate.id)}
                   disabled={startingChat === candidate.id}
-                  style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '7px 14px', background: '#6366f1', border: 'none', borderRadius: 8, color: '#fff', fontSize: 12, cursor: startingChat === candidate.id ? 'not-allowed' : 'pointer', fontFamily: 'Inter,sans-serif', flexShrink: 0, fontWeight: 600, opacity: startingChat === candidate.id ? 0.7 : 1, transition: 'all 0.15s' }}
+                  style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '7px 14px', background: 'var(--accent)', border: 'none', borderRadius: 'var(--radius-sm)', color: '#fff', fontSize: 12, cursor: startingChat === candidate.id ? 'not-allowed' : 'pointer', fontFamily: 'inherit', flexShrink: 0, fontWeight: 600, opacity: startingChat === candidate.id ? 0.7 : 1, transition: 'background-color 150ms ease' }}
                 >
                   {startingChat === candidate.id ? <Loader2 size={12} style={{ animation: 'spin 1s linear infinite' }} /> : <MessageSquare size={12} />}
                   Message
