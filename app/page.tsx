@@ -217,7 +217,7 @@ export default function HomePage() {
       {/* HOW IT WORKS - Interactive Flow */}
       <div style={{ padding: '4rem 2.5rem', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1 }}>
         <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(16,185,129,.1)', border: '1px solid rgba(16,185,129,.2)', borderRadius: 999, padding: '4px 12px', fontSize: 11, color: '#34d399', fontWeight: 700, marginBottom: 12 }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'var(--success-subtle)', border: '1px solid var(--success-border)', borderRadius: 999, padding: '4px 12px', fontSize: 11, color: 'var(--success)', fontWeight: 700, marginBottom: 12 }}>
             ✦ See it in action
           </div>
           <div style={{ fontSize: 26, fontWeight: 900, color: 'var(--text-primary)', letterSpacing: '-1px', marginBottom: 8 }}>How HireWise works</div>
@@ -238,11 +238,11 @@ export default function HomePage() {
                   <div style={{ fontSize: 10, color: 'var(--text-secondary)', marginBottom: 6 }}>Profile completed</div>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
                     {['React', 'Node.js', 'TypeScript', 'DSA', 'MongoDB'].map(s => (
-                      <span key={s} style={{ background: 'rgba(99,102,241,.12)', color: '#818cf8', border: '1px solid rgba(99,102,241,.2)', borderRadius: 20, fontSize: 10, padding: '2px 8px', fontWeight: 600, animation: 'fadeUp .4s ease both' }}>{s}</span>
+                      <span key={s} style={{ background: 'var(--accent-subtle)', color: 'var(--accent)', border: '1px solid var(--accent-border)', borderRadius: 20, fontSize: 10, padding: '2px 8px', fontWeight: 600 }}>{s}</span>
                     ))}
                   </div>
-                  <div style={{ marginTop: 8, fontSize: 10, color: '#34d399', display: 'flex', alignItems: 'center', gap: 4 }}>
-                    <span style={{ width: 6, height: 6, background: '#34d399', borderRadius: '50%', display: 'inline-block' }} />
+                  <div style={{ marginTop: 8, fontSize: 10, color: 'var(--success)', display: 'flex', alignItems: 'center', gap: 4 }}>
+                    <span style={{ width: 6, height: 6, background: 'var(--success)', borderRadius: '50%', display: 'inline-block' }} />
                     Profile ready — 5 skills added
                   </div>
                 </div>
