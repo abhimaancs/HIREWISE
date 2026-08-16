@@ -1,17 +1,13 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Plus_Jakarta_Sans } from 'next/font/google'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import './globals.css'
 
-const geist = Geist({
+// Plus Jakarta Sans — premium geometric sans, used by Linear, Loom, and top SaaS products
+const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  variable: '--font-geist',
-  display: 'swap',
-})
-
-const geistMono = Geist_Mono({
-  subsets: ['latin'],
-  variable: '--font-geist-mono',
+  variable: '--font-jakarta',
+  weight: ['400', '500', '600', '700', '800'],
   display: 'swap',
 })
 
@@ -45,7 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* FOUC prevention — must run before any paint */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className={`${geist.variable} ${geistMono.variable}`}>
+      <body className={plusJakarta.variable}>
         <ThemeProvider>
           {children}
         </ThemeProvider>
