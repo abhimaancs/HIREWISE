@@ -329,20 +329,20 @@ export default function HomePage() {
 
       {/* SPLIT CTA */}
       <div className="split-cta" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, maxWidth: 1200, margin: '0 auto', padding: '0 2.5rem 4rem', position: 'relative', zIndex: 1 }}>
-        <div style={{ background: 'var(--accent-subtle)', border: '1px solid var(--accent-border)', borderRadius: 22, padding: '2.25rem', boxShadow: '0 0 40px rgba(99,102,241,.05)' }}>
-          <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '.1em', marginBottom: 14 }}>For Candidates</div>
-          <div style={{ fontSize: 22, fontWeight: 800, color: 'var(--text-primary)', marginBottom: 10, letterSpacing: '-.8px', lineHeight: 1.2 }}>Find your perfect role faster</div>
-          <div style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: '1.5rem' }}>Complete your profile, add your skills, and let AI find the jobs where you're genuinely the best fit. Apply in one click.</div>
+        <div className="big-card-teal" style={{ background: 'var(--accent)', border: 'none', borderRadius: 22, padding: '2.25rem', boxShadow: '0 8px 32px rgba(13,148,136,.25)' }}>
+          <div style={{ fontSize: 11, fontWeight: 800, color: 'rgba(255,255,255,0.75)', textTransform: 'uppercase', letterSpacing: '.1em', marginBottom: 14 }}>For Candidates</div>
+          <div style={{ fontSize: 22, fontWeight: 800, color: '#ffffff', marginBottom: 10, letterSpacing: '-.8px', lineHeight: 1.2 }}>Find your perfect role faster</div>
+          <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', lineHeight: 1.8, marginBottom: '1.5rem' }}>Complete your profile, add your skills, and let AI find the jobs where you're genuinely the best fit. Apply in one click.</div>
           <Link href="/signup">
-            <button className="cta-btn" style={{ padding: '11px 24px', background: 'var(--accent)', border: 'none', borderRadius: 10, color: '#fff', fontSize: 13, fontWeight: 700, cursor: 'pointer', fontFamily: 'Inter,sans-serif', boxShadow: '0 4px 14px rgba(13,148,136,.25)' }}>Get started →</button>
+            <button className="cta-btn" style={{ padding: '11px 24px', background: '#ffffff', border: 'none', borderRadius: 10, color: 'var(--accent)', fontSize: 13, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit', boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>Get started →</button>
           </Link>
         </div>
-        <div style={{ background: 'rgba(16,185,129,.06)', border: '1px solid rgba(16,185,129,.2)', borderRadius: 22, padding: '2.25rem', boxShadow: '0 0 40px rgba(16,185,129,.04)' }}>
-          <div style={{ fontSize: 11, fontWeight: 800, color: '#34d399', textTransform: 'uppercase', letterSpacing: '.1em', marginBottom: 14 }}>For Companies</div>
-          <div style={{ fontSize: 22, fontWeight: 800, color: 'var(--text-primary)', marginBottom: 10, letterSpacing: '-.8px', lineHeight: 1.2 }}>Find the right candidate fast</div>
-          <div style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: '1.5rem' }}>Post a job and AI instantly ranks all candidates by how well they match. Message top candidates directly.</div>
+        <div className="big-card-teal" style={{ background: 'var(--accent-hover)', border: 'none', borderRadius: 22, padding: '2.25rem', boxShadow: '0 8px 32px rgba(13,148,136,.2)' }}>
+          <div style={{ fontSize: 11, fontWeight: 800, color: 'rgba(255,255,255,0.75)', textTransform: 'uppercase', letterSpacing: '.1em', marginBottom: 14 }}>For Companies</div>
+          <div style={{ fontSize: 22, fontWeight: 800, color: '#ffffff', marginBottom: 10, letterSpacing: '-.8px', lineHeight: 1.2 }}>Find the right candidate fast</div>
+          <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', lineHeight: 1.8, marginBottom: '1.5rem' }}>Post a job and AI instantly ranks all candidates by how well they match. Message top candidates directly.</div>
           <Link href="/signup?role=company">
-            <button className="cta-btn" style={{ padding: '11px 24px', background: '#059669', border: 'none', borderRadius: 10, color: '#fff', fontSize: 13, fontWeight: 700, cursor: 'pointer', fontFamily: 'Inter,sans-serif', boxShadow: '0 0 20px rgba(16,185,129,.3)' }}>Post a job →</button>
+            <button className="cta-btn" style={{ padding: '11px 24px', background: '#ffffff', border: 'none', borderRadius: 10, color: 'var(--accent-hover)', fontSize: 13, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit', boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>Post a job →</button>
           </Link>
         </div>
       </div>
