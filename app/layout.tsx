@@ -1,17 +1,17 @@
 import type { Metadata } from 'next'
-import { Inter, Syne } from 'next/font/google'
+import { Geist, Geist_Mono } from 'next/font/google'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import './globals.css'
 
-const inter = Inter({
+const geist = Geist({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-geist',
   display: 'swap',
 })
 
-const syne = Syne({
+const geistMono = Geist_Mono({
   subsets: ['latin'],
-  variable: '--font-syne',
+  variable: '--font-geist-mono',
   display: 'swap',
 })
 
@@ -45,7 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* FOUC prevention — must run before any paint */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className={`${inter.variable} ${syne.variable}`}>
+      <body className={`${geist.variable} ${geistMono.variable}`}>
         <ThemeProvider>
           {children}
         </ThemeProvider>

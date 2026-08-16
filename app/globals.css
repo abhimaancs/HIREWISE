@@ -152,12 +152,15 @@ html {
 }
 
 body {
-  font-family: 'Inter', var(--font-dm), system-ui, sans-serif;
+  font-family: var(--font-geist), 'Inter', system-ui, sans-serif;
   background: var(--bg);
   color: var(--text-primary);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 15px;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
 }
 
 /* ── Scrollbar ── */
@@ -181,10 +184,10 @@ select {
   background: var(--surface-1);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  padding: 10px 12px;
+  padding: 11px 14px;
   color: var(--text-primary);
-  font-size: 14px;
-  font-family: 'Inter', var(--font-dm), system-ui, sans-serif;
+  font-size: 15px;
+  font-family: var(--font-geist), 'Inter', system-ui, sans-serif;
   outline: none;
   width: 100%;
   transition: border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
@@ -593,6 +596,46 @@ a,
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ── Light mode: large card teal accent ── */
+/* Featured/hero cards (radius-xl, radius-lg with prominent content) get teal bg */
+[data-theme="light"] .job-card,
+[data-theme="light"] .app-row,
+[data-theme="light"] .cand-card {
+  background: #FFFFFF;
+}
+
+/* The largest cards — section panels, CTA blocks — get a teal wash */
+[data-theme="light"] [style*="var(--radius-xl)"],
+[data-theme="light"] .split-cta > div {
+  /* teal accent bg handled inline via var(--accent-subtle) */
+}
+
+/* Primary large surface card override in light — teal-tinted */
+[data-theme="light"] .profile-card-main,
+[data-theme="light"] .card-featured {
+  background: #0D9488 !important;
+  color: #fff !important;
+}
+
+/* ── Global font size scale boost ── */
+/* Applied globally — increases all text by ~1 step while preserving relative hierarchy */
+[data-theme="light"] body,
+[data-theme="dark"] body {
+  font-size: 15px;
+}
+
+/* Ensure buttons and interactive elements also use the larger base */
+button, a, input, textarea, select, label {
+  font-size: inherit;
+}
+
+/* Paragraph and meta text — bumped from 13px to 14px, 14px to 15px */
+[data-theme="light"] p,
+[data-theme="dark"] p {
+  font-size: 15px;
+  line-height: 1.7;
 }
 
 /* Select dropdown options need a white bg in light mode */

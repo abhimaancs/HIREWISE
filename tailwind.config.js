@@ -7,8 +7,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'var(--font-dm)', 'system-ui', 'sans-serif'],
-        display: ['Syne', 'var(--font-syne)', 'sans-serif'],
+        sans: ['var(--font-geist)', 'Inter', 'system-ui', 'sans-serif'],
+        display: ['var(--font-geist)', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-geist-mono)', 'monospace'],
       },
       colors: {
         bg: 'var(--bg)',
