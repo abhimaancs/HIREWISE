@@ -111,98 +111,105 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Dashboard preview — always dark */}
-        <div data-force-theme="dark">
-          <div className="dashboard fade-up-5" style={{ background: '#141417', border: '1px solid var(--border)', borderRadius: 20, overflow: 'hidden', position: 'relative', boxShadow: '0 0 60px rgba(99,102,241,.08)' }}>
-            <div style={{ position: 'absolute', top: -60, right: -60, width: 200, height: 200, background: 'radial-gradient(circle,rgba(99,102,241,.08) 0%,transparent 70%)', pointerEvents: 'none' }} />
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '.875rem 1.25rem', borderBottom: '1px solid rgba(255,255,255,.06)', position: 'relative', zIndex: 1 }}>
-              <div style={{ width: 26, height: 26, background: 'linear-gradient(135deg,#6366f1,#8b5cf6)', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 900, fontSize: 12, color: '#fff' }}>H</div>
+        {/* Dashboard preview — teal themed */}
+        <div>
+          <div className="dashboard fade-up-5" style={{ background: '#0D9488', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 20, overflow: 'hidden', position: 'relative', boxShadow: '0 8px 48px rgba(13,148,136,.35), 0 2px 12px rgba(13,148,136,.20)' }}>
+            <div style={{ position: 'absolute', top: -60, right: -60, width: 200, height: 200, background: 'radial-gradient(circle,rgba(255,255,255,.06) 0%,transparent 70%)', pointerEvents: 'none' }} />
+            {/* Header */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '.875rem 1.25rem', borderBottom: '1px solid rgba(255,255,255,.15)', position: 'relative', zIndex: 1, background: 'rgba(0,0,0,.10)' }}>
+              <div style={{ width: 26, height: 26, background: 'rgba(255,255,255,.25)', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 900, fontSize: 12, color: '#fff' }}>H</div>
               <div style={{ flex: 1, marginLeft: '.875rem' }}>
-                <div style={{ fontSize: 13, fontWeight: 700, color: '#fff' }}>Welcome back, Rahul 👋</div>
-                <div style={{ fontSize: 10, color: '#6b7280' }}>Here's your hiring overview</div>
+                <div style={{ fontSize: 13, fontWeight: 700, color: '#ffffff' }}>Welcome back, Rahul 👋</div>
+                <div style={{ fontSize: 10, color: 'rgba(255,255,255,.65)' }}>Here's your hiring overview</div>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                <div style={{ position: 'relative', width: 24, height: 24, background: 'rgba(255,255,255,.06)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11 }}>🔔<div style={{ position: 'absolute', top: 3, right: 3, width: 5, height: 5, background: '#ef4444', borderRadius: '50%' }} /></div>
-                <div style={{ width: 26, height: 26, borderRadius: '50%', background: 'linear-gradient(135deg,#6366f1,#8b5cf6)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 800, fontSize: 9 }}>RK</div>
-                <div style={{ fontSize: 10, color: '#9ca3af' }}><div style={{ color: '#e5e7eb', fontWeight: 600, fontSize: 11 }}>Rahul Kumar</div>TechStartup India</div>
+                <div style={{ position: 'relative', width: 24, height: 24, background: 'rgba(255,255,255,.15)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11 }}>🔔<div style={{ position: 'absolute', top: 3, right: 3, width: 5, height: 5, background: '#ef4444', borderRadius: '50%' }} /></div>
+                <div style={{ width: 26, height: 26, borderRadius: '50%', background: 'rgba(255,255,255,.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 800, fontSize: 9 }}>RK</div>
+                <div style={{ fontSize: 10, color: 'rgba(255,255,255,.65)' }}><div style={{ color: '#ffffff', fontWeight: 600, fontSize: 11 }}>Rahul Kumar</div>TechStartup India</div>
               </div>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '100px 1fr', position: 'relative', zIndex: 1 }}>
-              <div style={{ background: 'rgba(255,255,255,.02)', borderRight: '1px solid rgba(255,255,255,.06)', padding: '.875rem .625rem' }}>
+              {/* Sidebar */}
+              <div style={{ background: 'rgba(0,0,0,.12)', borderRight: '1px solid rgba(255,255,255,.12)', padding: '.875rem .625rem' }}>
                 {[['🏠', 'Overview', true], ['💼', 'Jobs', false], ['👥', 'Candidates', false], ['💬', 'Messages', false], ['📊', 'Analytics', false], ['⚙️', 'Settings', false]].map(([ic, lb, ac]) => (
-                  <div key={lb as string} className={!ac ? 'db-link-h' : ''} style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '6px 8px', borderRadius: 7, fontSize: 10, color: ac ? '#818cf8' : '#6b7280', background: ac ? 'rgba(99,102,241,.15)' : 'transparent', fontWeight: ac ? 600 : 400, cursor: 'pointer', marginBottom: 2 }}>
+                  <div key={lb as string} style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '6px 8px', borderRadius: 7, fontSize: 10, color: ac ? '#ffffff' : 'rgba(255,255,255,.60)', background: ac ? 'rgba(255,255,255,.20)' : 'transparent', fontWeight: ac ? 700 : 400, cursor: 'pointer', marginBottom: 2 }}>
                     <span>{ic as string}</span><span>{lb as string}</span>
                   </div>
                 ))}
               </div>
               <div style={{ padding: '.875rem' }}>
+                {/* Stat cards */}
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 6, marginBottom: '.875rem' }}>
                   {[['💼', 'Active Jobs', '8', '↑ 2 this week'], ['👥', 'Applicants', '143', '↑ 31 this week'], ['🎯', 'Avg. Match', '76%', '↑ 4% this week'], ['✅', 'Hired', '3', '↑ 1 this week']].map(([ic, lb, vl, tr]) => (
-                    <div key={lb as string} style={{ background: 'rgba(255,255,255,.03)', border: '1px solid rgba(255,255,255,.07)', borderRadius: 10, padding: '.625rem .75rem' }}>
+                    <div key={lb as string} style={{ background: 'rgba(0,0,0,.12)', border: '1px solid rgba(255,255,255,.12)', borderRadius: 10, padding: '.625rem .75rem' }}>
                       <div style={{ fontSize: 13, marginBottom: 4 }}>{ic as string}</div>
-                      <div style={{ fontSize: 8, color: '#6b7280', marginBottom: 3 }}>{lb as string}</div>
-                      <div style={{ fontSize: 15, fontWeight: 800, color: '#fff', letterSpacing: '-.5px' }}>{vl as string}</div>
-                      <div style={{ fontSize: 8, color: '#34d399', marginTop: 2 }}>{tr as string}</div>
+                      <div style={{ fontSize: 8, color: 'rgba(255,255,255,.60)', marginBottom: 3 }}>{lb as string}</div>
+                      <div style={{ fontSize: 15, fontWeight: 800, color: '#ffffff', letterSpacing: '-.5px' }}>{vl as string}</div>
+                      <div style={{ fontSize: 8, color: '#a7f3d0', marginTop: 2 }}>{tr as string}</div>
                     </div>
                   ))}
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                    <div style={{ background: 'rgba(255,255,255,.03)', border: '1px solid rgba(255,255,255,.07)', borderRadius: 10, padding: '.75rem' }}>
-                      <div style={{ fontSize: 10, fontWeight: 700, color: '#e5e7eb', marginBottom: '.625rem' }}>Match Distribution</div>
+                    {/* Match Distribution */}
+                    <div style={{ background: 'rgba(0,0,0,.12)', border: '1px solid rgba(255,255,255,.12)', borderRadius: 10, padding: '.75rem' }}>
+                      <div style={{ fontSize: 10, fontWeight: 700, color: '#ffffff', marginBottom: '.625rem' }}>Match Distribution</div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                         <svg width="56" height="56" viewBox="0 0 56 56">
-                          <circle cx="28" cy="28" r="22" fill="none" stroke="rgba(255,255,255,.06)" strokeWidth="8" />
-                          <circle cx="28" cy="28" r="22" fill="none" stroke="#6366f1" strokeWidth="8" strokeDasharray="55 83" strokeDashoffset="0" strokeLinecap="round" />
-                          <circle cx="28" cy="28" r="22" fill="none" stroke="#10b981" strokeWidth="8" strokeDasharray="44 83" strokeDashoffset="-55" strokeLinecap="round" />
-                          <circle cx="28" cy="28" r="22" fill="none" stroke="#f59e0b" strokeWidth="8" strokeDasharray="22 83" strokeDashoffset="-99" strokeLinecap="round" />
-                          <circle cx="28" cy="28" r="22" fill="none" stroke="#ef4444" strokeWidth="8" strokeDasharray="10 83" strokeDashoffset="-121" strokeLinecap="round" />
+                          <circle cx="28" cy="28" r="22" fill="none" stroke="rgba(255,255,255,.12)" strokeWidth="8" />
+                          <circle cx="28" cy="28" r="22" fill="none" stroke="#ffffff" strokeWidth="8" strokeDasharray="55 83" strokeDashoffset="0" strokeLinecap="round" />
+                          <circle cx="28" cy="28" r="22" fill="none" stroke="#a7f3d0" strokeWidth="8" strokeDasharray="44 83" strokeDashoffset="-55" strokeLinecap="round" />
+                          <circle cx="28" cy="28" r="22" fill="none" stroke="#fde68a" strokeWidth="8" strokeDasharray="22 83" strokeDashoffset="-99" strokeLinecap="round" />
+                          <circle cx="28" cy="28" r="22" fill="none" stroke="rgba(255,255,255,.30)" strokeWidth="8" strokeDasharray="10 83" strokeDashoffset="-121" strokeLinecap="round" />
                           <text x="28" y="26" textAnchor="middle" fill="#fff" fontSize="8" fontWeight="800">143</text>
-                          <text x="28" y="34" textAnchor="middle" fill="#6b7280" fontSize="6">Total</text>
+                          <text x="28" y="34" textAnchor="middle" fill="rgba(255,255,255,.65)" fontSize="6">Total</text>
                         </svg>
                         <div style={{ flex: 1 }}>
-                          {[['#6366f1', '80-100%', '39%'], ['#10b981', '60-80%', '31%'], ['#f59e0b', '40-60%', '18%'], ['#ef4444', '0-40%', '12%']].map(([c, l, v]) => (
+                          {[['#ffffff', '80-100%', '39%'], ['#a7f3d0', '60-80%', '31%'], ['#fde68a', '40-60%', '18%'], ['rgba(255,255,255,.35)', '0-40%', '12%']].map(([c, l, v]) => (
                             <div key={l} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
-                              <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}><div style={{ width: 6, height: 6, borderRadius: '50%', background: c as string }} /><span style={{ fontSize: 8, color: '#9ca3af' }}>{l}</span></div>
-                              <span style={{ fontSize: 8, fontWeight: 700, color: '#e5e7eb' }}>{v}</span>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}><div style={{ width: 6, height: 6, borderRadius: '50%', background: c as string }} /><span style={{ fontSize: 8, color: 'rgba(255,255,255,.65)' }}>{l}</span></div>
+                              <span style={{ fontSize: 8, fontWeight: 700, color: '#ffffff' }}>{v}</span>
                             </div>
                           ))}
                         </div>
                       </div>
                     </div>
-                    <div style={{ background: 'rgba(255,255,255,.03)', border: '1px solid rgba(255,255,255,.07)', borderRadius: 10, padding: '.75rem' }}>
-                      <div style={{ fontSize: 10, fontWeight: 700, color: '#e5e7eb', marginBottom: '.625rem' }}>Top Skills in Demand</div>
-                      {[['React', '78%', 'linear-gradient(90deg,#6366f1,#8b5cf6)'], ['Node.js', '65%', 'linear-gradient(90deg,#06b6d4,#3b82f6)'], ['Python', '52%', 'linear-gradient(90deg,#10b981,#06b6d4)'], ['TypeScript', '44%', 'linear-gradient(90deg,#f59e0b,#ef4444)']].map(([sk, pct, bg]) => (
+                    {/* Top Skills */}
+                    <div style={{ background: 'rgba(0,0,0,.12)', border: '1px solid rgba(255,255,255,.12)', borderRadius: 10, padding: '.75rem' }}>
+                      <div style={{ fontSize: 10, fontWeight: 700, color: '#ffffff', marginBottom: '.625rem' }}>Top Skills in Demand</div>
+                      {[['React', '78%', 'rgba(255,255,255,.90)'], ['Node.js', '65%', 'rgba(255,255,255,.75)'], ['Python', '52%', '#a7f3d0'], ['TypeScript', '44%', '#fde68a']].map(([sk, pct, bg]) => (
                         <div key={sk} style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 5 }}>
-                          <span style={{ fontSize: 9, color: '#9ca3af', width: 48, textAlign: 'right', flexShrink: 0 }}>{sk}</span>
-                          <div style={{ flex: 1, height: 5, background: 'rgba(255,255,255,.06)', borderRadius: 3, overflow: 'hidden' }}>
+                          <span style={{ fontSize: 9, color: 'rgba(255,255,255,.65)', width: 48, textAlign: 'right', flexShrink: 0 }}>{sk}</span>
+                          <div style={{ flex: 1, height: 5, background: 'rgba(0,0,0,.15)', borderRadius: 3, overflow: 'hidden' }}>
                             <div className="bar-fill" style={{ height: '100%', borderRadius: 3, background: bg, '--w': pct } as any} />
                           </div>
-                          <span style={{ fontSize: 9, fontWeight: 700, color: '#e5e7eb', width: 26 }}>{pct}</span>
+                          <span style={{ fontSize: 9, fontWeight: 700, color: '#ffffff', width: 26 }}>{pct}</span>
                         </div>
                       ))}
                     </div>
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                    <div style={{ background: 'rgba(255,255,255,.03)', border: '1px solid rgba(255,255,255,.07)', borderRadius: 10, padding: '.75rem' }}>
+                    {/* Top Matched */}
+                    <div style={{ background: 'rgba(0,0,0,.12)', border: '1px solid rgba(255,255,255,.12)', borderRadius: 10, padding: '.75rem' }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '.625rem' }}>
-                        <span style={{ fontSize: 10, fontWeight: 700, color: '#e5e7eb' }}>Top Matched</span>
-                        <span style={{ fontSize: 9, color: '#818cf8' }}>View all</span>
+                        <span style={{ fontSize: 10, fontWeight: 700, color: '#ffffff' }}>Top Matched</span>
+                        <span style={{ fontSize: 9, color: 'rgba(255,255,255,.70)' }}>View all</span>
                       </div>
-                      {[['AB', 'Abhi C S', 'SDE Intern', '94%', 'linear-gradient(135deg,#6366f1,#8b5cf6)', '#34d399', 'rgba(16,185,129,.15)'], ['PK', 'Priya Kumar', 'Full Stack Dev', '88%', 'linear-gradient(135deg,#06b6d4,#3b82f6)', '#34d399', 'rgba(16,185,129,.15)'], ['RM', 'Rahul M', 'Backend Eng.', '71%', 'linear-gradient(135deg,#f59e0b,#ef4444)', '#818cf8', 'rgba(99,102,241,.15)']].map(([i, n, r, s, bg, sc, sbg]) => (
+                      {[['AB', 'Abhi C S', 'SDE Intern', '94%', 'rgba(255,255,255,.25)', '#ffffff', 'rgba(255,255,255,.18)'], ['PK', 'Priya Kumar', 'Full Stack Dev', '88%', 'rgba(255,255,255,.20)', '#ffffff', 'rgba(255,255,255,.15)'], ['RM', 'Rahul M', 'Backend Eng.', '71%', 'rgba(255,255,255,.15)', 'rgba(255,255,255,.85)', 'rgba(0,0,0,.12)']].map(([i, n, r, s, bg, sc, sbg]) => (
                         <div key={n as string} style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 7 }}>
-                          <div style={{ width: 24, height: 24, borderRadius: '50%', background: bg as string, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 800, fontSize: 9, flexShrink: 0 }}>{i as string}</div>
-                          <div style={{ flex: 1 }}><div style={{ fontSize: 10, fontWeight: 600, color: '#e5e7eb' }}>{n as string}</div><div style={{ fontSize: 8, color: '#6b7280' }}>{r as string}</div></div>
-                          <div style={{ background: sbg as string, color: sc as string, borderRadius: 6, fontSize: 10, fontWeight: 800, padding: '1px 6px' }}>{s as string}</div>
+                          <div style={{ width: 24, height: 24, borderRadius: '50%', background: bg as string, border: '1px solid rgba(255,255,255,.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 800, fontSize: 9, flexShrink: 0 }}>{i as string}</div>
+                          <div style={{ flex: 1 }}><div style={{ fontSize: 10, fontWeight: 600, color: '#ffffff' }}>{n as string}</div><div style={{ fontSize: 8, color: 'rgba(255,255,255,.60)' }}>{r as string}</div></div>
+                          <div style={{ background: sbg as string, color: sc as string, border: '1px solid rgba(255,255,255,.20)', borderRadius: 6, fontSize: 10, fontWeight: 800, padding: '1px 6px' }}>{s as string}</div>
                         </div>
                       ))}
                     </div>
-                    <div style={{ background: 'rgba(255,255,255,.03)', border: '1px solid rgba(255,255,255,.07)', borderRadius: 10, padding: '.75rem' }}>
-                      <div style={{ fontSize: 10, fontWeight: 700, color: '#e5e7eb', marginBottom: '.625rem' }}>AI Activity</div>
-                      {[['#34d399', 'Profile Updated', 'Abhi C S · 5 skills added'], ['#818cf8', '94% Match Found', 'Abhi matched SDE Intern role'], ['#fbbf24', 'AI Recommendation', '2 new candidates for Backend'], ['#34d399', 'Shortlisted', 'Priya K. moved to shortlist']].map(([dot, title, desc], i) => (
-                        <div key={i} className="ai-item" style={{ display: 'flex', alignItems: 'flex-start', gap: 6, padding: '5px 6px', background: 'rgba(255,255,255,.02)', border: '1px solid rgba(255,255,255,.05)', borderRadius: 7, marginBottom: 5 }}>
+                    {/* AI Activity */}
+                    <div style={{ background: 'rgba(0,0,0,.12)', border: '1px solid rgba(255,255,255,.12)', borderRadius: 10, padding: '.75rem' }}>
+                      <div style={{ fontSize: 10, fontWeight: 700, color: '#ffffff', marginBottom: '.625rem' }}>AI Activity</div>
+                      {[['#a7f3d0', 'Profile Updated', 'Abhi C S · 5 skills added'], ['rgba(255,255,255,.80)', '94% Match Found', 'Abhi matched SDE Intern role'], ['#fde68a', 'AI Recommendation', '2 new candidates for Backend'], ['#a7f3d0', 'Shortlisted', 'Priya K. moved to shortlist']].map(([dot, title, desc], i) => (
+                        <div key={i} className="ai-item" style={{ display: 'flex', alignItems: 'flex-start', gap: 6, padding: '5px 6px', background: 'rgba(0,0,0,.10)', border: '1px solid rgba(255,255,255,.10)', borderRadius: 7, marginBottom: 5 }}>
                           <div style={{ width: 6, height: 6, borderRadius: '50%', background: dot as string, marginTop: 2, flexShrink: 0 }} />
-                          <div style={{ fontSize: 9, color: '#9ca3af', lineHeight: 1.4 }}><strong style={{ fontWeight: 600, color: '#e5e7eb' }}>{title}</strong> — {desc}</div>
+                          <div style={{ fontSize: 9, color: 'rgba(255,255,255,.65)', lineHeight: 1.4 }}><strong style={{ fontWeight: 600, color: '#ffffff' }}>{title}</strong> — {desc}</div>
                         </div>
                       ))}
                     </div>
