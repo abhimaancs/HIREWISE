@@ -562,11 +562,113 @@ a,
   color: var(--text-secondary) !important;
 }
 
-/* Dashboard preview widget — keep dark, it's a UI mockup illustration */
+/* Dashboard preview widget — teal-themed in light mode */
 [data-theme="light"] .dashboard {
-  filter: none;
-  box-shadow: var(--shadow-lg), 0 0 40px rgba(13, 148, 136, 0.08) !important;
-  border: 1px solid var(--border) !important;
+  background: #0D9488 !important;
+  border: 1px solid rgba(255,255,255,0.15) !important;
+  box-shadow: 0 8px 40px rgba(13,148,136,0.30), 0 2px 8px rgba(13,148,136,0.15) !important;
+}
+
+/* Dashboard header bar */
+[data-theme="light"] .dashboard > div:nth-child(2) {
+  border-bottom-color: rgba(255,255,255,0.15) !important;
+  background: rgba(0,0,0,0.06) !important;
+}
+
+/* Dashboard sidebar */
+[data-theme="light"] .dashboard [style*="gridTemplateColumns: '100px 1fr'"] > div:first-child {
+  background: rgba(0,0,0,0.08) !important;
+  border-right-color: rgba(255,255,255,0.12) !important;
+}
+
+/* Active nav item in sidebar */
+[data-theme="light"] .dashboard [style*="rgba(99,102,241,.15)"] {
+  background: rgba(255,255,255,0.18) !important;
+  color: #ffffff !important;
+}
+
+/* Inactive nav item text */
+[data-theme="light"] .dashboard [style*="color: '#6b7280'"] {
+  color: rgba(255,255,255,0.65) !important;
+}
+
+/* Stat cards and inner panels */
+[data-theme="light"] .dashboard [style*="rgba(255,255,255,.03)"],
+[data-theme="light"] .dashboard [style*="rgba(255,255,255,.02)"] {
+  background: rgba(0,0,0,0.10) !important;
+  border-color: rgba(255,255,255,0.12) !important;
+}
+
+/* All white/light text inside dashboard stays white */
+[data-theme="light"] .dashboard [style*="color: '#fff'"],
+[data-theme="light"] .dashboard [style*="color: '#e5e7eb'"],
+[data-theme="light"] .dashboard [style*="color: '#f1f5f9'"] {
+  color: #ffffff !important;
+}
+
+/* Muted text inside dashboard */
+[data-theme="light"] .dashboard [style*="color: '#9ca3af'"],
+[data-theme="light"] .dashboard [style*="color: '#6b7280'"] {
+  color: rgba(255,255,255,0.65) !important;
+}
+
+/* Green trend text */
+[data-theme="light"] .dashboard [style*="color: '#34d399'"] {
+  color: #a7f3d0 !important;
+}
+
+/* Logo "H" badge — white on teal-dark */
+[data-theme="light"] .dashboard [style*="linear-gradient(135deg,#6366f1,#8b5cf6)"][style*="borderRadius: 7"] {
+  background: rgba(255,255,255,0.20) !important;
+}
+
+/* Avatar circles */
+[data-theme="light"] .dashboard [style*="linear-gradient(135deg,#6366f1,#8b5cf6)"][style*="borderRadius: '50%'"],
+[data-theme="light"] .dashboard [style*="linear-gradient(135deg,#6366f1,#8b5cf6)"][style*="borderRadius:'50%'"] {
+  background: rgba(255,255,255,0.25) !important;
+}
+
+/* AI activity items */
+[data-theme="light"] .dashboard [style*="rgba(255,255,255,.02)"][style*="borderRadius: 7"],
+[data-theme="light"] .dashboard [style*="rgba(255,255,255,.05)"] {
+  background: rgba(0,0,0,0.08) !important;
+  border-color: rgba(255,255,255,0.10) !important;
+}
+
+/* Radial glow orb — shift to teal */
+[data-theme="light"] .dashboard [style*="rgba(99,102,241,.08)"] {
+  background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%) !important;
+}
+
+/* "View all" link teal */
+[data-theme="light"] .dashboard [style*="color: '#818cf8'"] {
+  color: rgba(255,255,255,0.80) !important;
+}
+
+/* Match score chips inside dashboard */
+[data-theme="light"] .dashboard [style*="rgba(16,185,129,.15)"] {
+  background: rgba(255,255,255,0.18) !important;
+  color: #ffffff !important;
+}
+[data-theme="light"] .dashboard [style*="rgba(99,102,241,.15)"] {
+  background: rgba(0,0,0,0.12) !important;
+  color: rgba(255,255,255,0.85) !important;
+}
+
+/* Skill bar track */
+[data-theme="light"] .dashboard [style*="rgba(255,255,255,.06)"][style*="height: 5"] {
+  background: rgba(0,0,0,0.15) !important;
+}
+
+/* SVG donut track */
+[data-theme="light"] .dashboard circle[stroke="rgba(255,255,255,.06)"] {
+  stroke: rgba(0,0,0,0.15) !important;
+}
+
+/* db-link hover */
+[data-theme="light"] .dashboard .db-link-h:hover {
+  background: rgba(255,255,255,0.12) !important;
+  color: rgba(255,255,255,0.85) !important;
 }
 
 /* Split CTA heading text */
