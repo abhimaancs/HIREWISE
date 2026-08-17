@@ -272,9 +272,10 @@ function CandidatesContent() {
                   <div
                     key={app.id}
                     className="cand-card"
-                    style={{ background: 'var(--surface-0)', border: `1px solid ${isShortlisted ? 'var(--success-border)' : isRejected ? 'var(--danger-border)' : 'var(--border)'}`, borderRadius: 'var(--radius-lg)', padding: '1.25rem', display: 'flex', alignItems: 'flex-start', gap: 14, transition: 'border-color 0.2s', boxShadow: 'var(--shadow-sm)' }}
-                    onMouseEnter={e => { if (!isRejected) (e.currentTarget as HTMLElement).style.borderColor = isShortlisted ? 'var(--success-border)' : 'var(--accent-border)' }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = isShortlisted ? 'var(--success-border)' : isRejected ? 'var(--danger-border)' : 'var(--border)' }}
+                    onClick={() => window.location.href = `/company/candidates/${app.candidate_id}`}
+                    style={{ background: 'var(--surface-0)', border: `1px solid ${isShortlisted ? 'var(--success-border)' : isRejected ? 'var(--danger-border)' : 'var(--border)'}`, borderRadius: 'var(--radius-lg)', padding: '1.25rem', display: 'flex', alignItems: 'flex-start', gap: 14, transition: 'border-color 0.2s, box-shadow 0.2s, transform 0.2s', boxShadow: 'var(--shadow-sm)', cursor: 'pointer' }}
+                    onMouseEnter={e => { const el = e.currentTarget as HTMLElement; if (!isRejected) el.style.borderColor = isShortlisted ? 'var(--success-border)' : 'var(--accent-border)'; el.style.boxShadow = 'var(--shadow-md)'; el.style.transform = 'translateY(-2px)' }}
+                    onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = isShortlisted ? 'var(--success-border)' : isRejected ? 'var(--danger-border)' : 'var(--border)'; el.style.boxShadow = 'var(--shadow-sm)'; el.style.transform = 'translateY(0)' }}
                   >
                     {/* Avatar */}
                     <div style={{ width: 46, height: 46, borderRadius: 'var(--radius-full)', background: isRejected ? 'var(--surface-2)' : 'linear-gradient(135deg,var(--accent),var(--accent-hover))', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 800, fontSize: 17, flexShrink: 0, opacity: isRejected ? 0.6 : 1 }}>
@@ -285,11 +286,9 @@ function CandidatesContent() {
                     <div style={{ flex: 1, minWidth: 0 }}>
                       {/* Name + status badge */}
                       <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginBottom: 5 }}>
-                        <a href={`/company/candidates/${app.candidate_id}`} style={{ textDecoration: 'none' }}>
-                          <span style={{ fontWeight: 700, fontSize: 15, color: isRejected ? 'var(--text-tertiary)' : 'var(--accent)', letterSpacing: '-0.2px', cursor: 'pointer', borderBottom: `1px solid ${isRejected ? 'transparent' : 'var(--accent-border)'}`, transition: 'opacity 150ms ease' }}>
-                            {app.candidate?.name || 'Unknown'}
-                          </span>
-                        </a>
+                        <span style={{ fontWeight: 700, fontSize: 15, color: isRejected ? 'var(--text-tertiary)' : 'var(--text-primary)', letterSpacing: '-0.2px' }}>
+                          {app.candidate?.name || 'Unknown'}
+                        </span>
                         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 4, background: sc.bg, color: sc.color, border: `1px solid ${sc.border}`, borderRadius: 20, fontSize: 11, fontWeight: 700, padding: '2px 8px' }}>
                           {statusIcon[app.status]}{statusLabel[app.status]}
                         </div>
@@ -334,7 +333,7 @@ function CandidatesContent() {
                     </div>
 
                     {/* Actions column */}
-                    <div className="cand-actions" style={{ display: 'flex', flexDirection: 'column', gap: 6, flexShrink: 0, minWidth: 120 }}>
+                    <div className="cand-actions" onClick={e => e.stopPropagation()} style={{ display: 'flex', flexDirection: 'column', gap: 6, flexShrink: 0, minWidth: 120 }}>
                       {isUpdating ? (
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px 0' }}>
                           <Loader2 size={18} color="#818cf8" style={{ animation: 'spin 1s linear infinite' }} />
@@ -342,7 +341,6 @@ function CandidatesContent() {
 
                       ) : isShortlisted ? (
                         <>
-                          {/* Message still available when shortlisted */}
                           <button
                             onClick={() => startChat(app.candidate_id)}
                             disabled={startingChat === app.candidate_id}
@@ -351,11 +349,9 @@ function CandidatesContent() {
                             {startingChat === app.candidate_id ? <Loader2 size={12} style={{ animation: 'spin 1s linear infinite' }} /> : <MessageSquare size={12} />}
                             Message
                           </button>
-                          {/* Shortlisted badge */}
                           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, padding: '7px 12px', background: 'var(--success-subtle)', border: '1px solid var(--success-border)', borderRadius: 'var(--radius-sm)', color: 'var(--success)', fontSize: 12, fontWeight: 700 }}>
                             <CheckCircle size={12} /> Shortlisted
                           </div>
-                          {/* Undo shortlist */}
                           <button
                             onClick={() => updateStatus(app.id, 'applied')}
                             title="Undo shortlist — move back to Applied"
@@ -368,12 +364,10 @@ function CandidatesContent() {
                         </>
 
                       ) : isRejected ? (
-                        /* Rejected — badge + undo */
                         <>
                           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, padding: '7px 12px', background: 'var(--danger-subtle)', border: '1px solid var(--danger-border)', borderRadius: 'var(--radius-sm)', color: 'var(--danger)', fontSize: 12, fontWeight: 700 }}>
                             <XCircle size={12} /> Rejected
                           </div>
-                          {/* Undo rejection */}
                           <button
                             onClick={() => updateStatus(app.id, 'applied')}
                             title="Undo rejection — move back to Applied"
@@ -386,9 +380,7 @@ function CandidatesContent() {
                         </>
 
                       ) : (
-                        /* Applied — full action set */
                         <>
-                          {/* Message — secondary */}
                           <button
                             onClick={() => startChat(app.candidate_id)}
                             disabled={startingChat === app.candidate_id}
@@ -397,16 +389,12 @@ function CandidatesContent() {
                             {startingChat === app.candidate_id ? <Loader2 size={12} style={{ animation: 'spin 1s linear infinite' }} /> : <MessageSquare size={12} />}
                             Message
                           </button>
-
-                          {/* Shortlist — primary green */}
                           <button
                             onClick={() => updateStatus(app.id, 'shortlisted')}
                             style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '7px 12px', background: 'var(--success-subtle)', border: '1px solid var(--success-border)', borderRadius: 'var(--radius-sm)', color: 'var(--success)', fontSize: 12, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit', transition: 'background-color 150ms ease' }}
                           >
                             <CheckCircle size={12} /> Shortlist
                           </button>
-
-                          {/* Reject — destructive, triggers inline confirmation */}
                           {!showConfirm && (
                             <button
                               onClick={() => setConfirmReject(app.id)}
@@ -440,9 +428,10 @@ function CandidatesContent() {
             {matches.map(({ job: candidate, match_score, match_reason }: CandidateMatch, i: number) => (
               <div
                 key={candidate.id}
-                style={{ background: 'var(--surface-0)', border: '1px solid var(--border)', borderRadius: 'var(--radius-lg)', padding: '1.25rem', display: 'flex', alignItems: 'flex-start', gap: 14, transition: 'border-color 200ms ease, box-shadow 200ms ease, background-color 200ms ease', boxShadow: 'var(--shadow-sm)' }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-border)'; (e.currentTarget as HTMLElement).style.background = 'var(--surface-1)'; (e.currentTarget as HTMLElement).style.boxShadow = 'var(--shadow-md)' }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)'; (e.currentTarget as HTMLElement).style.background = 'var(--surface-0)'; (e.currentTarget as HTMLElement).style.boxShadow = 'var(--shadow-sm)' }}
+                onClick={() => window.location.href = `/company/candidates/${candidate.id}`}
+                style={{ background: 'var(--surface-0)', border: '1px solid var(--border)', borderRadius: 'var(--radius-lg)', padding: '1.25rem', display: 'flex', alignItems: 'flex-start', gap: 14, transition: 'border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease', boxShadow: 'var(--shadow-sm)', cursor: 'pointer' }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'var(--accent-border)'; el.style.boxShadow = 'var(--shadow-md)'; el.style.transform = 'translateY(-2px)' }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'var(--border)'; el.style.boxShadow = 'var(--shadow-sm)'; el.style.transform = 'translateY(0)' }}
               >
                 {/* Rank badge */}
                 <div style={{ width: 28, height: 28, borderRadius: 'var(--radius-full)', background: i === 0 ? 'rgba(245,158,11,0.15)' : 'var(--surface-2)', border: `1px solid ${i === 0 ? 'rgba(245,158,11,0.3)' : 'var(--border)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 800, color: i === 0 ? '#f59e0b' : 'var(--text-tertiary)', flexShrink: 0, marginTop: 8 }}>
@@ -457,9 +446,7 @@ function CandidatesContent() {
                 {/* Info */}
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginBottom: 5 }}>
-                    <a href={`/company/candidates/${candidate.id}`} style={{ textDecoration: 'none' }}>
-                      <span style={{ fontWeight: 700, fontSize: 15, color: 'var(--accent)', letterSpacing: '-0.2px', borderBottom: '1px solid var(--accent-border)' }}>{candidate.name}</span>
-                    </a>
+                    <span style={{ fontWeight: 700, fontSize: 15, color: 'var(--text-primary)', letterSpacing: '-0.2px' }}>{candidate.name}</span>
                     <div style={{ display: 'inline-flex', alignItems: 'center', gap: 3, background: scoreBg(match_score), color: scoreColor(match_score), border: `1px solid ${scoreBorder(match_score)}`, borderRadius: 20, fontSize: 11, fontWeight: 700, padding: '2px 8px' }}>
                       {match_score}% match
                     </div>
@@ -480,7 +467,7 @@ function CandidatesContent() {
 
                 {/* Message button */}
                 <button
-                  onClick={() => startChat(candidate.id)}
+                  onClick={(e) => { e.stopPropagation(); startChat(candidate.id) }}
                   disabled={startingChat === candidate.id}
                   style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '7px 14px', background: 'var(--accent)', border: 'none', borderRadius: 'var(--radius-sm)', color: '#fff', fontSize: 12, cursor: startingChat === candidate.id ? 'not-allowed' : 'pointer', fontFamily: 'inherit', flexShrink: 0, fontWeight: 600, opacity: startingChat === candidate.id ? 0.7 : 1, transition: 'background-color 150ms ease' }}
                 >
