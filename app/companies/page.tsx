@@ -27,40 +27,41 @@ export default function CompaniesPage() {
         .fade-up{animation:fadeUp .5s ease forwards}
         .fade-up-1{animation:fadeUp .5s .1s ease both}
         .fade-up-2{animation:fadeUp .5s .2s ease both}
-        .company-card{transition:all .25s}
-        .company-card:hover{border-color:rgba(99,102,241,.4)!important;transform:translateY(-3px)!important;box-shadow:0 8px 30px rgba(0,0,0,.3)!important}
-        .filter-btn{transition:all .2s}
-        .filter-btn:hover{border-color:rgba(99,102,241,.4)!important;color:#e5e7eb!important}
-        .view-btn{transition:all .2s}
-        .view-btn:hover{background:#6366f1!important;color:#fff!important;border-color:#6366f1!important}
-        .back-btn{transition:all .2s}
-        .back-btn:hover{color:#e5e7eb!important;border-color:rgba(255,255,255,.2)!important}
+        .company-card{transition:border-color 200ms ease,transform 200ms ease,box-shadow 200ms ease}
+        .company-card:hover{border-color:var(--accent-border)!important;transform:translateY(-3px)!important;box-shadow:var(--shadow-md)!important}
+        .filter-btn{transition:background-color 150ms ease,border-color 150ms ease,color 150ms ease}
+        .filter-btn:hover{border-color:var(--accent-border)!important;color:var(--accent)!important}
+        .view-btn{transition:background-color 150ms ease,border-color 150ms ease,color 150ms ease}
+        .view-btn:hover{background:var(--accent)!important;color:#fff!important;border-color:var(--accent)!important}
+        .back-btn{transition:color 150ms ease,border-color 150ms ease}
+        .back-btn:hover{color:var(--text-primary)!important;border-color:var(--border-strong)!important}
         @media(max-width:768px){.companies-grid{grid-template-columns:1fr 1fr!important}}
         @media(max-width:480px){.companies-grid{grid-template-columns:1fr!important}}
       `}</style>
 
+      {/* Background glow */}
       <div style={{position:'fixed',top:0,left:0,right:0,bottom:0,pointerEvents:'none',zIndex:0}}>
-        <div style={{position:'absolute',top:'-10%',left:'20%',width:500,height:500,background:'radial-gradient(circle,rgba(99,102,241,.05) 0%,transparent 70%)'}}/>
+        <div style={{position:'absolute',top:'-10%',left:'20%',width:500,height:500,background:'radial-gradient(circle,var(--accent-subtle) 0%,transparent 70%)'}}/>
       </div>
 
       <div style={{maxWidth:1100,margin:'0 auto',padding:'2.5rem 2rem',position:'relative',zIndex:1}}>
 
         {/* Back button */}
         <Link href="/" style={{textDecoration:'none'}}>
-          <button className="back-btn" style={{display:'inline-flex',alignItems:'center',gap:6,padding:'7px 14px',background:'rgba(255,255,255,.04)',border:'1px solid rgba(255,255,255,.08)',borderRadius:9,color:'#9ca3af',fontSize:13,fontWeight:500,cursor:'pointer',fontFamily:'Inter,sans-serif',marginBottom:'2rem'}}>
+          <button className="back-btn" style={{display:'inline-flex',alignItems:'center',gap:6,padding:'7px 14px',background:'var(--surface-1)',border:'1px solid var(--border)',borderRadius:'var(--radius-sm)',color:'var(--text-secondary)',fontSize:13,fontWeight:500,cursor:'pointer',fontFamily:'inherit',marginBottom:'2rem'}}>
             ← Back
           </button>
         </Link>
 
         {/* Header */}
         <div className="fade-up" style={{textAlign:'center',marginBottom:'3rem'}}>
-          <div style={{display:'inline-flex',alignItems:'center',gap:6,background:'rgba(99,102,241,.1)',border:'1px solid rgba(99,102,241,.25)',borderRadius:999,padding:'5px 14px',fontSize:12,color:'#818cf8',fontWeight:700,marginBottom:16}}>
+          <div style={{display:'inline-flex',alignItems:'center',gap:6,background:'var(--accent-subtle)',border:'1px solid var(--accent-border)',borderRadius:999,padding:'5px 14px',fontSize:12,color:'var(--accent)',fontWeight:700,marginBottom:16}}>
             🏢 Companies on HireWise
           </div>
-          <h1 style={{fontSize:'clamp(1.8rem,4vw,2.75rem)',fontWeight:900,color:'#fff',letterSpacing:'-1.5px',marginBottom:10}}>
+          <h1 style={{fontSize:'clamp(1.8rem,4vw,2.75rem)',fontWeight:900,color:'var(--text-primary)',letterSpacing:'-1.5px',marginBottom:10}}>
             Companies hiring right now
           </h1>
-          <p style={{fontSize:14,color:'#6b7280',maxWidth:500,margin:'0 auto',lineHeight:1.7}}>
+          <p style={{fontSize:14,color:'var(--text-secondary)',maxWidth:500,margin:'0 auto',lineHeight:1.7}}>
             These companies are actively looking for talent on HireWise. Sign up to see open roles and apply directly.
           </p>
         </div>
@@ -68,7 +69,7 @@ export default function CompaniesPage() {
         {/* Industry filters */}
         <div className="fade-up-1" style={{display:'flex',gap:8,flexWrap:'wrap',justifyContent:'center',marginBottom:'2.5rem'}}>
           {['All','Fintech','Dev Tools','SaaS','E-Commerce','Food Tech','Payments'].map((ind, i) => (
-            <button key={ind} className="filter-btn" style={{padding:'7px 16px',borderRadius:20,border:`1px solid ${i===0?'#6366f1':'rgba(255,255,255,.1)'}`,background:i===0?'#6366f1':'transparent',color:i===0?'#fff':'#9ca3af',fontSize:13,fontWeight:500,cursor:'pointer',fontFamily:'Inter,sans-serif'}}>
+            <button key={ind} className="filter-btn" style={{padding:'7px 16px',borderRadius:'var(--radius-full)',border:`1px solid ${i===0?'var(--accent)':'var(--border)'}`,background:i===0?'var(--accent)':'var(--surface-1)',color:i===0?'#fff':'var(--text-secondary)',fontSize:13,fontWeight:i===0?700:500,cursor:'pointer',fontFamily:'inherit'}}>
               {ind}
             </button>
           ))}
@@ -77,25 +78,25 @@ export default function CompaniesPage() {
         {/* Grid */}
         <div className="companies-grid fade-up-2" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:14}}>
           {companies.map(co => (
-            <div key={co.name} className="company-card" style={{background:'rgba(255,255,255,.02)',border:'1px solid rgba(255,255,255,.07)',borderRadius:18,padding:'1.5rem'}}>
+            <div key={co.name} className="company-card" style={{background:'var(--surface-0)',border:'1px solid var(--border)',borderRadius:'var(--radius-lg)',padding:'1.5rem',boxShadow:'var(--shadow-sm)'}}>
               <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',marginBottom:14}}>
-                <div style={{width:48,height:48,borderRadius:12,background:`${co.color}20`,border:`1px solid ${co.color}30`,display:'flex',alignItems:'center',justifyContent:'center',fontWeight:900,color:co.color,fontSize:18}}>
+                <div style={{width:48,height:48,borderRadius:'var(--radius-md)',background:`${co.color}20`,border:`1px solid ${co.color}40`,display:'flex',alignItems:'center',justifyContent:'center',fontWeight:900,color:co.color,fontSize:18}}>
                   {co.name[0]}
                 </div>
-                <div style={{background:'rgba(16,185,129,.12)',color:'#34d399',border:'1px solid rgba(16,185,129,.25)',borderRadius:20,fontSize:11,fontWeight:700,padding:'3px 10px'}}>
+                <div style={{background:'var(--success-subtle)',color:'var(--success)',border:'1px solid var(--success-border)',borderRadius:'var(--radius-full)',fontSize:11,fontWeight:700,padding:'3px 10px'}}>
                   {co.jobs} open roles
                 </div>
               </div>
-              <div style={{fontSize:16,fontWeight:700,color:'#f1f1f1',marginBottom:4,letterSpacing:'-.2px'}}>{co.name}</div>
+              <div style={{fontSize:16,fontWeight:700,color:'var(--text-primary)',marginBottom:4,letterSpacing:'-.2px'}}>{co.name}</div>
               <div style={{display:'flex',gap:8,marginBottom:10,flexWrap:'wrap'}}>
-                <span style={{fontSize:11,color:'#818cf8',background:'rgba(99,102,241,.1)',borderRadius:6,padding:'2px 8px',fontWeight:600}}>{co.industry}</span>
-                <span style={{fontSize:11,color:'#6b7280'}}>📍 {co.location}</span>
+                <span style={{fontSize:11,color:'var(--accent)',background:'var(--accent-subtle)',borderRadius:'var(--radius-sm)',padding:'2px 8px',fontWeight:600,border:'1px solid var(--accent-border)'}}>{co.industry}</span>
+                <span style={{fontSize:11,color:'var(--text-secondary)'}}>📍 {co.location}</span>
               </div>
-              <p style={{fontSize:12,color:'#6b7280',lineHeight:1.65,marginBottom:14}}>{co.desc}</p>
+              <p style={{fontSize:12,color:'var(--text-secondary)',lineHeight:1.65,marginBottom:14}}>{co.desc}</p>
               <div style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}>
-                <span style={{fontSize:11,color:'#4b5563'}}>👥 {co.size} employees</span>
+                <span style={{fontSize:11,color:'var(--text-tertiary)'}}>👥 {co.size} employees</span>
                 <Link href="/signup">
-                  <button className="view-btn" style={{padding:'6px 14px',background:'rgba(99,102,241,.12)',border:'1px solid rgba(99,102,241,.25)',borderRadius:8,color:'#818cf8',fontSize:12,fontWeight:600,cursor:'pointer',fontFamily:'Inter,sans-serif'}}>
+                  <button className="view-btn" style={{padding:'6px 14px',background:'var(--accent-subtle)',border:'1px solid var(--accent-border)',borderRadius:'var(--radius-sm)',color:'var(--accent)',fontSize:12,fontWeight:600,cursor:'pointer',fontFamily:'inherit'}}>
                     View roles →
                   </button>
                 </Link>
@@ -105,11 +106,11 @@ export default function CompaniesPage() {
         </div>
 
         {/* CTA */}
-        <div style={{textAlign:'center',marginTop:'3rem',padding:'2.5rem',background:'rgba(99,102,241,.06)',border:'1px solid rgba(99,102,241,.15)',borderRadius:20}}>
-          <div style={{fontSize:20,fontWeight:800,color:'#fff',letterSpacing:'-.5px',marginBottom:8}}>Your company not listed?</div>
-          <div style={{fontSize:13,color:'#6b7280',marginBottom:'1.25rem'}}>Sign up as a company and start finding the right talent with AI matching.</div>
+        <div style={{textAlign:'center',marginTop:'3rem',padding:'2.5rem',background:'var(--accent-subtle)',border:'1px solid var(--accent-border)',borderRadius:'var(--radius-xl)'}}>
+          <div style={{fontSize:20,fontWeight:800,color:'var(--text-primary)',letterSpacing:'-.5px',marginBottom:8}}>Your company not listed?</div>
+          <div style={{fontSize:13,color:'var(--text-secondary)',marginBottom:'1.25rem'}}>Sign up as a company and start finding the right talent with AI matching.</div>
           <Link href="/signup?role=company">
-            <button style={{padding:'11px 28px',background:'#6366f1',border:'none',borderRadius:10,color:'#fff',fontSize:14,fontWeight:700,cursor:'pointer',fontFamily:'Inter,sans-serif',boxShadow:'0 0 20px rgba(99,102,241,.3)'}}>
+            <button style={{padding:'11px 28px',background:'var(--accent)',border:'none',borderRadius:'var(--radius-md)',color:'#fff',fontSize:14,fontWeight:700,cursor:'pointer',fontFamily:'inherit',boxShadow:'0 4px 14px rgba(13,148,136,0.25)'}}>
               Add your company →
             </button>
           </Link>

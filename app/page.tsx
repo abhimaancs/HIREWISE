@@ -61,9 +61,9 @@ export default function HomePage() {
 
       {/* Background glow */}
       <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none', zIndex: 0, overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', top: '-20%', left: '30%', width: 600, height: 600, background: 'radial-gradient(circle,rgba(99,102,241,.04) 0%,transparent 70%)' }} />
-        <div style={{ position: 'absolute', top: '40%', right: '-10%', width: 500, height: 500, background: 'radial-gradient(circle,rgba(139,92,246,.03) 0%,transparent 70%)' }} />
-        <div style={{ position: 'absolute', bottom: '-10%', left: '10%', width: 400, height: 400, background: 'radial-gradient(circle,rgba(16,185,129,.02) 0%,transparent 70%)' }} />
+        <div style={{ position: 'absolute', top: '-20%', left: '30%', width: 600, height: 600, background: 'radial-gradient(circle,var(--accent-subtle) 0%,transparent 70%)' }} />
+        <div style={{ position: 'absolute', top: '40%', right: '-10%', width: 500, height: 500, background: 'radial-gradient(circle,var(--accent-subtle) 0%,transparent 70%)' }} />
+        <div style={{ position: 'absolute', bottom: '-10%', left: '10%', width: 400, height: 400, background: 'radial-gradient(circle,var(--success-subtle) 0%,transparent 70%)' }} />
       </div>
 
       {/* HERO */}
@@ -71,13 +71,13 @@ export default function HomePage() {
 
         {/* Left */}
         <div>
-          <div className="fade-up" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'var(--accent-subtle)', border: '1px solid rgba(99,102,241,.25)', borderRadius: 999, padding: '5px 14px', fontSize: 12, color: 'var(--accent)', fontWeight: 700, marginBottom: '1.5rem' }}>
+          <div className="fade-up" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'var(--accent-subtle)', border: '1px solid var(--accent-border)', borderRadius: 999, padding: '5px 14px', fontSize: 12, color: 'var(--accent)', fontWeight: 700, marginBottom: '1.5rem' }}>
             <span className="badge-dot" />AI-Powered Hiring Platform
           </div>
 
           <h1 className="hero-title fade-up-1" style={{ fontSize: 'clamp(2.2rem,4vw,3.5rem)', fontWeight: 900, lineHeight: 1.05, color: 'var(--text-primary)', marginBottom: '1rem', letterSpacing: '-2px' }}>
             Hire Smarter<br />
-            <span style={{ background: 'linear-gradient(135deg,#818cf8,#a78bfa)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', color: 'var(--accent)' }}>with AI</span>
+            <span style={{ color: 'var(--accent)' }}>with AI</span>
           </h1>
 
           <p className="fade-up-2" style={{ fontSize: 15, color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: '2rem', maxWidth: 400 }}>
@@ -261,7 +261,7 @@ export default function HomePage() {
               desc: 'Our AI semantically understands your profile and scores every job from 0–100 based on real fit — not just keywords.',
               demo: (
                 <div style={{ background: 'var(--surface-1)', border: '1px solid var(--border)', borderRadius: 10, padding: '10px 12px', marginTop: 12 }}>
-                  {[['Razorpay · SDE Intern', '94%', '#34d399', 'rgba(16,185,129,.15)'], ['Swiggy · Full Stack Dev', '88%', '#34d399', 'rgba(16,185,129,.15)'], ['Zepto · Backend Eng.', '71%', '#818cf8', 'rgba(99,102,241,.15)']].map(([job, score, sc, sbg]) => (
+                  {[['Razorpay · SDE Intern', '94%', 'var(--success)', 'var(--success-subtle)'], ['Swiggy · Full Stack Dev', '88%', 'var(--success)', 'var(--success-subtle)'], ['Zepto · Backend Eng.', '71%', 'var(--accent)', 'var(--accent-subtle)']].map(([job, score, sc, sbg]) => (
                     <div key={job} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '5px 0', borderBottom: '1px solid var(--border)' }}>
                       <span style={{ fontSize: 10, color: 'var(--text-tertiary)' }}>{job}</span>
                       <span style={{ background: sbg, color: sc, borderRadius: 6, fontSize: 10, fontWeight: 800, padding: '1px 7px' }}>{score}</span>
@@ -296,7 +296,7 @@ export default function HomePage() {
               <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 8, letterSpacing: '-.2px' }}>{s.title}</div>
               <div style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.65 }}>{s.desc}</div>
               {s.demo}
-              {i < 2 && <div style={{ position: 'absolute', top: '50%', right: '-28px', width: 20, height: 20, background: 'rgba(99,102,241,.2)', border: '1px solid rgba(99,102,241,.3)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, color: '#818cf8', zIndex: 2, transform: 'translateY(-50%)' }}>→</div>}
+              {i < 2 && <div style={{ position: 'absolute', top: '50%', right: '-28px', width: 20, height: 20, background: 'var(--accent-subtle)', border: '1px solid var(--accent-border)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, color: 'var(--accent)', zIndex: 2, transform: 'translateY(-50%)' }}>→</div>}
             </div>
           ))}
         </div>
@@ -356,7 +356,7 @@ export default function HomePage() {
 
       {/* FINAL CTA */}
       <div style={{ textAlign: 'center', padding: '5rem 2rem', borderTop: '1px solid var(--border)', position: 'relative', overflow: 'hidden', zIndex: 1 }}>
-        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: 600, height: 600, background: 'radial-gradient(circle,rgba(99,102,241,.04) 0%,transparent 70%)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: 600, height: 600, background: 'radial-gradient(circle,var(--accent-subtle) 0%,transparent 70%)', pointerEvents: 'none' }} />
         <div style={{ fontSize: 30, fontWeight: 900, color: 'var(--text-primary)', letterSpacing: '-1.5px', marginBottom: 8, position: 'relative', zIndex: 1 }}>Ready to hire smarter?</div>
         <div style={{ fontSize: 14, color: 'var(--text-secondary)', marginBottom: '1.75rem', position: 'relative', zIndex: 1 }}>Join HireWise and let AI do the hard work</div>
         <Link href="/signup">
