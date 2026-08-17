@@ -63,9 +63,9 @@ export default function Navbar({ userRole }: NavbarProps) {
     gap: '5px',
     padding: '6px 14px',
     borderRadius: 'var(--radius-full)',
-    background: isActive(href) ? '#0D9488' : 'rgba(13,148,136,0.10)',
-    color: isActive(href) ? '#ffffff' : '#0D9488',
-    border: '1px solid rgba(13,148,136,0.25)',
+    background: isActive(href) ? 'var(--accent)' : 'var(--accent-subtle)',
+    color: isActive(href) ? '#ffffff' : 'var(--accent)',
+    border: '1px solid var(--accent-border)',
     transition: 'background-color 150ms ease, color 150ms ease, box-shadow 150ms ease',
   })
 
@@ -120,7 +120,7 @@ export default function Navbar({ userRole }: NavbarProps) {
           .hw-desktop-links { display: none !important; }
           .hw-hamburger      { display: flex !important; }
         }
-        .hw-nav-link:hover { background: #0D9488 !important; color: #ffffff !important; border-color: #0D9488 !important; }
+        .hw-nav-link:hover { background: var(--accent) !important; color: #ffffff !important; border-color: var(--accent) !important; }
         .hw-profile-btn:hover { background: var(--surface-2) !important; }
         .hw-signout-btn:hover { color: var(--danger) !important; border-color: var(--danger-border) !important; }
         .hw-login-btn:hover { color: var(--text-primary) !important; border-color: var(--border-strong) !important; }

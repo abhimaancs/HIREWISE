@@ -111,9 +111,9 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Dashboard preview — teal themed */}
+        {/* Dashboard preview */}
         <div>
-          <div className="dashboard fade-up-5" style={{ background: '#0D9488', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 20, overflow: 'hidden', position: 'relative', boxShadow: '0 8px 48px rgba(13,148,136,.35), 0 2px 12px rgba(13,148,136,.20)' }}>
+          <div className="dashboard dashboard-card fade-up-5" style={{ border: '1px solid rgba(255,255,255,0.15)', borderRadius: 20, overflow: 'hidden', position: 'relative', boxShadow: '0 8px 48px var(--dashboard-glow), 0 2px 12px var(--dashboard-glow)' }}>
             <div style={{ position: 'absolute', top: -60, right: -60, width: 200, height: 200, background: 'radial-gradient(circle,rgba(255,255,255,.06) 0%,transparent 70%)', pointerEvents: 'none' }} />
             {/* Header */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '.875rem 1.25rem', borderBottom: '1px solid rgba(255,255,255,.15)', position: 'relative', zIndex: 1, background: 'rgba(0,0,0,.10)' }}>

@@ -567,6 +567,18 @@ a,
   box-shadow: 0 8px 48px rgba(13,148,136,.35), 0 2px 12px rgba(13,148,136,.20) !important;
 }
 
+/* Dashboard card background — teal in light, dark slate in dark */
+[data-theme="light"] .dashboard-card {
+  background: #0D9488;
+}
+[data-theme="dark"] .dashboard-card {
+  background: #141417;
+}
+
+/* Dashboard card glow per theme */
+:root { --dashboard-glow: rgba(13,148,136,.25); }
+[data-theme="dark"] { --dashboard-glow: rgba(99,102,241,.12); }
+
 /* Split CTA heading text */
 [data-theme="light"] .split-cta [style*="color: '#fff'"] {
   color: var(--text-primary) !important;
