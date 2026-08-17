@@ -64,6 +64,7 @@ export default function Navbar({ userRole }: NavbarProps) {
     padding: '6px 14px',
     borderRadius: 'var(--radius-full)',
     background: isActive(href) ? 'var(--accent)' : 'var(--accent-subtle)',
+    color: isActive(href) ? '#ffffff' : 'var(--accent)',
     border: '1px solid var(--accent-border)',
     transition: 'background-color 150ms ease, color 150ms ease, box-shadow 150ms ease',
   })
@@ -119,9 +120,11 @@ export default function Navbar({ userRole }: NavbarProps) {
           .hw-desktop-links { display: none !important; }
           .hw-hamburger      { display: flex !important; }
         }
-        .hw-nav-link { color: var(--accent) !important; }
-        .hw-nav-link[data-active="true"] { color: #ffffff !important; }
-        .hw-nav-link:hover { background: var(--accent) !important; color: #ffffff !important; border-color: var(--accent) !important; }
+        .hw-nav-link { color: var(--accent); text-decoration: none; }
+        .hw-nav-link:hover,
+        .hw-nav-link:hover * { background: var(--accent) !important; color: #fff !important; border-color: var(--accent) !important; }
+        .hw-nav-link[data-active="true"] { color: #fff; }
+        .hw-nav-link[data-active="true"]:hover { background: var(--accent-hover) !important; }
         .hw-profile-btn:hover { background: var(--surface-2) !important; }
         .hw-signout-btn:hover { color: var(--danger) !important; border-color: var(--danger-border) !important; }
         .hw-login-btn:hover { color: var(--text-primary) !important; border-color: var(--border-strong) !important; }
@@ -149,19 +152,43 @@ export default function Navbar({ userRole }: NavbarProps) {
         </Link>
 
         {/* Desktop nav links */}
-        <div className="hw-desktop-links" style={{ alignItems: 'center', gap: '1.75rem' }}>
+        <div className="hw-desktop-links" style={{ alignItems: 'center', gap: '1.25rem' }}>
           {!userRole && publicLinks.map(({ href, label }) => (
-            <Link key={href} href={href} className="hw-nav-link" data-active={isActive(href) ? 'true' : 'false'} style={navLink(href)}>
+            <Link
+              key={href}
+              href={href}
+              className="hw-nav-link"
+              data-active={isActive(href) ? 'true' : 'false'}
+              style={navLink(href)}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'var(--accent)'; (e.currentTarget as HTMLElement).style.color = '#ffffff'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = isActive(href) ? 'var(--accent)' : 'var(--accent-subtle)'; (e.currentTarget as HTMLElement).style.color = isActive(href) ? '#ffffff' : 'var(--accent)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-border)'; }}
+            >
               {label}
             </Link>
           ))}
           {userRole === 'candidate' && candidateLinks.map(({ href, label, icon }) => (
-            <Link key={href} href={href} className="hw-nav-link" data-active={isActive(href) ? 'true' : 'false'} style={navLink(href)}>
+            <Link
+              key={href}
+              href={href}
+              className="hw-nav-link"
+              data-active={isActive(href) ? 'true' : 'false'}
+              style={navLink(href)}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'var(--accent)'; (e.currentTarget as HTMLElement).style.color = '#ffffff'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = isActive(href) ? 'var(--accent)' : 'var(--accent-subtle)'; (e.currentTarget as HTMLElement).style.color = isActive(href) ? '#ffffff' : 'var(--accent)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-border)'; }}
+            >
               {icon}{label}
             </Link>
           ))}
           {userRole === 'company' && companyLinks.map(({ href, label, icon }) => (
-            <Link key={href} href={href} className="hw-nav-link" data-active={isActive(href) ? 'true' : 'false'} style={navLink(href)}>
+            <Link
+              key={href}
+              href={href}
+              className="hw-nav-link"
+              data-active={isActive(href) ? 'true' : 'false'}
+              style={navLink(href)}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'var(--accent)'; (e.currentTarget as HTMLElement).style.color = '#ffffff'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = isActive(href) ? 'var(--accent)' : 'var(--accent-subtle)'; (e.currentTarget as HTMLElement).style.color = isActive(href) ? '#ffffff' : 'var(--accent)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-border)'; }}
+            >
               {icon}{label}
             </Link>
           ))}
