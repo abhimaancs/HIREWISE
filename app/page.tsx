@@ -119,19 +119,19 @@ export default function HomePage() {
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '.875rem 1.25rem', borderBottom: '1px solid rgba(255,255,255,.15)', position: 'relative', zIndex: 1, background: 'rgba(0,0,0,.10)' }}>
               <div style={{ width: 26, height: 26, background: 'rgba(255,255,255,.25)', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 900, fontSize: 12, color: '#fff' }}>H</div>
               <div style={{ flex: 1, marginLeft: '.875rem' }}>
-                <div style={{ fontSize: 13, fontWeight: 700, color: '#ffffff' }}>Welcome back, Rahul 👋</div>
-                <div style={{ fontSize: 10, color: 'rgba(255,255,255,.65)' }}>Here's your hiring overview</div>
+                <div style={{ fontSize: 13, fontWeight: 700, color: '#ffffff' }}>Welcome back, Abhimaan 👋</div>
+                <div style={{ fontSize: 10, color: 'rgba(255,255,255,.65)' }}>3 new job matches since yesterday</div>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 <div style={{ position: 'relative', width: 24, height: 24, background: 'rgba(255,255,255,.15)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11 }}>🔔<div style={{ position: 'absolute', top: 3, right: 3, width: 5, height: 5, background: '#ef4444', borderRadius: '50%' }} /></div>
-                <div style={{ width: 26, height: 26, borderRadius: '50%', background: 'rgba(255,255,255,.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 800, fontSize: 9 }}>RK</div>
-                <div style={{ fontSize: 10, color: 'rgba(255,255,255,.65)' }}><div style={{ color: '#ffffff', fontWeight: 600, fontSize: 11 }}>Rahul Kumar</div>TechStartup India</div>
+                <div style={{ width: 26, height: 26, borderRadius: '50%', background: 'rgba(255,255,255,.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 800, fontSize: 9 }}>AC</div>
+                <div style={{ fontSize: 10, color: 'rgba(255,255,255,.65)' }}><div style={{ color: '#ffffff', fontWeight: 600, fontSize: 11 }}>Abhimaan C S</div>SDE Intern · Chennai</div>
               </div>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '100px 1fr', position: 'relative', zIndex: 1 }}>
               {/* Sidebar */}
               <div style={{ background: 'rgba(0,0,0,.12)', borderRight: '1px solid rgba(255,255,255,.12)', padding: '.875rem .625rem' }}>
-                {[['🏠', 'Overview', true], ['💼', 'Jobs', false], ['👥', 'Candidates', false], ['💬', 'Messages', false], ['📊', 'Analytics', false], ['⚙️', 'Settings', false]].map(([ic, lb, ac]) => (
+                {[['🏠', 'Overview', true], ['🎯', 'My Matches', false], ['📄', 'Applications', false], ['💬', 'Messages', false], ['👤', 'Profile', false], ['⚙️', 'Settings', false]].map(([ic, lb, ac]) => (
                   <div key={lb as string} style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '6px 8px', borderRadius: 7, fontSize: 10, color: ac ? '#ffffff' : 'rgba(255,255,255,.60)', background: ac ? 'rgba(255,255,255,.20)' : 'transparent', fontWeight: ac ? 700 : 400, cursor: 'pointer', marginBottom: 2 }}>
                     <span>{ic as string}</span><span>{lb as string}</span>
                   </div>
@@ -140,7 +140,7 @@ export default function HomePage() {
               <div style={{ padding: '.875rem' }}>
                 {/* Stat cards */}
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 6, marginBottom: '.875rem' }}>
-                  {[['💼', 'Active Jobs', '8', '↑ 2 this week'], ['👥', 'Applicants', '143', '↑ 31 this week'], ['🎯', 'Avg. Match', '76%', '↑ 4% this week'], ['✅', 'Hired', '3', '↑ 1 this week']].map(([ic, lb, vl, tr]) => (
+                  {[['🎯', 'Matches', '12', '↑ 3 today'], ['📄', 'Applied', '4', '↑ 1 this week'], ['💬', 'Messages', '2', '1 unread'], ['⭐', 'Shortlisted', '1', 'By Razorpay']].map(([ic, lb, vl, tr]) => (
                     <div key={lb as string} style={{ background: 'rgba(0,0,0,.12)', border: '1px solid rgba(255,255,255,.12)', borderRadius: 10, padding: '.625rem .75rem' }}>
                       <div style={{ fontSize: 13, marginBottom: 4 }}>{ic as string}</div>
                       <div style={{ fontSize: 8, color: 'rgba(255,255,255,.60)', marginBottom: 3 }}>{lb as string}</div>
@@ -153,19 +153,18 @@ export default function HomePage() {
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                     {/* Match Distribution */}
                     <div style={{ background: 'rgba(0,0,0,.12)', border: '1px solid rgba(255,255,255,.12)', borderRadius: 10, padding: '.75rem' }}>
-                      <div style={{ fontSize: 10, fontWeight: 700, color: '#ffffff', marginBottom: '.625rem' }}>Match Distribution</div>
+                      <div style={{ fontSize: 10, fontWeight: 700, color: '#ffffff', marginBottom: '.625rem' }}>Your Match Scores</div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                         <svg width="56" height="56" viewBox="0 0 56 56">
                           <circle cx="28" cy="28" r="22" fill="none" stroke="rgba(255,255,255,.12)" strokeWidth="8" />
-                          <circle cx="28" cy="28" r="22" fill="none" stroke="#ffffff" strokeWidth="8" strokeDasharray="55 83" strokeDashoffset="0" strokeLinecap="round" />
-                          <circle cx="28" cy="28" r="22" fill="none" stroke="#a7f3d0" strokeWidth="8" strokeDasharray="44 83" strokeDashoffset="-55" strokeLinecap="round" />
-                          <circle cx="28" cy="28" r="22" fill="none" stroke="#fde68a" strokeWidth="8" strokeDasharray="22 83" strokeDashoffset="-99" strokeLinecap="round" />
-                          <circle cx="28" cy="28" r="22" fill="none" stroke="rgba(255,255,255,.30)" strokeWidth="8" strokeDasharray="10 83" strokeDashoffset="-121" strokeLinecap="round" />
-                          <text x="28" y="26" textAnchor="middle" fill="#fff" fontSize="8" fontWeight="800">143</text>
-                          <text x="28" y="34" textAnchor="middle" fill="rgba(255,255,255,.65)" fontSize="6">Total</text>
+                          <circle cx="28" cy="28" r="22" fill="none" stroke="#ffffff" strokeWidth="8" strokeDasharray="46 83" strokeDashoffset="0" strokeLinecap="round" />
+                          <circle cx="28" cy="28" r="22" fill="none" stroke="#a7f3d0" strokeWidth="8" strokeDasharray="33 83" strokeDashoffset="-46" strokeLinecap="round" />
+                          <circle cx="28" cy="28" r="22" fill="none" stroke="#fde68a" strokeWidth="8" strokeDasharray="4 83" strokeDashoffset="-79" strokeLinecap="round" />
+                          <text x="28" y="26" textAnchor="middle" fill="#fff" fontSize="8" fontWeight="800">12</text>
+                          <text x="28" y="34" textAnchor="middle" fill="rgba(255,255,255,.65)" fontSize="6">Jobs</text>
                         </svg>
                         <div style={{ flex: 1 }}>
-                          {[['#ffffff', '80-100%', '39%'], ['#a7f3d0', '60-80%', '31%'], ['#fde68a', '40-60%', '18%'], ['rgba(255,255,255,.35)', '0-40%', '12%']].map(([c, l, v]) => (
+                          {[['#ffffff', '80–100%', '5 jobs'], ['#a7f3d0', '60–80%', '4 jobs'], ['#fde68a', '40–60%', '3 jobs']].map(([c, l, v]) => (
                             <div key={l} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
                               <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}><div style={{ width: 6, height: 6, borderRadius: '50%', background: c as string }} /><span style={{ fontSize: 8, color: 'rgba(255,255,255,.65)' }}>{l}</span></div>
                               <span style={{ fontSize: 8, fontWeight: 700, color: '#ffffff' }}>{v}</span>
@@ -174,10 +173,10 @@ export default function HomePage() {
                         </div>
                       </div>
                     </div>
-                    {/* Top Skills */}
+                    {/* My Skills */}
                     <div style={{ background: 'rgba(0,0,0,.12)', border: '1px solid rgba(255,255,255,.12)', borderRadius: 10, padding: '.75rem' }}>
-                      <div style={{ fontSize: 10, fontWeight: 700, color: '#ffffff', marginBottom: '.625rem' }}>Top Skills in Demand</div>
-                      {[['React', '78%', 'rgba(255,255,255,.90)'], ['Node.js', '65%', 'rgba(255,255,255,.75)'], ['Python', '52%', '#a7f3d0'], ['TypeScript', '44%', '#fde68a']].map(([sk, pct, bg]) => (
+                      <div style={{ fontSize: 10, fontWeight: 700, color: '#ffffff', marginBottom: '.625rem' }}>Skill Match Rate</div>
+                      {[['React', '92%', 'rgba(255,255,255,.90)'], ['Node.js', '85%', '#a7f3d0'], ['TypeScript', '78%', 'rgba(255,255,255,.75)'], ['DSA', '60%', '#fde68a']].map(([sk, pct, bg]) => (
                         <div key={sk} style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 5 }}>
                           <span style={{ fontSize: 9, color: 'rgba(255,255,255,.65)', width: 48, textAlign: 'right', flexShrink: 0 }}>{sk}</span>
                           <div style={{ flex: 1, height: 5, background: 'rgba(0,0,0,.15)', borderRadius: 3, overflow: 'hidden' }}>
@@ -189,15 +188,19 @@ export default function HomePage() {
                     </div>
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                    {/* Top Matched */}
+                    {/* Top Job Matches */}
                     <div style={{ background: 'rgba(0,0,0,.12)', border: '1px solid rgba(255,255,255,.12)', borderRadius: 10, padding: '.75rem' }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '.625rem' }}>
-                        <span style={{ fontSize: 10, fontWeight: 700, color: '#ffffff' }}>Top Matched</span>
+                        <span style={{ fontSize: 10, fontWeight: 700, color: '#ffffff' }}>Top Job Matches</span>
                         <span style={{ fontSize: 9, color: 'rgba(255,255,255,.70)' }}>View all</span>
                       </div>
-                      {[['AB', 'Abhi C S', 'SDE Intern', '94%', 'rgba(255,255,255,.25)', '#ffffff', 'rgba(255,255,255,.18)'], ['PK', 'Priya Kumar', 'Full Stack Dev', '88%', 'rgba(255,255,255,.20)', '#ffffff', 'rgba(255,255,255,.15)'], ['RM', 'Rahul M', 'Backend Eng.', '71%', 'rgba(255,255,255,.15)', 'rgba(255,255,255,.85)', 'rgba(0,0,0,.12)']].map(([i, n, r, s, bg, sc, sbg]) => (
+                      {[
+                        ['RZ', 'Razorpay', 'SDE Intern', '94%', 'rgba(255,255,255,.25)', '#ffffff', 'rgba(255,255,255,.18)'],
+                        ['SW', 'Swiggy', 'Full Stack Intern', '88%', 'rgba(255,255,255,.20)', '#ffffff', 'rgba(255,255,255,.15)'],
+                        ['ZP', 'Zepto', 'Backend Intern', '76%', 'rgba(255,255,255,.15)', 'rgba(255,255,255,.85)', 'rgba(0,0,0,.12)']
+                      ].map(([i, n, r, s, bg, sc, sbg]) => (
                         <div key={n as string} style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 7 }}>
-                          <div style={{ width: 24, height: 24, borderRadius: '50%', background: bg as string, border: '1px solid rgba(255,255,255,.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 800, fontSize: 9, flexShrink: 0 }}>{i as string}</div>
+                          <div style={{ width: 24, height: 24, borderRadius: 6, background: bg as string, border: '1px solid rgba(255,255,255,.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 800, fontSize: 8, flexShrink: 0 }}>{i as string}</div>
                           <div style={{ flex: 1 }}><div style={{ fontSize: 10, fontWeight: 600, color: '#ffffff' }}>{n as string}</div><div style={{ fontSize: 8, color: 'rgba(255,255,255,.60)' }}>{r as string}</div></div>
                           <div style={{ background: sbg as string, color: sc as string, border: '1px solid rgba(255,255,255,.20)', borderRadius: 6, fontSize: 10, fontWeight: 800, padding: '1px 6px' }}>{s as string}</div>
                         </div>
@@ -205,8 +208,13 @@ export default function HomePage() {
                     </div>
                     {/* AI Activity */}
                     <div style={{ background: 'rgba(0,0,0,.12)', border: '1px solid rgba(255,255,255,.12)', borderRadius: 10, padding: '.75rem' }}>
-                      <div style={{ fontSize: 10, fontWeight: 700, color: '#ffffff', marginBottom: '.625rem' }}>AI Activity</div>
-                      {[['#a7f3d0', 'Profile Updated', 'Abhi C S · 5 skills added'], ['rgba(255,255,255,.80)', '94% Match Found', 'Abhi matched SDE Intern role'], ['#fde68a', 'AI Recommendation', '2 new candidates for Backend'], ['#a7f3d0', 'Shortlisted', 'Priya K. moved to shortlist']].map(([dot, title, desc], i) => (
+                      <div style={{ fontSize: 10, fontWeight: 700, color: '#ffffff', marginBottom: '.625rem' }}>Recent Activity</div>
+                      {[
+                        ['#a7f3d0', 'Resume Parsed', 'Skills auto-filled · React, Node.js, TS'],
+                        ['rgba(255,255,255,.80)', '94% Match', 'Razorpay · SDE Intern role'],
+                        ['#fde68a', 'Shortlisted', 'Razorpay moved you to shortlist'],
+                        ['#a7f3d0', 'Cover Letter', 'AI generated for Swiggy role'],
+                      ].map(([dot, title, desc], i) => (
                         <div key={i} className="ai-item" style={{ display: 'flex', alignItems: 'flex-start', gap: 6, padding: '5px 6px', background: 'rgba(0,0,0,.10)', border: '1px solid rgba(255,255,255,.10)', borderRadius: 7, marginBottom: 5 }}>
                           <div style={{ width: 6, height: 6, borderRadius: '50%', background: dot as string, marginTop: 2, flexShrink: 0 }} />
                           <div style={{ fontSize: 9, color: 'rgba(255,255,255,.65)', lineHeight: 1.4 }}><strong style={{ fontWeight: 600, color: '#ffffff' }}>{title}</strong> — {desc}</div>
