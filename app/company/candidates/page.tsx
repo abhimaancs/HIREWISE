@@ -285,9 +285,11 @@ function CandidatesContent() {
                     <div style={{ flex: 1, minWidth: 0 }}>
                       {/* Name + status badge */}
                       <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginBottom: 5 }}>
-                        <span style={{ fontWeight: 700, fontSize: 15, color: isRejected ? 'var(--text-tertiary)' : 'var(--text-primary)', letterSpacing: '-0.2px' }}>
-                          {app.candidate?.name || 'Unknown'}
-                        </span>
+                        <a href={`/company/candidates/${app.candidate_id}`} style={{ textDecoration: 'none' }}>
+                          <span style={{ fontWeight: 700, fontSize: 15, color: isRejected ? 'var(--text-tertiary)' : 'var(--accent)', letterSpacing: '-0.2px', cursor: 'pointer', borderBottom: `1px solid ${isRejected ? 'transparent' : 'var(--accent-border)'}`, transition: 'opacity 150ms ease' }}>
+                            {app.candidate?.name || 'Unknown'}
+                          </span>
+                        </a>
                         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 4, background: sc.bg, color: sc.color, border: `1px solid ${sc.border}`, borderRadius: 20, fontSize: 11, fontWeight: 700, padding: '2px 8px' }}>
                           {statusIcon[app.status]}{statusLabel[app.status]}
                         </div>
@@ -455,7 +457,9 @@ function CandidatesContent() {
                 {/* Info */}
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginBottom: 5 }}>
-                    <span style={{ fontWeight: 700, fontSize: 15, color: 'var(--text-primary)', letterSpacing: '-0.2px' }}>{candidate.name}</span>
+                    <a href={`/company/candidates/${candidate.id}`} style={{ textDecoration: 'none' }}>
+                      <span style={{ fontWeight: 700, fontSize: 15, color: 'var(--accent)', letterSpacing: '-0.2px', borderBottom: '1px solid var(--accent-border)' }}>{candidate.name}</span>
+                    </a>
                     <div style={{ display: 'inline-flex', alignItems: 'center', gap: 3, background: scoreBg(match_score), color: scoreColor(match_score), border: `1px solid ${scoreBorder(match_score)}`, borderRadius: 20, fontSize: 11, fontWeight: 700, padding: '2px 8px' }}>
                       {match_score}% match
                     </div>
