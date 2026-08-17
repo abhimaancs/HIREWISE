@@ -29,16 +29,16 @@ export default function HomePage() {
         .ai-item:nth-child(3){animation-delay:.8s}
         .ai-item:nth-child(4){animation-delay:1.1s}
         .bar-fill{animation:barGrow .9s .3s ease forwards;width:0}
-        .btn-hero{transition:background-color 150ms ease,box-shadow 150ms ease,transform 150ms ease}
-        .btn-hero:hover{transform:translateY(-2px);box-shadow:var(--glow-accent)}
-        .btn-outline-hero{transition:background-color 150ms ease,border-color 150ms ease,transform 150ms ease}
-        .btn-outline-hero:hover{background:var(--surface-2)!important;transform:translateY(-1px)}
+        .btn-hero{transition:background-color 150ms ease,box-shadow 150ms ease,transform 150ms ease;color:#fff}
+        .btn-hero:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(13,148,136,.35);background:var(--accent-hover)!important;color:#fff!important}
+        .btn-outline-hero{transition:background-color 150ms ease,border-color 150ms ease,color 150ms ease,transform 150ms ease}
+        .btn-outline-hero:hover{background:var(--surface-1)!important;border-color:var(--accent-border)!important;color:var(--text-primary)!important;transform:translateY(-1px)}
         .feature-card{transition:border-color 200ms ease,transform 200ms ease,box-shadow 200ms ease}
         .feature-card:hover{border-color:var(--accent-border)!important;transform:translateY(-3px);box-shadow:var(--shadow-md)}
-        .step-card{transition:border-color 200ms ease,transform 200ms ease}
-        .step-card:hover{border-color:var(--accent-border)!important;transform:translateY(-2px)}
-        .cta-btn{transition:background-color 150ms ease,transform 150ms ease}
-        .cta-btn:hover{transform:translateY(-2px)}
+        .step-card{transition:border-color 200ms ease,transform 200ms ease,box-shadow 200ms ease}
+        .step-card:hover{border-color:var(--accent-border)!important;transform:translateY(-2px);box-shadow:var(--shadow-md)}
+        .cta-btn{transition:background-color 150ms ease,transform 150ms ease,box-shadow 150ms ease;color:#fff!important}
+        .cta-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(13,148,136,.3)}
         .db-link-h:hover{background:var(--surface-2)!important;color:var(--text-secondary)!important}
         [data-force-theme="dark"]{color-scheme:dark}
 
@@ -256,14 +256,14 @@ export default function HomePage() {
               )
             },
             {
-              step: '02', icon: '🤖', color: 'var(--accent)', bg: 'var(--accent-subtle)', border: 'var(--accent-border)',
+              step: '02', icon: '🤖', color: 'var(--warning)', bg: 'var(--warning-subtle)', border: 'var(--warning-border)',
               title: 'AI Scores Your Matches',
               desc: 'Our AI semantically understands your profile and scores every job from 0–100 based on real fit — not just keywords.',
               demo: (
                 <div style={{ background: 'var(--surface-1)', border: '1px solid var(--border)', borderRadius: 10, padding: '10px 12px', marginTop: 12 }}>
-                  {[['Razorpay · SDE Intern', '94%', 'var(--success)', 'var(--success-subtle)'], ['Swiggy · Full Stack Dev', '88%', 'var(--success)', 'var(--success-subtle)'], ['Zepto · Backend Eng.', '71%', 'var(--accent)', 'var(--accent-subtle)']].map(([job, score, sc, sbg]) => (
+                  {[['Razorpay · SDE Intern', '94%', 'var(--success)', 'var(--success-subtle)'], ['Swiggy · Full Stack Dev', '88%', 'var(--success)', 'var(--success-subtle)'], ['Zepto · Backend Eng.', '71%', 'var(--warning)', 'var(--warning-subtle)']].map(([job, score, sc, sbg]) => (
                     <div key={job} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '5px 0', borderBottom: '1px solid var(--border)' }}>
-                      <span style={{ fontSize: 10, color: 'var(--text-tertiary)' }}>{job}</span>
+                      <span style={{ fontSize: 10, color: 'var(--text-secondary)' }}>{job}</span>
                       <span style={{ background: sbg, color: sc, borderRadius: 6, fontSize: 10, fontWeight: 800, padding: '1px 7px' }}>{score}</span>
                     </div>
                   ))}
@@ -271,7 +271,7 @@ export default function HomePage() {
               )
             },
             {
-              step: '03', icon: '💬', color: '#10b981', bg: 'rgba(16,185,129,.12)', border: 'rgba(16,185,129,.25)',
+              step: '03', icon: '💬', color: 'var(--success)', bg: 'var(--success-subtle)', border: 'var(--success-border)',
               title: 'Connect Directly',
               desc: 'Chat directly with hiring managers for your top matches. No recruiters, no spam, no gatekeepers.',
               demo: (
@@ -282,7 +282,7 @@ export default function HomePage() {
                   </div>
                   <div style={{ display: 'flex', alignItems: 'flex-start', gap: 6, justifyContent: 'flex-end' }}>
                     <div style={{ background: 'var(--accent)', borderRadius: '8px 8px 2px 8px', padding: '5px 8px', fontSize: 10, color: '#fff', lineHeight: 1.4 }}>Excited to learn more! When can we chat?</div>
-                    <div style={{ width: 20, height: 20, borderRadius: '50%', background: 'linear-gradient(135deg,#10b981,#06b6d4)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: 8, fontWeight: 800, flexShrink: 0 }}>A</div>
+                    <div style={{ width: 20, height: 20, borderRadius: '50%', background: 'var(--success)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: 8, fontWeight: 800, flexShrink: 0 }}>A</div>
                   </div>
                 </div>
               )

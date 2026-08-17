@@ -408,58 +408,13 @@ a,
 }
 
 /* ── Light mode: landing page overrides ── */
-/* The landing page (app/page.tsx) uses hardcoded dark-theme hex values.
-   These overrides remap them to light-theme equivalents without touching page logic. */
-
-/* Background glow orbs — use teal instead of indigo in light */
-[data-theme="light"] .hero-grid~div[style*="fixed"],
-[data-theme="light"] div[style*="position: 'fixed'"][style*="pointerEvents: 'none'"] {
-  opacity: 0.4;
-}
-
-/* Hero heading — dark text instead of white */
-[data-theme="light"] .hero-title,
-[data-theme="light"] h1[style*="color: '#fff'"],
-[data-theme="light"] [style*="color: '#f1f1f1'"],
-[data-theme="light"] [style*="color: '#e5e7eb'"],
-[data-theme="light"] [style*="color: '#fff'"] {
-  color: var(--text-primary) !important;
-}
-
-/* Muted/secondary text on landing */
-[data-theme="light"] [style*="color: '#6b7280'"],
-[data-theme="light"] [style*="color: '#9ca3af'"],
-[data-theme="light"] [style*="color: '#a1a1aa'"] {
-  color: var(--text-secondary) !important;
-}
-
-/* Dark card backgrounds on landing — flip to light surfaces */
-[data-theme="light"] [style*="background: 'rgba(255,255,255,.02)'"],
-[data-theme="light"] [style*="background: 'rgba(255,255,255,.03)'"],
-[data-theme="light"] [style*="background: 'rgba(255,255,255,.04)'"],
-[data-theme="light"] [style*="background: 'rgba(255,255,255,.05)'"],
-[data-theme="light"] [style*="background: 'rgba(255,255,255,.06)'"] {
-  background: var(--surface-0) !important;
-  border-color: var(--border) !important;
-}
+/* Most inline styles now use CSS vars. Only a few structural overrides remain. */
 
 /* Feature cards and step cards */
 [data-theme="light"] .feature-card {
   background: var(--surface-0) !important;
   border: 1px solid var(--border) !important;
   box-shadow: var(--shadow-card) !important;
-  color: var(--text-primary) !important;
-}
-
-[data-theme="light"] .feature-card [style*="color: '#f1f1f1'"],
-[data-theme="light"] .feature-card [style*="color: '#e5e7eb'"],
-[data-theme="light"] .feature-card [style*="color: '#fff'"] {
-  color: var(--text-primary) !important;
-}
-
-[data-theme="light"] .feature-card [style*="color: '#6b7280'"],
-[data-theme="light"] .feature-card [style*="color: '#9ca3af'"] {
-  color: var(--text-secondary) !important;
 }
 
 [data-theme="light"] .step-card {
@@ -468,101 +423,47 @@ a,
   box-shadow: var(--shadow-card) !important;
 }
 
-[data-theme="light"] .step-card [style*="color: '#f1f1f1'"],
-[data-theme="light"] .step-card [style*="color: '#e5e7eb'"],
-[data-theme="light"] .step-card [style*="color: '#fff'"] {
-  color: var(--text-primary) !important;
-}
-
-[data-theme="light"] .step-card [style*="color: '#6b7280'"],
-[data-theme="light"] .step-card [style*="color: '#9ca3af'"] {
-  color: var(--text-secondary) !important;
-}
-
-/* Demo widgets inside step cards */
-[data-theme="light"] .step-card div[style*="rgba(255,255,255,.03)"],
-[data-theme="light"] .step-card div[style*="rgba(255,255,255,.06)"] {
-  background: var(--surface-1) !important;
-  border-color: var(--border) !important;
-}
-
-[data-theme="light"] .step-card [style*="borderBottom: '1px solid rgba(255,255,255,.05)'"] {
-  border-bottom-color: var(--border) !important;
-}
-
-/* Hero badge pill — use teal */
-[data-theme="light"] [style*="rgba(99,102,241,.1)"][style*="borderRadius: 999"] {
-  background: rgba(13, 148, 136, 0.08) !important;
-  border-color: rgba(13, 148, 136, 0.25) !important;
-  color: var(--accent) !important;
-}
-
-/* "See it in action" green pill */
-[data-theme="light"] [style*="rgba(16,185,129,.1)"][style*="borderRadius: 999"] {
-  background: rgba(5, 150, 105, 0.08) !important;
-  border-color: rgba(5, 150, 105, 0.25) !important;
-  color: var(--success) !important;
-}
-
-/* Section headings */
-[data-theme="light"] [style*="color: '#fff'"][style*="fontWeight: 900"],
-[data-theme="light"] [style*="color: '#fff'"][style*="fontWeight: 800"] {
-  color: var(--text-primary) !important;
-}
-
-/* Hero buttons — replace indigo with teal in light mode */
+/* Hero buttons — solid teal, white text, always visible */
 [data-theme="light"] .btn-hero {
-  background: linear-gradient(135deg, var(--accent), var(--accent-hover)) !important;
-  box-shadow: 0 4px 14px rgba(13, 148, 136, 0.3) !important;
+  background: var(--accent) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(13, 148, 136, 0.30) !important;
+}
+[data-theme="light"] .btn-hero:hover {
+  background: var(--accent-hover) !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 20px rgba(13, 148, 136, 0.40) !important;
 }
 
+/* Glow animation off in light — no flicker */
 [data-theme="light"] .glow-btn {
   animation: none !important;
-  box-shadow: 0 4px 14px rgba(13, 148, 136, 0.25) !important;
 }
 
+/* Outline hero button — clear border, readable text */
 [data-theme="light"] .btn-outline-hero {
+  background: var(--surface-0) !important;
   border-color: var(--border) !important;
   color: var(--text-secondary) !important;
-  background: var(--surface-0) !important;
   box-shadow: var(--shadow-sm) !important;
 }
-
-[data-theme="light"] .cta-btn {
-  box-shadow: 0 2px 8px rgba(13, 148, 136, 0.2) !important;
-}
-
-/* CTA section panels */
-[data-theme="light"] [style*="rgba(99,102,241,.08)"][style*="borderRadius: 22"] {
-  background: rgba(13, 148, 136, 0.06) !important;
-  border-color: rgba(13, 148, 136, 0.2) !important;
-}
-
-[data-theme="light"] [style*="rgba(16,185,129,.06)"][style*="borderRadius: 22"] {
-  background: rgba(5, 150, 105, 0.05) !important;
-  border-color: rgba(5, 150, 105, 0.2) !important;
-}
-
-/* CTA section text */
-[data-theme="light"] [style*="rgba(99,102,241,.08)"] [style*="color: '#818cf8'"] {
-  color: var(--accent) !important;
-}
-
-/* Feature pills under hero */
-[data-theme="light"] .hero-pill {
+[data-theme="light"] .btn-outline-hero:hover {
   background: var(--surface-1) !important;
-  border-color: var(--border) !important;
-}
-
-[data-theme="light"] .hero-pill [style*="color: '#e5e7eb'"] {
+  border-color: var(--accent-border) !important;
   color: var(--text-primary) !important;
 }
 
-[data-theme="light"] .hero-pill [style*="color: '#6b7280'"] {
-  color: var(--text-secondary) !important;
+/* CTA buttons — always white text on teal */
+[data-theme="light"] .cta-btn {
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(13, 148, 136, 0.25) !important;
+}
+[data-theme="light"] .cta-btn:hover {
+  color: #ffffff !important;
+  box-shadow: 0 6px 20px rgba(13, 148, 136, 0.35) !important;
 }
 
-/* Dashboard preview widget — teal themed directly in JSX, no overrides needed */
+/* Dashboard preview widget */
 [data-theme="light"] .dashboard {
   box-shadow: 0 8px 48px rgba(13,148,136,.35), 0 2px 12px rgba(13,148,136,.20) !important;
 }
@@ -579,25 +480,13 @@ a,
 :root { --dashboard-glow: rgba(13,148,136,.25); }
 [data-theme="dark"] { --dashboard-glow: rgba(99,102,241,.12); }
 
-/* Split CTA heading text */
-[data-theme="light"] .split-cta [style*="color: '#fff'"] {
-  color: var(--text-primary) !important;
-}
-
-[data-theme="light"] .split-cta [style*="color: '#6b7280'"] {
-  color: var(--text-secondary) !important;
-}
-
-/* Final CTA section */
+/* Final CTA section border */
 [data-theme="light"] [style*="borderTop: '1px solid rgba(255,255,255,.06)'"] {
   border-top-color: var(--border) !important;
 }
 
-[data-theme="light"] [style*="border-top: 1px solid rgba(255,255,255,.06)"] {
-  border-top-color: var(--border) !important;
-}
-
 /* ── Reduced motion ── */
+
 @media (prefers-reduced-motion: reduce) {
 
   *,
