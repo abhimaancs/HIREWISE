@@ -57,29 +57,17 @@ export default function Navbar({ userRole }: NavbarProps) {
   const navLink = (href: string): React.CSSProperties => ({
     fontSize: '13px',
     textDecoration: 'none',
-    fontWeight: isActive(href) ? 600 : 500,
+    fontWeight: 600,
     display: 'flex',
     alignItems: 'center',
     gap: '5px',
-    color: isActive(href) ? 'var(--text-primary)' : 'var(--text-secondary)',
-    position: 'relative',
-    paddingBottom: '2px',
-    transition: 'color 150ms ease',
+    padding: '6px 14px',
+    borderRadius: 'var(--radius-full)',
+    background: isActive(href) ? '#0D9488' : 'rgba(13,148,136,0.10)',
+    color: isActive(href) ? '#ffffff' : '#0D9488',
+    border: '1px solid rgba(13,148,136,0.25)',
+    transition: 'background-color 150ms ease, color 150ms ease, box-shadow 150ms ease',
   })
-
-  const ActiveDot = ({ href }: { href: string }) =>
-    isActive(href) ? (
-      <span style={{
-        position: 'absolute',
-        bottom: -14,
-        left: '50%',
-        transform: 'translateX(-50%)',
-        width: 18,
-        height: 2,
-        borderRadius: 2,
-        background: 'var(--accent)',
-      }} />
-    ) : null
 
   const drawerLink = (href: string): React.CSSProperties => ({
     display: 'flex',
@@ -132,7 +120,7 @@ export default function Navbar({ userRole }: NavbarProps) {
           .hw-desktop-links { display: none !important; }
           .hw-hamburger      { display: flex !important; }
         }
-        .hw-nav-link:hover { color: var(--text-primary) !important; }
+        .hw-nav-link:hover { background: #0D9488 !important; color: #ffffff !important; border-color: #0D9488 !important; }
         .hw-profile-btn:hover { background: var(--surface-2) !important; }
         .hw-signout-btn:hover { color: var(--danger) !important; border-color: var(--danger-border) !important; }
         .hw-login-btn:hover { color: var(--text-primary) !important; border-color: var(--border-strong) !important; }
@@ -163,17 +151,17 @@ export default function Navbar({ userRole }: NavbarProps) {
         <div className="hw-desktop-links" style={{ alignItems: 'center', gap: '1.75rem' }}>
           {!userRole && publicLinks.map(({ href, label }) => (
             <Link key={href} href={href} className="hw-nav-link" style={navLink(href)}>
-              {label}<ActiveDot href={href} />
+              {label}
             </Link>
           ))}
           {userRole === 'candidate' && candidateLinks.map(({ href, label, icon }) => (
             <Link key={href} href={href} className="hw-nav-link" style={navLink(href)}>
-              {icon}{label}<ActiveDot href={href} />
+              {icon}{label}
             </Link>
           ))}
           {userRole === 'company' && companyLinks.map(({ href, label, icon }) => (
             <Link key={href} href={href} className="hw-nav-link" style={navLink(href)}>
-              {icon}{label}<ActiveDot href={href} />
+              {icon}{label}
             </Link>
           ))}
         </div>
