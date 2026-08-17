@@ -233,11 +233,11 @@ export default function HomePage() {
 
         <div className="steps-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 16, position: 'relative' }}>
           {/* Connector lines */}
-          <div style={{ position: 'absolute', top: 40, left: 'calc(33% - 10px)', width: 'calc(34% + 20px)', height: 2, background: 'linear-gradient(90deg,rgba(99,102,241,.4),rgba(99,102,241,.4))', zIndex: 0, display: 'none' }} />
+          <div style={{ position: 'absolute', top: 40, left: 'calc(33% - 10px)', width: 'calc(34% + 20px)', height: 2, background: 'linear-gradient(90deg,var(--accent-border),var(--accent-border))', zIndex: 0, display: 'none' }} />
 
           {[
             {
-              step: '01', icon: '👤', color: '#6366f1', bg: 'rgba(99,102,241,.12)', border: 'rgba(99,102,241,.25)',
+              step: '01', icon: '👤', color: 'var(--accent)', bg: 'var(--accent-subtle)', border: 'var(--accent-border)',
               title: 'Build Your Profile',
               desc: 'Add your skills, experience, and education manually. Upload your PDF resume for companies to view directly.',
               demo: (
@@ -256,7 +256,7 @@ export default function HomePage() {
               )
             },
             {
-              step: '02', icon: '🤖', color: '#8b5cf6', bg: 'rgba(139,92,246,.12)', border: 'rgba(139,92,246,.25)',
+              step: '02', icon: '🤖', color: 'var(--accent)', bg: 'var(--accent-subtle)', border: 'var(--accent-border)',
               title: 'AI Scores Your Matches',
               desc: 'Our AI semantically understands your profile and scores every job from 0–100 based on real fit — not just keywords.',
               demo: (
@@ -277,7 +277,7 @@ export default function HomePage() {
               demo: (
                 <div style={{ background: 'var(--surface-1)', border: '1px solid var(--border)', borderRadius: 10, padding: '10px 12px', marginTop: 12 }}>
                   <div style={{ display: 'flex', alignItems: 'flex-start', gap: 6, marginBottom: 6 }}>
-                    <div style={{ width: 20, height: 20, borderRadius: '50%', background: 'linear-gradient(135deg,#6366f1,#8b5cf6)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: 8, fontWeight: 800, flexShrink: 0 }}>R</div>
+                    <div style={{ width: 20, height: 20, borderRadius: '50%', background: 'var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: 8, fontWeight: 800, flexShrink: 0 }}>R</div>
                     <div style={{ background: 'var(--surface-0)', borderRadius: '8px 8px 8px 2px', padding: '5px 8px', fontSize: 10, color: 'var(--text-primary)', lineHeight: 1.4 }}>Hi! You matched 94% with our SDE Intern role 🎉</div>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'flex-start', gap: 6, justifyContent: 'flex-end' }}>
@@ -318,8 +318,8 @@ export default function HomePage() {
         </div>
         <div className="features-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(240px,1fr))', gap: 14 }}>
           {[
-            ['👤', 'rgba(99,102,241,.15)', 'Manual Profile Builder', 'Add your skills, experience, education and bio. Your profile drives AI matching — no parsing needed.'],
-            ['🎯', 'rgba(139,92,246,.15)', 'Semantic Matching', 'Goes beyond keywords — understands context. React matches ReactJS, Backend matches Node.js.'],
+            ['👤', 'var(--accent-subtle)', 'Manual Profile Builder', 'Add your skills, experience, education and bio. Your profile drives AI matching — no parsing needed.'],
+            ['🎯', 'var(--accent-subtle)', 'Semantic Matching', 'Goes beyond keywords — understands context. React matches ReactJS, Backend matches Node.js.'],
             ['💬', 'rgba(6,182,212,.15)', 'Direct Messaging', 'Real-time chat with hiring managers. No middlemen, no delays, no spam.'],
             ['📊', 'rgba(245,158,11,.15)', 'Match Scores', 'See exactly why you matched a job and which of your skills align. Full transparency.'],
             ['📄', 'rgba(16,185,129,.15)', 'Cover Letter AI', 'One-click AI-generated cover letters tailored specifically to each job you apply for.'],
