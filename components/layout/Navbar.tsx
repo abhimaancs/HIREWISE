@@ -145,7 +145,7 @@ export default function Navbar({ userRole }: NavbarProps) {
       >
         {/* Logo */}
         <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10 }}>
-          <div style={{ width: 30, height: 30, background: 'linear-gradient(135deg, var(--accent), var(--accent-hover))', borderRadius: 'var(--radius-sm)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 14, color: 'white' }}>H</div>
+          <img src="/logo.png" alt="HireWise" style={{ width: 32, height: 32, objectFit: 'contain' }} />
           <span style={{ fontSize: 17, fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.3px' }}>
             Hire<span style={{ color: 'var(--accent)' }}>Wise</span>
           </span>
@@ -342,7 +342,7 @@ export default function Navbar({ userRole }: NavbarProps) {
           flexShrink: 0,
         }}>
           <Link href="/" onClick={closeDrawer} style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 9 }}>
-            <div style={{ width: 28, height: 28, background: 'linear-gradient(135deg, var(--accent), var(--accent-hover))', borderRadius: 'var(--radius-sm)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 13, color: 'white' }}>H</div>
+            <img src="/logo.png" alt="HireWise" style={{ width: 28, height: 28, objectFit: 'contain' }} />
             <span style={{ fontSize: 16, fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.3px' }}>
               Hire<span style={{ color: 'var(--accent)' }}>Wise</span>
             </span>

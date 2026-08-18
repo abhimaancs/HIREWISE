@@ -28,10 +28,11 @@ function OnboardingContent() {
 
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-          <Link href="/" style={{ textDecoration: 'none' }}>
-            <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.5px', marginBottom: 20 }}>
+          <Link href="/" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8, justifyContent: 'center' }}>
+            <img src="/logo.png" alt="HireWise" style={{ width: 32, height: 32, objectFit: 'contain' }} />
+            <span style={{ fontSize: 20, fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.5px' }}>
               Hire<span style={{ color: 'var(--accent)' }}>Wise</span>
-            </div>
+            </span>
           </Link>
           <div style={{ width: 64, height: 64, background: 'var(--accent-subtle)', border: '1px solid var(--accent-border)', borderRadius: 'var(--radius-xl)', margin: '0 auto 16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 28 }}>🎉</div>
           <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.03em', marginBottom: 8 }}>Welcome to HireWise!</div>

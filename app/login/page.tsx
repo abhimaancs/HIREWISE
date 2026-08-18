@@ -54,7 +54,7 @@ export default function LoginPage() {
           {/* Logo */}
           <div style={{ position: 'relative', zIndex: 1 }}>
             <Link href="/" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 10 }}>
-              <div style={{ width: 36, height: 36, background: 'rgba(255,255,255,0.20)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 900, fontSize: 17, color: '#fff' }}>H</div>
+              <img src="/logo.png" alt="HireWise" style={{ width: 38, height: 38, objectFit: 'contain' }} />
               <span style={{ fontSize: 22, fontWeight: 800, color: '#ffffff', letterSpacing: '-0.5px' }}>HireWise</span>
             </Link>
           </div>
