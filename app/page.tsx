@@ -66,16 +66,19 @@ export default function HomePage() {
         <div style={{ position: 'absolute', bottom: '-10%', left: '10%', width: 400, height: 400, background: 'radial-gradient(circle,var(--success-subtle) 0%,transparent 70%)' }} />
       </div>
 
+      {/* Brand header */}
+      <div style={{ textAlign: 'center', padding: '2.5rem 0 0', position: 'relative', zIndex: 1 }}>
+        <span style={{ fontSize: 'clamp(2.5rem,6vw,4.5rem)', fontWeight: 900, color: 'var(--text-primary)', letterSpacing: '-3px' }}>
+          Hire<span style={{ color: 'var(--accent)' }}>Wise</span>
+        </span>
+      </div>
+
       {/* HERO */}
       <div className="hero-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'center', padding: '5rem 2.5rem 3rem', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1 }}>
 
         {/* Left */}
         <div>
-          <div className="fade-up" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, marginBottom: '1rem' }}>
-            <span style={{ fontSize: 36, fontWeight: 900, color: 'var(--text-primary)', letterSpacing: '-1.5px' }}>Hire<span style={{ color: 'var(--accent)' }}>Wise</span></span>
-          </div>
-
-          <div className="fade-up-1" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'var(--accent-subtle)', border: '1px solid var(--accent-border)', borderRadius: 999, padding: '5px 14px', fontSize: 12, color: 'var(--accent)', fontWeight: 700, marginBottom: '1.5rem' }}>
+          <div className="fade-up" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'var(--accent-subtle)', border: '1px solid var(--accent-border)', borderRadius: 999, padding: '5px 14px', fontSize: 12, color: 'var(--accent)', fontWeight: 700, marginBottom: '1.5rem' }}>
             <span className="badge-dot" />AI-Powered Hiring Platform
           </div>
 
