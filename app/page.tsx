@@ -72,8 +72,7 @@ export default function HomePage() {
         {/* Left */}
         <div>
           <div className="fade-up" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, marginBottom: '1rem' }}>
-            <div style={{ width: 32, height: 32, background: 'linear-gradient(135deg, var(--accent), var(--accent-hover))', borderRadius: 'var(--radius-sm)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 900, fontSize: 15, color: '#fff', flexShrink: 0 }}>H</div>
-            <span style={{ fontSize: 20, fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.5px' }}>Hire<span style={{ color: 'var(--accent)' }}>Wise</span></span>
+            <span style={{ fontSize: 36, fontWeight: 900, color: 'var(--text-primary)', letterSpacing: '-1.5px' }}>Hire<span style={{ color: 'var(--accent)' }}>Wise</span></span>
           </div>
 
           <div className="fade-up-1" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'var(--accent-subtle)', border: '1px solid var(--accent-border)', borderRadius: 999, padding: '5px 14px', fontSize: 12, color: 'var(--accent)', fontWeight: 700, marginBottom: '1.5rem' }}>
