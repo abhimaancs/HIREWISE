@@ -54,13 +54,15 @@ function SignupForm() {
         .auth-input:focus { border-color: var(--accent) !important; box-shadow: 0 0 0 3px var(--accent-subtle) !important; }
         .create-btn:hover { background: var(--accent-hover) !important; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(13,148,136,0.35) !important; }
         .role-btn { transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease; }
+        .auth-left { background: #0D9488; }
+        [data-theme="dark"] .auth-left { background: #141417; border-right: 1px solid rgba(255,255,255,0.08); }
         @media (max-width: 768px) { .auth-split { grid-template-columns: 1fr !important; } .auth-left { display: none !important; } }
       `}</style>
 
       <div className="auth-split" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: '100vh' }}>
 
         {/* ── Left panel — brand ── */}
-        <div className="auth-left" style={{ background: '#0D9488', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '3rem' }}>
+        <div className="auth-left" style={{ position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '3rem' }}>
           <div style={{ position: 'absolute', top: -80, right: -80, width: 300, height: 300, background: 'rgba(255,255,255,0.06)', borderRadius: '50%', pointerEvents: 'none' }} />
           <div style={{ position: 'absolute', bottom: -60, left: -60, width: 250, height: 250, background: 'rgba(255,255,255,0.04)', borderRadius: '50%', pointerEvents: 'none' }} />
 
