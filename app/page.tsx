@@ -71,20 +71,25 @@ export default function HomePage() {
 
         {/* Left */}
         <div>
-          <div className="fade-up" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'var(--accent-subtle)', border: '1px solid var(--accent-border)', borderRadius: 999, padding: '5px 14px', fontSize: 12, color: 'var(--accent)', fontWeight: 700, marginBottom: '1.5rem' }}>
+          <div className="fade-up" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, marginBottom: '1rem' }}>
+            <div style={{ width: 32, height: 32, background: 'linear-gradient(135deg, var(--accent), var(--accent-hover))', borderRadius: 'var(--radius-sm)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 900, fontSize: 15, color: '#fff', flexShrink: 0 }}>H</div>
+            <span style={{ fontSize: 20, fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.5px' }}>Hire<span style={{ color: 'var(--accent)' }}>Wise</span></span>
+          </div>
+
+          <div className="fade-up-1" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'var(--accent-subtle)', border: '1px solid var(--accent-border)', borderRadius: 999, padding: '5px 14px', fontSize: 12, color: 'var(--accent)', fontWeight: 700, marginBottom: '1.5rem' }}>
             <span className="badge-dot" />AI-Powered Hiring Platform
           </div>
 
-          <h1 className="hero-title fade-up-1" style={{ fontSize: 'clamp(2.2rem,4vw,3.5rem)', fontWeight: 900, lineHeight: 1.05, color: 'var(--text-primary)', marginBottom: '1rem', letterSpacing: '-2px' }}>
+          <h1 className="hero-title fade-up-2" style={{ fontSize: 'clamp(2.2rem,4vw,3.5rem)', fontWeight: 900, lineHeight: 1.05, color: 'var(--text-primary)', marginBottom: '1rem', letterSpacing: '-2px' }}>
             Hire Smarter<br />
             <span style={{ color: 'var(--accent)' }}>with AI</span>
           </h1>
 
-          <p className="fade-up-2" style={{ fontSize: 15, color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: '2rem', maxWidth: 400 }}>
+          <p className="fade-up-3" style={{ fontSize: 15, color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: '2rem', maxWidth: 400 }}>
             HireWise uses AI to match the right talent to the right roles, and help companies build amazing teams — faster.
           </p>
 
-          <div className="fade-up-3" style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: '2.5rem' }}>
+          <div className="fade-up-4" style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: '2.5rem' }}>
             <Link href="/signup">
               <button className="btn-hero glow-btn" style={{ padding: '13px 28px', background: 'var(--accent)', border: 'none', borderRadius: 12, color: '#fff', fontSize: 15, fontWeight: 700, cursor: 'pointer', fontFamily: 'Inter,sans-serif', boxShadow: '0 4px 14px rgba(13,148,136,0.3)' }}>
                 Find Jobs →
@@ -98,7 +103,7 @@ export default function HomePage() {
           </div>
 
           {/* Feature pills */}
-          <div className="hero-pills fade-up-4" style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+          <div className="hero-pills fade-up-5" style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
             {[['📄', 'PDF Resume Upload', 'Store your resume securely'], ['🎯', 'Semantic Matching', 'Beyond keyword search'], ['💬', 'Direct Messaging', 'No recruiters needed']].map(([ic, tt, dc]) => (
               <div key={tt as string} className="hero-pill" style={{ background: 'var(--surface-1)', border: '1px solid var(--border)', borderRadius: 12, padding: '10px 12px', display: 'flex', alignItems: 'center', gap: 8, flex: 1, minWidth: 120 }}>
                 <span style={{ fontSize: 15 }}>{ic as string}</span>

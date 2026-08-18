@@ -3,7 +3,7 @@ import { useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase'
-import { Loader2 } from 'lucide-react'
+import { Loader2, ArrowRight, Briefcase, User } from 'lucide-react'
 
 function SignupForm() {
   const router = useRouter()
@@ -15,7 +15,7 @@ function SignupForm() {
   const supabase = createClient()
 
   const handleSubmit = async () => {
-    if (!form.name || !form.email || !form.password) { setError('Please fill in all fields'); return }
+    if (!form.name || !form.email || !form.password) { setError('Please fill in all required fields'); return }
     if (form.password.length < 6) { setError('Password must be at least 6 characters'); return }
     setLoading(true); setError('')
     try {
@@ -37,62 +37,172 @@ function SignupForm() {
     finally { setLoading(false) }
   }
 
-  const lbl: React.CSSProperties = { fontSize: 11, fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6, display: 'block' }
+  const lbl: React.CSSProperties = { fontSize: 11, fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 7, display: 'block' }
+
+  const stats = role === 'candidate'
+    ? [['12K+', 'Active jobs'], ['94%', 'Match accuracy'], ['2 min', 'To get matched']]
+    : [['5K+', 'Candidates'], ['76%', 'Avg match score'], ['24h', 'To find top fit']]
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1.5rem' }}>
-      <div style={{ width: '100%', maxWidth: 440 }}>
-        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <Link href="/" style={{ textDecoration: 'none' }}>
-            <div style={{ fontSize: 22, fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.5px', marginBottom: 12 }}>
-              Hire<span style={{ color: 'var(--accent)' }}>Wise</span>
-            </div>
-          </Link>
-          <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.03em', marginBottom: 6 }}>Create your account</div>
-          <div style={{ fontSize: 14, color: 'var(--text-secondary)' }}>Join HireWise and find your perfect match</div>
-        </div>
+    <>
+      <style>{`
+        @keyframes spin { to { transform: rotate(360deg) } }
+        @keyframes fadeUp { from { opacity:0; transform:translateY(12px) } to { opacity:1; transform:translateY(0) } }
+        .fade-up { animation: fadeUp .5s ease forwards; }
+        .fade-up-1 { animation: fadeUp .5s .08s ease both; }
+        .fade-up-2 { animation: fadeUp .5s .16s ease both; }
+        .auth-input:focus { border-color: var(--accent) !important; box-shadow: 0 0 0 3px var(--accent-subtle) !important; }
+        .create-btn:hover { background: var(--accent-hover) !important; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(13,148,136,0.35) !important; }
+        .role-btn { transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease; }
+        @media (max-width: 768px) { .auth-split { grid-template-columns: 1fr !important; } .auth-left { display: none !important; } }
+      `}</style>
 
-        {/* Role toggle */}
-        <div style={{ display: 'flex', background: 'var(--surface-1)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', padding: 4, marginBottom: '1.25rem' }}>
-          {(['candidate', 'company'] as const).map(r => (
-            <button key={r} onClick={() => setRole(r)} style={{ flex: 1, padding: 9, borderRadius: 'var(--radius-sm)', border: 'none', background: role === r ? 'var(--accent)' : 'transparent', color: role === r ? 'white' : 'var(--text-secondary)', fontSize: 13, fontWeight: role === r ? 700 : 500, cursor: 'pointer', fontFamily: 'Inter,sans-serif', transition: 'background-color 150ms ease, color 150ms ease' }}>
-              {r === 'candidate' ? "I'm a candidate" : "I'm a company"}
-            </button>
-          ))}
-        </div>
+      <div className="auth-split" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: '100vh' }}>
 
-        <div style={{ background: 'var(--surface-0)', border: '1px solid var(--border)', borderRadius: 'var(--radius-lg)', padding: '1.75rem', boxShadow: 'var(--shadow-md)' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 12 }}>
-            <div><label style={lbl}>Full name</label><input placeholder="Abhi B." value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} /></div>
-            <div><label style={lbl}>Location</label><input placeholder="Chennai, India" value={form.location} onChange={e => setForm({ ...form, location: e.target.value })} /></div>
+        {/* ── Left panel — brand ── */}
+        <div className="auth-left" style={{ background: 'var(--accent)', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '3rem' }}>
+          <div style={{ position: 'absolute', top: -80, right: -80, width: 300, height: 300, background: 'rgba(255,255,255,0.06)', borderRadius: '50%', pointerEvents: 'none' }} />
+          <div style={{ position: 'absolute', bottom: -60, left: -60, width: 250, height: 250, background: 'rgba(255,255,255,0.04)', borderRadius: '50%', pointerEvents: 'none' }} />
+
+          {/* Logo */}
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            <Link href="/" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 10 }}>
+              <div style={{ width: 36, height: 36, background: 'rgba(255,255,255,0.20)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 900, fontSize: 17, color: '#fff' }}>H</div>
+              <span style={{ fontSize: 22, fontWeight: 800, color: '#ffffff', letterSpacing: '-0.5px' }}>HireWise</span>
+            </Link>
           </div>
-          <div style={{ marginBottom: 12 }}><label style={lbl}>Email</label><input type="email" placeholder="you@email.com" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} /></div>
-          <div style={{ marginBottom: 12 }}><label style={lbl}>Password</label><input type="password" placeholder="Min. 6 characters" value={form.password} onChange={e => setForm({ ...form, password: e.target.value })} /></div>
-          {role === 'candidate'
-            ? <div style={{ marginBottom: 16 }}><label style={lbl}>College</label><input placeholder="Anna University, Chennai" value={form.college} onChange={e => setForm({ ...form, college: e.target.value })} /></div>
-            : <div style={{ marginBottom: 16 }}><label style={lbl}>Company name</label><input placeholder="Acme Corp" value={form.company_name} onChange={e => setForm({ ...form, company_name: e.target.value })} /></div>
-          }
 
-          {error && (
-            <div style={{ background: 'var(--danger-subtle)', border: '1px solid var(--danger-border)', borderRadius: 'var(--radius-sm)', padding: '10px 12px', color: 'var(--danger)', fontSize: 13, marginBottom: 14 }}>{error}</div>
-          )}
+          {/* Centre content */}
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            <div style={{ fontSize: 'clamp(1.8rem,3vw,2.4rem)', fontWeight: 900, color: '#ffffff', letterSpacing: '-1.5px', lineHeight: 1.1, marginBottom: '1.25rem' }}>
+              {role === 'candidate' ? 'Find the job you\nactually deserve' : 'Find the talent\nyou actually need'}
+            </div>
+            <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.80)', lineHeight: 1.75, marginBottom: '2.5rem', maxWidth: 340 }}>
+              {role === 'candidate'
+                ? 'AI reads your skills and matches you to roles where you genuinely fit. No more applying blindly.'
+                : 'Post a job and AI instantly ranks candidates by how well they match your requirements.'}
+            </p>
 
-          <button
-            onClick={handleSubmit}
-            disabled={loading}
-            style={{ width: '100%', padding: 12, background: 'var(--accent)', border: 'none', borderRadius: 'var(--radius-sm)', color: 'white', fontSize: 14, fontWeight: 700, cursor: loading ? 'not-allowed' : 'pointer', fontFamily: 'Inter,sans-serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, opacity: loading ? 0.7 : 1, boxShadow: 'var(--glow-accent)', letterSpacing: '-0.2px' }}
-          >
-            {loading && <Loader2 size={16} style={{ animation: 'spin 600ms linear infinite' }} />}
-            {loading ? 'Creating account…' : 'Create account →'}
-          </button>
+            {/* Stats */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 16, marginBottom: '2rem' }}>
+              {stats.map(([val, label]) => (
+                <div key={label as string} style={{ background: 'rgba(255,255,255,0.12)', borderRadius: 12, padding: '14px 12px', textAlign: 'center' }}>
+                  <div style={{ fontSize: 22, fontWeight: 900, color: '#ffffff', letterSpacing: '-1px', marginBottom: 4 }}>{val as string}</div>
+                  <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.70)', fontWeight: 500 }}>{label as string}</div>
+                </div>
+              ))}
+            </div>
 
-          <p style={{ textAlign: 'center', fontSize: 13, color: 'var(--text-secondary)', marginTop: 16 }}>
-            Already have an account?{' '}
-            <Link href="/login" style={{ color: 'var(--accent)', fontWeight: 700, textDecoration: 'none' }}>Sign in</Link>
-          </p>
+            {/* Testimonial */}
+            <div style={{ background: 'rgba(255,255,255,0.10)', borderRadius: 12, padding: '16px', borderLeft: '3px solid rgba(255,255,255,0.40)' }}>
+              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', lineHeight: 1.65, margin: 0, fontStyle: 'italic' }}>
+                {role === 'candidate'
+                  ? '"Got shortlisted by Razorpay within 2 days of signing up. The match score was spot on."'
+                  : '"Found 3 strong candidates for a senior role in under 24 hours. The AI ranking saved us weeks."'}
+              </p>
+              <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.60)', marginTop: 10, fontWeight: 600 }}>
+                {role === 'candidate' ? '— Abhimaan C S, SDE Intern @ Razorpay' : '— Engineering Lead, Swiggy'}
+              </div>
+            </div>
+          </div>
+
+          <div style={{ position: 'relative', zIndex: 1, fontSize: 12, color: 'rgba(255,255,255,0.50)' }}>
+            © 2026 HireWise · Built with AI
+          </div>
+        </div>
+
+        {/* ── Right panel — form ── */}
+        <div style={{ background: 'var(--bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2.5rem 2rem', overflowY: 'auto' }}>
+          <div style={{ width: '100%', maxWidth: 420 }}>
+
+            <div className="fade-up" style={{ marginBottom: '1.75rem' }}>
+              <h1 style={{ fontSize: 26, fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.04em', marginBottom: 6 }}>Create your account</h1>
+              <p style={{ fontSize: 14, color: 'var(--text-secondary)' }}>Join HireWise — it's free to get started</p>
+            </div>
+
+            {/* Role toggle */}
+            <div className="fade-up-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: '1.5rem' }}>
+              {(['candidate', 'company'] as const).map(r => (
+                <button
+                  key={r}
+                  className="role-btn"
+                  onClick={() => setRole(r)}
+                  style={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
+                    padding: '11px 0',
+                    borderRadius: 'var(--radius-sm)',
+                    border: `1px solid ${role === r ? 'var(--accent)' : 'var(--border)'}`,
+                    background: role === r ? 'var(--accent-subtle)' : 'var(--surface-0)',
+                    color: role === r ? 'var(--accent)' : 'var(--text-secondary)',
+                    fontSize: 13, fontWeight: role === r ? 700 : 500,
+                    cursor: 'pointer', fontFamily: 'inherit',
+                  }}
+                >
+                  {r === 'candidate' ? <User size={14} /> : <Briefcase size={14} />}
+                  {r === 'candidate' ? 'Candidate' : 'Company'}
+                </button>
+              ))}
+            </div>
+
+            <div className="fade-up-2" style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                <div>
+                  <label style={lbl}>Full name *</label>
+                  <input className="auth-input" placeholder="Abhimaan C S" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} style={{ fontSize: 14 }} />
+                </div>
+                <div>
+                  <label style={lbl}>Location</label>
+                  <input className="auth-input" placeholder="Chennai, India" value={form.location} onChange={e => setForm({ ...form, location: e.target.value })} style={{ fontSize: 14 }} />
+                </div>
+              </div>
+
+              <div>
+                <label style={lbl}>Email address *</label>
+                <input className="auth-input" type="email" placeholder="you@email.com" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} style={{ fontSize: 14 }} />
+              </div>
+
+              <div>
+                <label style={lbl}>Password *</label>
+                <input className="auth-input" type="password" placeholder="Min. 6 characters" value={form.password} onChange={e => setForm({ ...form, password: e.target.value })} style={{ fontSize: 14 }} />
+              </div>
+
+              {role === 'candidate' ? (
+                <div>
+                  <label style={lbl}>College / University</label>
+                  <input className="auth-input" placeholder="Anna University, Chennai" value={form.college} onChange={e => setForm({ ...form, college: e.target.value })} style={{ fontSize: 14 }} />
+                </div>
+              ) : (
+                <div>
+                  <label style={lbl}>Company name</label>
+                  <input className="auth-input" placeholder="Acme Corp" value={form.company_name} onChange={e => setForm({ ...form, company_name: e.target.value })} style={{ fontSize: 14 }} />
+                </div>
+              )}
+
+              {error && (
+                <div style={{ background: 'var(--danger-subtle)', border: '1px solid var(--danger-border)', borderRadius: 'var(--radius-sm)', padding: '11px 14px', color: 'var(--danger)', fontSize: 13, fontWeight: 500 }}>
+                  {error}
+                </div>
+              )}
+
+              <button
+                className="create-btn"
+                onClick={handleSubmit}
+                disabled={loading}
+                style={{ width: '100%', padding: '13px 0', background: 'var(--accent)', border: 'none', borderRadius: 'var(--radius-sm)', color: '#fff', fontSize: 15, fontWeight: 700, cursor: loading ? 'not-allowed' : 'pointer', fontFamily: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, opacity: loading ? 0.75 : 1, boxShadow: '0 4px 14px rgba(13,148,136,0.25)', transition: 'background-color 150ms ease, transform 150ms ease, box-shadow 150ms ease' }}
+              >
+                {loading ? <Loader2 size={17} style={{ animation: 'spin 600ms linear infinite' }} /> : <ArrowRight size={17} />}
+                {loading ? 'Creating account…' : 'Create account'}
+              </button>
+
+              <p style={{ textAlign: 'center', fontSize: 13, color: 'var(--text-secondary)', margin: 0 }}>
+                Already have an account?{' '}
+                <Link href="/login" style={{ color: 'var(--accent)', fontWeight: 700, textDecoration: 'none' }}>Sign in →</Link>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
