@@ -249,7 +249,7 @@ export default function ProfilePage() {
           <div className="auto-fill-badge" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 16px', background: 'var(--success-subtle)', border: '1px solid var(--success-border)', borderRadius: 'var(--radius-md)', marginBottom: 16 }}>
             <Sparkles size={16} color="var(--success)" style={{ flexShrink: 0 }} />
             <span style={{ fontSize: 13, color: 'var(--success)', fontWeight: 600, flex: 1 }}>
-              Resume parsed — we auto-filled {autoFilled.size} field{autoFilled.size > 1 ? 's' : ''} ({[...autoFilled].join(', ')}). Review and hit Save.
+              Resume parsed — we auto-filled {autoFilled.size} field{autoFilled.size > 1 ? 's' : ''} ({Array.from(autoFilled).join(', ')}). Review and hit Save.
             </span>
             <button onClick={() => setAutoFilled(new Set())} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--success)', padding: 2, display: 'flex', opacity: 0.7 }}>
               <X size={14} />
